@@ -1,0 +1,14 @@
+---
+/**
+ * StructuredData.astro
+ * Renders <script type="application/ld+json"> in <head>.
+ * Accepts any Schema.org JSON-LD object or array of objects.
+ */
+interface Props {
+  data: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { data } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

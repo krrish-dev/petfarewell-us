@@ -1,0 +1,7 @@
+node_modules/
+.astro/
+dist/
+.dist/
+.playwright-cli/
+test-results/
+output/

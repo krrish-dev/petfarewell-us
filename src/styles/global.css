@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+/* Pet Farewell — Global Styles
+ *
+ * Compassionate color palette with humanist sans-serif typography.
+ * WCAG 2.1 AA color contrast compliant.
+ * font-display: swap on all @font-face declarations.
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+
+:root {
+  /* --- Compassionate Color Palette --- */
+  /* Primary — Warm teal, evokes calmness and trust */
+  --color-primary: hsl(173, 42%, 32%);
+  --color-primary-light: hsl(173, 38%, 45%);
+  --color-primary-dark: hsl(173, 48%, 22%);
+  --color-primary-subtle: hsl(173, 30%, 93%);
+
+  /* Secondary — Soft lavender, comfort and serenity */
+  --color-secondary: hsl(264, 28%, 55%);
+  --color-secondary-light: hsl(264, 25%, 68%);
+  --color-secondary-dark: hsl(264, 32%, 38%);
+
+  /* Accent — Warm amber, hope and warmth */
+  --color-accent: hsl(36, 85%, 58%);
+  --color-accent-light: hsl(36, 80%, 72%);
+  --color-accent-dark: hsl(36, 88%, 42%);
+
+  /* Neutral — Warm grays for text and backgrounds */
+  --color-text: hsl(220, 15%, 18%);
+  --color-text-secondary: hsl(220, 10%, 42%);
+  --color-text-muted: hsl(220, 8%, 58%);
+  --color-bg: hsl(30, 20%, 98%);
+  --color-bg-warm: hsl(30, 25%, 95%);
+  --color-bg-card: hsl(0, 0%, 100%);
+  --color-border: hsl(220, 12%, 88%);
+  --color-border-light: hsl(220, 10%, 93%);
+
+  /* Status */
+  --color-success: hsl(152, 45%, 38%);
+  --color-error: hsl(4, 65%, 48%);
+
+  /* --- Typography --- */
+  --font-body: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+  --font-size-base: 1rem;     /* 16px minimum */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+
+  /* --- Spacing --- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* --- Layout --- */
+  --max-width: 72rem;
+  --max-width-content: 48rem;
+  --header-height: 4rem;
+
+  /* --- Borders & Radius --- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px 0 hsla(220, 15%, 18%, 0.05);
+  --shadow-md: 0 4px 6px -1px hsla(220, 15%, 18%, 0.08), 0 2px 4px -2px hsla(220, 15%, 18%, 0.05);
+  --shadow-lg: 0 10px 15px -3px hsla(220, 15%, 18%, 0.08), 0 4px 6px -4px hsla(220, 15%, 18%, 0.04);
+  --shadow-xl: 0 20px 25px -5px hsla(220, 15%, 18%, 0.1), 0 8px 10px -6px hsla(220, 15%, 18%, 0.06);
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%; /* 16px */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+h1 { font-size: var(--font-size-4xl); margin-bottom: var(--space-lg); }
+h2 { font-size: var(--font-size-2xl); margin-bottom: var(--space-md); margin-top: var(--space-2xl); }
+h3 { font-size: var(--font-size-xl); margin-bottom: var(--space-sm); margin-top: var(--space-xl); }
+h4 { font-size: var(--font-size-lg); margin-bottom: var(--space-sm); margin-top: var(--space-lg); }
+
+p {
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================
+   Focus Indicators (Accessibility)
+   ============================================ */
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   Skip to Content Link (Accessibility)
+   ============================================ */
+
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 1000;
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-to-content:focus {
+  top: var(--space-sm);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-dark);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+   Layout Utilities
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+}
+
+.section {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+/* ============================================
+   Cards
+   ============================================ */
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card a {
+  text-decoration: none;
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+
+ul, ol {
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+
+blockquote {
+  border-left: 4px solid var(--color-primary-light);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-lg) 0;
+  background: var(--color-primary-subtle);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-lg);
+}
+
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+th {
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-bg-warm);
+}
+
+/* ============================================
+   Responsive Media
+   ============================================ */
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   Media Queries
+   ============================================ */
+
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-3xl); }
+  h2 { font-size: var(--font-size-xl); }
+  h3 { font-size: var(--font-size-lg); }
+
+  .section {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: var(--font-size-2xl); }
+
+  .btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-size-base);
+  }
+}

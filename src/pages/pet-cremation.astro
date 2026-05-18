@@ -1,0 +1,84 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Dog & Cat Cremation and Aftercare | Private & Communal";
+const description = "Dog and cat cremation aftercare options after in-home euthanasia, including private cremation, communal cremation, cedar box return, clay paw print, and home arrangements.";
+
+const headline = "Dog & Cat Cremation and Aftercare";
+const subheadline = "Respectful aftercare options for families who choose private cremation, communal cremation, or their own burial arrangements.";
+
+const headings = [
+  { depth: 2, slug: "aftercare-options", text: "Aftercare Options for Dogs and Cats" },
+  { depth: 2, slug: "private-cremation", text: "Private Cremation" },
+  { depth: 2, slug: "communal-cremation", text: "Communal Cremation" },
+  { depth: 2, slug: "own-arrangements", text: "Making Your Own Arrangements" },
+  { depth: 2, slug: "keepsakes", text: "Keepsakes and Return Timeline" }
+];
+
+const faqItems = [
+  {
+    question: "What is private cremation?",
+    answer: "Private cremation means your dog or cat is cremated individually. Ashes are returned to you in a personalized cedar box with a clay paw print."
+  },
+  {
+    question: "What is communal cremation?",
+    answer: "Communal cremation means your pet is cremated respectfully with other pets, and ashes are not returned. A fur clipping or clay paw print may be requested."
+  },
+  {
+    question: "How long does it take to receive ashes back?",
+    answer: "Private cremation ashes are usually returned in about two to three weeks. Please provide accurate contact information so the return can be coordinated properly."
+  },
+  {
+    question: "Can I bury my dog or cat at home?",
+    answer: "You may choose to keep your pet with you for burial or other arrangements, but home burial rules vary by city and county. Check local ordinances before deciding."
+  }
+];
+
+const relatedLinks = [
+  { label: "Dog & Cat Euthanasia", href: "/at-home-pet-euthanasia/", description: "Review the in-home euthanasia process and package pricing." },
+  { label: "Dog Cremation", href: "/dog-cremation/", description: "Learn about aftercare for dogs." },
+  { label: "Cat Cremation", href: "/cat-cremation/", description: "Learn about aftercare for cats." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/pet-cremation-hero.jpg"
+  heroImageAlt="A beautiful wooden pet urn surrounded by flowers"
+  ctaText="View Euthanasia Pricing"
+  ctaHref="/at-home-pet-euthanasia/#pricing"
+>
+  <h2 id="aftercare-options">Aftercare Options for Dogs and Cats</h2>
+  <p>After in-home euthanasia, your family can choose the aftercare option that feels most appropriate for your dog or cat. Dr. Hany Soliman can arrange cremation, or your pet may remain with you if you prefer to make your own arrangements.</p>
+  <p>The goal is simple: your companion is handled with dignity, and your family has clear options before the appointment begins.</p>
+
+  <h2 id="private-cremation">Private Cremation</h2>
+  <p>Private cremation means your dog or cat is cremated individually. This option is for families who want ashes returned.</p>
+  <ul>
+    <li>Your pet is cremated alone.</li>
+    <li>Ashes are returned in a personalized cedar box.</li>
+    <li>A clay paw print is included.</li>
+    <li>Return usually takes about two to three weeks.</li>
+  </ul>
+
+  <h2 id="communal-cremation">Communal Cremation</h2>
+  <p>Communal cremation, also called group cremation, is a respectful option when families do not need ashes returned. Your pet receives careful handling and transport, but the ashes are not returned afterward.</p>
+  <ul>
+    <li>Respectful group cremation.</li>
+    <li>Ashes are not returned.</li>
+    <li>Optional fur clipping may be requested.</li>
+    <li>Optional clay paw print may be requested.</li>
+  </ul>
+
+  <h2 id="own-arrangements">Making Your Own Arrangements</h2>
+  <p>You may request that your dog or cat remain with you after euthanasia. Some families choose burial or another personal arrangement. If you are considering home burial, check city and county regulations first because some local rules restrict backyard burial.</p>
+
+  <h2 id="keepsakes">Keepsakes and Return Timeline</h2>
+  <p>Families often find comfort in a keepsake, such as a paw print, fur clipping, or personalized cedar box. If you choose private cremation, please provide accurate contact information so ashes can be returned safely when they are ready.</p>
+</ServicePageLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Terms of Service | Pet Farewell";
+const description = "Terms of Service for Pet Farewell.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  noindex={true}
+>
+  <div class="container section">
+    <div class="content-container article-body">
+      <h1>Terms of Service</h1>
+      <p>Last updated: {new Date().toLocaleDateString()}</p>
+
+      <p>Please read these Terms of Service carefully before using the Pet Farewell website.</p>
+
+      <h2>Acceptance of Terms</h2>
+      <p>By accessing or using our website, you agree to be bound by these Terms. If you disagree with any part of the terms, you may not access the service.</p>
+
+      <h2>Services Description</h2>
+      <p>Pet Farewell provides information and connects users with local providers for pet end-of-life care, including at-home euthanasia and pet cremation. The information provided on this site is for educational purposes and should not replace professional veterinary advice.</p>
+
+      <h2>User Conduct</h2>
+      <p>You agree not to use the website for any unlawful purpose or in any way that interrupts, damages, or impairs the service.</p>
+
+      <h2>Disclaimer of Warranties</h2>
+      <p>The website and its content are provided on an "as is" and "as available" basis without any warranties of any kind, either express or implied.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>Pet Farewell shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the service.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .article-body {
+    line-height: var(--line-height-relaxed);
+  }
+  .article-body h1 {
+    margin-bottom: var(--space-md);
+  }
+  .article-body h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

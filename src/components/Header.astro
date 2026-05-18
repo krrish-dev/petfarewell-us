@@ -1,0 +1,162 @@
+---
+/**
+ * Header.astro
+ * Site header with logo, primary navigation, and CTA button.
+ * Includes MobileNav for viewports < 768px.
+ */
+import { SITE_CONFIG } from '../config/site';
+import MobileNav from './MobileNav.astro';
+
+const phoneHref = 'tel:+17609120848';
+
+const navLinks = [
+  { label: 'Dog & Cat Euthanasia', href: '/at-home-pet-euthanasia/' },
+  { label: 'Pricing', href: '/at-home-pet-euthanasia/#pricing' },
+  { label: 'About Dr. Hany', href: '/about/' },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="/" class="header-logo" aria-label={`${SITE_CONFIG.name} — Home`}>
+      <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="var(--color-primary)" opacity="0.15"/>
+        <path d="M10 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm8 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-8 6c0 3.3 2.7 6 6 6s6-2.7 6-6H10z" fill="var(--color-primary)"/>
+      </svg>
+      <span class="logo-text">{SITE_CONFIG.name}</span>
+    </a>
+
+    <nav class="header-nav" aria-label="Primary navigation" id="primary-nav">
+      <ul class="nav-list">
+        {navLinks.map(link => (
+          <li class="nav-item">
+            <a href={link.href} class="nav-link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/contact/" class="btn btn-primary header-cta" id="header-cta">
+      Call or Text
+    </a>
+
+    <div class="mobile-header-actions" aria-label="Mobile quick actions">
+      <MobileNav navLinks={navLinks} />
+      <a class="mobile-header-call" href={phoneHref} aria-label={`Call ${SITE_CONFIG.nap.telephone}`}>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7.1 4.5 8.7 8c.3.7.2 1.5-.3 2.1l-.8.9c1 1.9 2.5 3.4 4.4 4.4l.9-.8c.6-.5 1.4-.6 2.1-.3l3.5 1.6c.8.4 1.2 1.2 1 2.1l-.5 2.1c-.2.8-.9 1.4-1.8 1.4C9.1 21.5 2.5 14.9 2.5 6.8c0-.9.6-1.6 1.4-1.8L6 4.5c.4-.1.8-.1 1.1 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: hsla(30, 20%, 98%, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-light);
+    height: var(--header-height);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-lg);
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary-dark);
+  }
+
+  .header-nav {
+    display: flex;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-subtle);
+  }
+
+  .header-cta {
+    padding: 0.5rem 1.25rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .mobile-header-actions {
+    display: none;
+  }
+
+  .mobile-header-call {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    background: var(--color-bg-card);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mobile-header-call:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+  }
+
+  @media (max-width: 768px) {
+    .header-nav,
+    .header-cta {
+      display: none;
+    }
+
+    .mobile-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+    }
+  }
+</style>

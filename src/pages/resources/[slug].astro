@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import ResourcePageLayout from '../../layouts/ResourcePageLayout.astro';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<ResourcePageLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  datePublished={entry.data.datePublished}
+  dateModified={entry.data.dateModified}
+  author={entry.data.author}
+  ogImage={entry.data.ogImage}
+  faqs={entry.data.faqs}
+  relatedPages={entry.data.relatedPages}
+>
+  <Content />
+</ResourcePageLayout>

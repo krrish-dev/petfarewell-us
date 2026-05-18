@@ -1,0 +1,53 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Dog Cremation Services | Respectful Canine Aftercare | Pet Farewell";
+const description = "Specialized dog cremation services providing a dignified farewell for your loyal canine companion. Learn about private and communal cremation options for dogs.";
+
+const headline = "Dignified Dog Cremation Services";
+const subheadline = "Honoring the unconditional love and loyalty of your canine best friend with respectful, ethical cremation care.";
+
+const headings = [
+  { depth: 2, slug: "canine-cremation-options", text: "Canine Cremation Options" },
+  { depth: 2, slug: "size-and-weight", text: "Considerations for Size and Weight" },
+  { depth: 2, slug: "memorializing-your-dog", text: "Memorializing Your Dog" }
+];
+
+const faqItems = [
+  {
+    question: "Does the size of my dog affect the cremation cost?",
+    answer: "Yes, cremation costs are generally based on the weight of the pet. Larger dogs require more time and resources, which is reflected in the pricing."
+  },
+  {
+    question: "How much ashes will I receive back from my dog?",
+    answer: "The volume of cremains depends primarily on your dog's bone structure and weight. As a general rule, you can expect about 1 cubic inch of ashes per 1 pound of your dog's living weight."
+  }
+];
+
+const relatedLinks = [
+  { label: "Pet Cremation Cost", href: "/resources/pet-cremation-cost/", description: "Learn about the factors that influence cremation pricing." },
+  { label: "Pet Urns", href: "/pet-urns/", description: "Browse beautiful urns suitable for dogs." },
+  { label: "Pet Grief Support", href: "/pet-grief-support/", description: "Resources to help you cope with the loss of your dog." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/dog-cremation-hero.jpg"
+  heroImageAlt="A serene dog resting in a sunlit field"
+>
+  <h2 id="canine-cremation-options">Canine Cremation Options</h2>
+  <p>Dogs give us their whole hearts, and saying goodbye is incredibly hard. Our dog cremation services are designed to give your loyal companion the respectful farewell they deserve. You can choose between private cremation, where your dog is cremated alone and their ashes returned to you, or communal cremation, where they are respectfully cremated with other pets.</p>
+  
+  <h2 id="size-and-weight">Considerations for Size and Weight</h2>
+  <p>Because dogs vary so greatly in size—from a tiny Chihuahua to a giant Great Dane—the cremation process and pricing are tailored to accommodate these differences. Larger breeds naturally require more time in the cremation chamber and will result in a larger volume of ashes, which is an important consideration when selecting an urn.</p>
+
+  <h2 id="memorializing-your-dog">Memorializing Your Dog</h2>
+  <p>Many families choose to keep a tangible reminder of their dog. This might be a beautiful urn for their ashes, a customized wooden box with their name, or a clay paw print impression taken before the cremation process begins. Some also opt to scatter their dog's ashes in a favorite park, along a hiking trail, or in the backyard they loved to patrol.</p>
+</ServicePageLayout>

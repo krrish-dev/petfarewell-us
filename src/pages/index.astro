@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import { buildOrganizationSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+const organizationSchema = buildOrganizationSchema({
+  name: SITE_CONFIG.organization.name,
+  url: SITE_CONFIG.organization.url,
+  logo: SITE_CONFIG.organization.logo,
+  telephone: SITE_CONFIG.nap.telephone,
+  email: SITE_CONFIG.nap.email,
+});
+
+const faqItems = [
+  {
+    question: 'How do I know when it is time for dog euthanasia or cat euthanasia?',
+    answer: 'The decision usually depends on quality of life: mobility, appetite, pain, breathing comfort, anxiety, and whether bad days now outnumber good days. Dr. Soliman can help you talk through your dog or cat\'s condition before the visit.'
+  },
+  {
+    question: 'What does in-home euthanasia include?',
+    answer: 'The visit includes travel to your home, a gentle home exam, time for questions, sedation for comfort, and a peaceful final medication once your dog or cat is deeply asleep.'
+  },
+  {
+    question: 'How much does at-home euthanasia cost?',
+    answer: 'Packages start at $450 for euthanasia-only, $550 with communal cremation, and $750 with private cremation. Pricing can vary by distance and pet weight, so call or text for an exact quote.'
+  },
+  {
+    question: 'Can I receive my dog or cat\'s ashes back?',
+    answer: 'Yes. With private cremation, ashes are returned to you in a personalized cedar box with a clay paw print. Communal cremation is also available when ashes do not need to be returned.'
+  }
+];
+
+const cornerstonePages = [
+  { title: 'Dog & Cat Euthanasia', href: '/at-home-pet-euthanasia/', desc: 'In-home dog euthanasia and cat euthanasia with sedation, comfort, and time to say goodbye.' },
+  { title: 'Pricing & Aftercare', href: '/at-home-pet-euthanasia/#pricing', desc: 'Transparent packages for euthanasia-only, communal cremation, and private cremation.' },
+  { title: 'About Dr. Hany', href: '/about/', desc: 'Learn about Dr. Hany Soliman\'s compassionate approach and veterinary background.' },
+  { title: 'Service Areas', href: '/locations/', desc: 'Serving families within 50 miles of Victorville and surrounding Southern California cities.' }
+];
+
+---
+
+<BaseLayout
+  title="In-Home Dog Euthanasia & Cat Euthanasia"
+  description="In-home dog euthanasia and cat euthanasia by Dr. Hany Soliman, with transparent pricing, private cremation, communal cremation, and Southern California service areas."
+  structuredData={organizationSchema}
+>
+  <HeroSection
+    headline="In-Home Dog Euthanasia & Cat Euthanasia"
+    subheadline="A peaceful goodbye at home with Dr. Hany Soliman, serving Southern California families by appointment 7 days a week."
+    ctaText="View Pricing & Process"
+    ctaHref="/at-home-pet-euthanasia/"
+    imageUrl="/images/hero-home.jpg"
+    imageAlt="A peaceful dog resting comfortably"
+  />
+
+  <div class="container">
+    <section class="section">
+      <div class="content-container text-center">
+        <h2>Dog and Cat End-of-Life Care at Home</h2>
+        <p>Pet Farewell focuses on dogs and cats only. We help families arrange in-home euthanasia, private cremation, communal cremation, and aftercare with clear pricing and calm guidance.</p>
+      </div>
+
+      <div class="services-grid mt-xl">
+        {cornerstonePages.map(page => (
+          <a href={page.href} class="card service-card">
+            <h3>{page.title}</h3>
+            <p>{page.desc}</p>
+            <span class="service-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section bg-warm split-section">
+      <div class="split-content">
+        <h2>About Pet Farewell</h2>
+        <p>Pet Farewell provides in-home euthanasia for dogs and cats so they can remain in a familiar, quiet place instead of a stressful clinic.</p>
+        <p>Led by Dr. Hany Soliman, the service includes gentle sedation, a peaceful final medication, and respectful aftercare options for families who choose cremation.</p>
+        <a href="/about/" class="btn btn-secondary mt-md">Learn More About Us</a>
+      </div>
+      <div class="split-image">
+        <img src="/images/about-home.jpg" alt="A veterinarian comforting a pet" width="600" height="400" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="section text-center">
+      <h2>Trusted by Families</h2>
+      <div class="trust-signals">
+        <div class="trust-card">
+          <div class="stars">★★★★★</div>
+          <p>"The compassion and care they showed us during the hardest day of our lives will never be forgotten."</p>
+          <span class="author">- Sarah M.</span>
+        </div>
+        <div class="trust-card">
+          <div class="stars">★★★★★</div>
+          <p>"Professional, respectful, and deeply empathetic. They handled everything so we could focus on saying goodbye."</p>
+          <span class="author">- David T.</span>
+        </div>
+        <div class="trust-card">
+          <div class="stars">★★★★★</div>
+          <p>"The resources provided helped us understand what to expect and make the right choices for our sweet girl."</p>
+          <span class="author">- Emily R.</span>
+        </div>
+      </div>
+    </section>
+
+    <FAQSection items={faqItems} title="Frequently Asked Questions" />
+  </div>
+</BaseLayout>
+
+<style>
+  .text-center {
+    text-align: center;
+  }
+
+  .mt-md {
+    margin-top: var(--space-md);
+  }
+
+  .mt-xl {
+    margin-top: var(--space-xl);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .service-card h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+  }
+
+  .service-card p {
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+
+  .service-arrow {
+    align-self: flex-end;
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+    transition: transform var(--transition-fast);
+  }
+
+  .service-card:hover .service-arrow {
+    transform: translateX(4px);
+  }
+
+  .bg-warm {
+    background-color: var(--color-bg-warm);
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+    border-radius: var(--radius-xl);
+    margin: var(--space-2xl) 0;
+  }
+
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .split-image img {
+    border-radius: var(--radius-lg);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .trust-signals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  .trust-card {
+    background: var(--color-bg-card);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+  }
+
+  .stars {
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .trust-card p {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .author {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 768px) {
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+    
+    .bg-warm {
+      padding: var(--space-lg);
+    }
+  }
+</style>

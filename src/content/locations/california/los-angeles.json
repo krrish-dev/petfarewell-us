@@ -1,0 +1,21 @@
+{
+  "cityName": "Los Angeles",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "los-angeles",
+  "businessName": "Pet Farewell Los Angeles",
+  "address": {
+    "streetAddress": "1234 Sunset Blvd",
+    "city": "Los Angeles",
+    "state": "CA",
+    "postalCode": "90028",
+    "country": "US"
+  },
+  "telephone": "+1-310-555-0199",
+  "geo": {
+    "latitude": 34.0522,
+    "longitude": -118.2437
+  },
+  "services": ["pet-cremation", "at-home-pet-euthanasia"],
+  "serviceArea": "Greater Los Angeles Area including Hollywood, Beverly Hills, Santa Monica, and surrounding communities"
+}

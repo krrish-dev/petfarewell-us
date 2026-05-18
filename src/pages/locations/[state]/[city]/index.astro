@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import LocationPageLayout from '../../../../layouts/LocationPageLayout.astro';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations');
+  return locations.map(loc => ({
+    params: { 
+      state: loc.data.stateSlug,
+      city: loc.data.citySlug
+    },
+    props: { location: loc }
+  }));
+}
+
+const { location } = Astro.props;
+const { cityName, stateName, businessName, address, telephone, geo, services, serviceArea } = location.data;
+
+const description = `Compassionate in-home dog and cat euthanasia in ${cityName}, ${stateName}. Contact ${businessName} for peaceful, gentle end-of-life care in the comfort of home.`;
+---
+
+<LocationPageLayout
+  title={`Pet Farewell in ${cityName}, ${stateName}`}
+  description={description}
+  businessName={businessName}
+  address={address}
+  telephone={telephone}
+  geo={geo}
+  services={services}
+  serviceArea={serviceArea}
+>
+  <div class="location-about">
+    <h2>Compassionate At-Home Euthanasia for {cityName} Families</h2>
+    <p>At {businessName}, we understand that your dog or cat is a beloved member of your family. Saying goodbye is an incredibly difficult experience. Our dedicated team led by Dr. Hany Soliman is here in {cityName} to support you with empathy, respect, and professional veterinary care in the comfort of your own home.</p>
+    
+    <p>By choosing in-home euthanasia, you provide your beloved companion with a peaceful, stress-free transition, surrounded by familiar sights, smells, and the people they love most.</p>
+
+    <h3>Why Choose Our In-Home Euthanasia in {cityName}?</h3>
+    <ul>
+      <li><strong>Compassionate Veterinary Doctor:</strong> Dr. Hany Soliman provides gentle, pain-free passing with the utmost care and respect.</li>
+      <li><strong>Peaceful Home Environment:</strong> Avoid the anxiety and distress of a clinical veterinary office for your pet's final moments.</li>
+      <li><strong>Local Understanding:</strong> Serving the {cityName} and surrounding Southern California communities with dedication and love.</li>
+    </ul>
+
+    <div class="contact-cta">
+      <h3>Ready to Discuss Your Options?</h3>
+      <p>We are available to answer any questions you may have. Please call us at <a href={`tel:${telephone}`}>{telephone}</a> for immediate assistance, or explore our specific services above to learn more about how we can help.</p>
+    </div>
+  </div>
+</LocationPageLayout>
+
+<style>
+  .location-about h2 {
+    margin-top: 0;
+  }
+
+  .location-about h3 {
+    margin-top: var(--space-xl);
+  }
+
+  .contact-cta {
+    background: var(--color-bg-warm);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-2xl);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .contact-cta h3 {
+    margin-top: 0;
+  }
+
+  .contact-cta p:last-child {
+    margin-bottom: 0;
+  }
+</style>

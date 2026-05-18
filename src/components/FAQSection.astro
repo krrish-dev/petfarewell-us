@@ -1,0 +1,120 @@
+---
+/**
+ * FAQSection.astro
+ * Renders FAQ items using <details>/<summary> for accessibility.
+ * Outputs FAQPage JSON-LD.
+ */
+import StructuredData from './StructuredData.astro';
+import { buildFAQSchema } from '../lib/schema';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  title?: string;
+}
+
+const { items, title = 'Frequently Asked Questions' } = Astro.props;
+
+const faqJsonLd = buildFAQSchema(items);
+---
+
+<section class="faq-section" id="faq">
+  <h2 class="faq-title">{title}</h2>
+  <div class="faq-list">
+    {items.map((item, index) => (
+      <details class="faq-item" id={`faq-${index}`}>
+        <summary class="faq-question">{item.question}</summary>
+        <div class="faq-answer">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+  <StructuredData data={faqJsonLd} />
+</section>
+
+<style>
+  .faq-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .faq-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xl);
+    margin-top: 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .faq-item {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow var(--transition-normal);
+  }
+
+  .faq-item:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-item[open] {
+    box-shadow: var(--shadow-md);
+  }
+
+  .faq-question {
+    padding: var(--space-lg) var(--space-xl);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    transition: transform var(--transition-normal);
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-question::after {
+    content: '−';
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-xl) var(--space-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    animation: fadeIn var(--transition-normal) ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .faq-answer p {
+    margin: 0;
+  }
+</style>

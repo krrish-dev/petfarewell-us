@@ -1,0 +1,53 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Cat Cremation Services | Gentle Feline Aftercare | Pet Farewell";
+const description = "Gentle and respectful cat cremation services. Explore private and communal cremation options tailored for your beloved feline friend.";
+
+const headline = "Gentle Cat Cremation Services";
+const subheadline = "Providing a quiet, respectful, and dignified farewell for your beloved feline companion.";
+
+const headings = [
+  { depth: 2, slug: "feline-cremation-process", text: "The Feline Cremation Process" },
+  { depth: 2, slug: "private-cremation-for-cats", text: "Private Cremation for Cats" },
+  { depth: 2, slug: "honoring-your-cat", text: "Honoring Your Cat's Memory" }
+];
+
+const faqItems = [
+  {
+    question: "What size urn do I need for my cat?",
+    answer: "Most cats weigh between 8 and 15 pounds. A small urn or keepsake box with a capacity of 15 to 25 cubic inches is typically more than sufficient for a cat's ashes."
+  },
+  {
+    question: "Can I include my cat's favorite toy in the cremation?",
+    answer: "Some facilities allow small, combustible items like a favorite blanket or a small soft toy to be cremated with your pet. Please ask your provider about their specific policies."
+  }
+];
+
+const relatedLinks = [
+  { label: "Pet Cremation Cost", href: "/resources/pet-cremation-cost/", description: "Understand the costs associated with pet cremation." },
+  { label: "Pet Memorial Ideas", href: "/pet-memorial-ideas/", description: "Creative ways to remember your cat." },
+  { label: "At-Home Euthanasia", href: "/at-home-pet-euthanasia/", description: "Peaceful passing in your cat's favorite spot." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/cat-cremation-hero.jpg"
+  heroImageAlt="A peaceful cat sleeping on a soft blanket"
+>
+  <h2 id="feline-cremation-process">The Feline Cremation Process</h2>
+  <p>Cats bring a unique, quiet comfort into our homes. When it's time to say goodbye, our cat cremation services ensure that your feline friend is treated with the utmost gentleness and respect. The cremation process for cats is carefully monitored to ensure their delicate remains are handled properly.</p>
+
+  <h2 id="private-cremation-for-cats">Private Cremation for Cats</h2>
+  <p>If you choose a private cremation, your cat will be cremated entirely alone. This guarantees that the ashes returned to you belong exclusively to your cat. Because cats are generally smaller, the volume of ashes returned is relatively small, making it easy to keep them in a delicate urn or a small piece of memorial jewelry.</p>
+
+  <h2 id="honoring-your-cat">Honoring Your Cat's Memory</h2>
+  <p>Feline owners often choose memorial items that reflect their cat's personality. This might include a wooden urn with a sleeping cat carving, a clay paw print, or keeping a lock of their soft fur. Scattering ashes in a sunbeam where they loved to nap or near their favorite window is also a beautiful tribute.</p>
+</ServicePageLayout>

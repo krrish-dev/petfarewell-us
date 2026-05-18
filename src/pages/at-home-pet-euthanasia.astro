@@ -1,0 +1,209 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Dog & Cat Euthanasia at Home | Pricing & Process";
+const description = "In-home dog euthanasia and cat euthanasia with Dr. Hany Soliman. See pricing, process, cremation options, service area, and FAQs for Southern California families.";
+
+const headline = "Dog & Cat Euthanasia at Home";
+const subheadline = "A peaceful, pain-free goodbye for your dog or cat in their favorite place, with clear pricing and respectful aftercare options.";
+
+const headings = [
+  { depth: 2, slug: "why-choose-at-home", text: "Why Choose At-Home Dog or Cat Euthanasia?" },
+  { depth: 2, slug: "pricing", text: "Dog and Cat Euthanasia Pricing" },
+  { depth: 2, slug: "how-it-works", text: "How the Process Works" },
+  { depth: 2, slug: "preparing", text: "Preparing for the Appointment" },
+  { depth: 2, slug: "aftercare", text: "Aftercare and Cremation Options" },
+  { depth: 2, slug: "service-area", text: "Service Area and Availability" }
+];
+
+const faqItems = [
+  {
+    question: "How do I know when it is time to euthanize a dog or cat?",
+    answer: "The decision is usually based on quality of life: mobility, appetite, breathing comfort, pain, anxiety, hygiene, and whether bad days now outnumber good days. Dr. Soliman can discuss what you are seeing and help you understand the options."
+  },
+  {
+    question: "What can I expect during in-home euthanasia?",
+    answer: "Dr. Soliman will arrive at your home, answer questions, perform a brief comfort-focused exam, give a sedative so your dog or cat becomes deeply relaxed, and then provide the final medication after you are ready."
+  },
+  {
+    question: "Will my dog or cat feel pain?",
+    answer: "No. The first injection is a sedative that helps your pet fall into a deep, pain-free sleep. The final medication is given only after your pet is fully sedated and unaware."
+  },
+  {
+    question: "What is the cost of in-home dog or cat euthanasia?",
+    answer: "Euthanasia-only starts at $450, euthanasia with communal cremation starts at $550, and euthanasia with private cremation starts at $750. Final pricing may vary by distance and pet weight."
+  },
+  {
+    question: "Is there a travel fee?",
+    answer: "The listed starting prices apply within the standard local service area. Extended travel may add a fee, which will be discussed clearly when you call or text."
+  },
+  {
+    question: "How long does the appointment take?",
+    answer: "Most visits last about 45 to 60 minutes, but the appointment is not rushed. Families are given time to say goodbye before, during, and after the procedure."
+  },
+  {
+    question: "Should I feed my pet before the appointment?",
+    answer: "Yes, if your pet wants food and is not nauseous. Many families offer favorite treats or a special meal as a final comfort before sedation."
+  },
+  {
+    question: "Can children or other pets be present?",
+    answer: "Yes. This is a personal family decision. Other pets can often benefit from seeing or sniffing afterward so they understand that their companion has passed."
+  },
+  {
+    question: "How and when do I get my pet's ashes back?",
+    answer: "With private cremation, ashes are returned in a personalized cedar box with a clay paw print. The return timeframe is usually about two to three weeks."
+  },
+  {
+    question: "Do you offer same-day appointments?",
+    answer: "Same-day availability may be possible when a dog or cat declines quickly. Call or text (760) 912-0848 to check the schedule."
+  }
+];
+
+const relatedLinks = [
+  { label: "Quality of Life Scale", href: "/resources/quality-of-life-scale-dog/", description: "Assess your dog's current quality of life." },
+  { label: "Cremation & Aftercare", href: "/pet-cremation/", description: "Compare private cremation, communal cremation, and home arrangements." },
+  { label: "Pet Grief Support", href: "/pet-grief-support/", description: "Find resources for coping with the loss of your dog or cat." }
+];
+
+const pricingPackages = [
+  {
+    name: "Euthanasia-Only",
+    price: "$450",
+    details: [
+      "Travel to your home",
+      "Home exam",
+      "Sedation for comfort",
+      "Peaceful euthanasia",
+      "Family keeps the body for burial or separate arrangements"
+    ]
+  },
+  {
+    name: "Euthanasia + Communal Cremation",
+    price: "$550",
+    details: [
+      "Travel to your home",
+      "Home exam and sedation",
+      "Peaceful euthanasia",
+      "Gentle transport for group cremation",
+      "Optional fur clipping or clay paw print by request"
+    ]
+  },
+  {
+    name: "Euthanasia + Private Cremation",
+    price: "$750",
+    details: [
+      "Travel to your home",
+      "Home exam and sedation",
+      "Peaceful euthanasia",
+      "Gentle transport for individual cremation",
+      "Ashes returned in a personalized cedar box with clay paw print"
+    ]
+  }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/at-home-euthanasia-hero.jpg"
+  heroImageAlt="A gentle hand comforting a resting dog"
+  ctaText="Call or Text for Availability"
+  ctaHref="/contact/"
+>
+  <h2 id="why-choose-at-home">Why Choose At-Home Dog or Cat Euthanasia?</h2>
+  <p>For many dogs and cats, a final trip to a clinic can create fear, pain, or confusion. In-home euthanasia lets your companion remain in a familiar place, whether that is a favorite bed, your lap, the couch, or a quiet spot outside.</p>
+  <p>Dr. Hany Soliman focuses on calm, unhurried care for dogs and cats only. Your family can gather privately, ask questions, and say goodbye without the stress of a waiting room or car ride.</p>
+
+  <h2 id="pricing">Dog and Cat Euthanasia Pricing</h2>
+  <p>These starting prices are based on standard service within the local area. Exact cost may vary by distance and your dog or cat's weight, so please call or text <a href="tel:(760) 912-0848">(760) 912-0848</a> for a quote.</p>
+  <div class="pricing-grid">
+    {pricingPackages.map((item) => {
+      const packageId = `package-${item.name.toLowerCase().replaceAll(' ', '-').replaceAll('+', 'plus')}`;
+      return (
+        <section class="pricing-card" aria-labelledby={packageId}>
+          <h3 id={packageId}>{item.name}</h3>
+          <p class="package-price">{item.price}</p>
+          <p class="package-note">Starting price</p>
+          <ul>
+            {item.details.map((detail) => <li>{detail}</li>)}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+  <p><strong>Payment methods:</strong> Cash and checks are preferred. Credit card payment is also available. Many pet insurance plans may reimburse euthanasia services, so keep any forms ready if you need paperwork completed.</p>
+
+  <h2 id="how-it-works">How the Process Works</h2>
+  <p>The in-home dog and cat euthanasia process is designed to be gentle, clear, and unhurried. Here is what you can generally expect:</p>
+  <ol>
+    <li><strong>Arrival and assessment:</strong> Dr. Soliman will meet your family, gently assess your dog or cat, answer remaining questions, and keep the focus on comfort.</li>
+    <li><strong>Deep sedation:</strong> A small injection with sedative and pain-relief medication helps your pet fall into a heavy, peaceful sleep within about 5 to 15 minutes.</li>
+    <li><strong>The final medication:</strong> When you are ready and your pet is deeply asleep, the final medication is given. It works quickly and peacefully.</li>
+    <li><strong>Confirmation and privacy:</strong> Dr. Soliman confirms your pet has passed and gives your family time for final goodbyes.</li>
+  </ol>
+
+  <h2 id="preparing">Preparing for the Appointment</h2>
+  <p>To make the experience as peaceful as possible, consider the following preparations:</p>
+  <ul>
+    <li><strong>Choose a comfortable location:</strong> Select a spot where your dog or cat feels most secure. Have soft blankets or their favorite bed ready.</li>
+    <li><strong>Decide who will be present:</strong> Consider which family members, including children and other pets, should be there. It is a deeply personal choice.</li>
+    <li><strong>Prepare special treats:</strong> Before sedation, many families offer favorite foods or treats if their pet is interested and not nauseous.</li>
+    <li><strong>Create a calm atmosphere:</strong> Dim the lights, play soft music, and focus on speaking gently to your pet.</li>
+  </ul>
+
+  <h2 id="aftercare">Aftercare and Cremation Options</h2>
+  <p>After the procedure, you may take private time with your dog or cat. If you choose cremation through Dr. Soliman, your companion will be transported with care and respect.</p>
+  <ul>
+    <li><strong>Private cremation:</strong> Your pet is cremated individually. Ashes are returned in a personalized cedar box with a clay paw print, usually in about two to three weeks.</li>
+    <li><strong>Communal cremation:</strong> Your pet is cremated respectfully with other pets. Ashes are not returned, but a fur clipping or clay paw print may be requested.</li>
+    <li><strong>Your own arrangements:</strong> Your pet may remain with you for burial or another arrangement. Please check city and county rules before home burial.</li>
+  </ul>
+
+  <h2 id="service-area">Service Area and Availability</h2>
+  <p>Pet Farewell provides in-home dog euthanasia and cat euthanasia within 50 miles of Victorville and nearby Southern California communities, including Apple Valley, Victorville, Hesperia, Phelan, Wrightwood, San Bernardino, Rancho Cucamonga, Upland, Fontana, Riverside, Redlands, and Highland.</p>
+  <p>Appointments are available 7 days a week from 8:00 AM to 8:00 PM by appointment only. For current availability, call or text <a href="tel:(760) 912-0848">(760) 912-0848</a>.</p>
+</ServicePageLayout>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-card);
+    padding: var(--space-xl);
+  }
+
+  .pricing-card h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+  }
+
+  .package-price {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-text);
+    margin: var(--space-md) 0 0;
+  }
+
+  .package-note {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .pricing-card ul {
+    padding-left: 1.2rem;
+  }
+</style>

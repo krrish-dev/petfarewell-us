@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80">
+  <defs>
+    <linearGradient id="logo-g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A354F" />
+      <stop offset="100%" stop-color="#6B5E62" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(15, 15)">
+    <circle cx="25" cy="25" r="24" fill="url(#logo-g)" />
+    <path d="M25 15 C18 8, 8 18, 25 38 C42 18, 32 8, 25 15 Z" fill="#F7F4EF" opacity="0.9" transform="scale(0.8) translate(6, 6)" />
+    <path d="M25 19 C21 14, 15 21, 25 32 C35 21, 29 14, 25 19 Z" fill="#D4AF37" transform="scale(0.8) translate(6, 6)" />
+  </g>
+  <text x="80" y="42" font-family="'Outfit', 'Inter', sans-serif" font-size="24" font-weight="700" fill="#4A354F">Pet Farewell</text>
+  <text x="80" y="58" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#6B5E62" letter-spacing="1">COMPASSIONATE CARE</text>
+</svg>

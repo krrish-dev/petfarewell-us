@@ -1,0 +1,159 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import FAQSection from '../../../../components/FAQSection.astro';
+import { generateBreadcrumbs } from '../../../../lib/breadcrumb';
+import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../../../../lib/schema';
+import { SITE_CONFIG } from '../../../../config/site';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations');
+  // Only create this page for locations that offer at-home-pet-euthanasia
+  const eligibleLocations = locations.filter(loc => loc.data.services.includes('at-home-pet-euthanasia'));
+  
+  return eligibleLocations.map(loc => ({
+    params: { 
+      state: loc.data.stateSlug,
+      city: loc.data.citySlug
+    },
+    props: { location: loc }
+  }));
+}
+
+const { location } = Astro.props;
+const { cityName, stateName, businessName, address, telephone, geo, serviceArea } = location.data;
+
+const title = `At-Home Pet Euthanasia in ${cityName}, ${stateName} | ${businessName}`;
+const description = `Peaceful, compassionate at-home pet euthanasia in ${cityName}. Allow your pet to pass gently in the comfort of their own home. Call ${businessName} for guidance.`;
+
+const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const localBusinessJsonLd = buildLocalBusinessSchema({
+  businessName,
+  address,
+  telephone,
+  geo,
+  url: canonicalUrl,
+  services: ['at-home-pet-euthanasia'],
+  serviceArea,
+});
+
+const faqItems = [
+  {
+    question: `Do you offer at-home euthanasia appointments on weekends in ${cityName}?`,
+    answer: `We understand that the need for end-of-life care can arise at any time. Please call us at ${telephone} to discuss our current availability for weekend or evening appointments in the ${cityName} area.`
+  },
+  {
+    question: "What happens after the at-home euthanasia?",
+    answer: "We offer respectful transportation for your pet to our facility if you choose private or communal cremation. If you prefer to handle burial yourself (in accordance with local laws), the veterinarian will ensure your pet is respectfully placed before leaving your home."
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
+>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="service-location-page content-container">
+      <header class="page-header">
+        <h1>At-Home Pet Euthanasia in {cityName}, {stateName}</h1>
+        <p class="lead">A peaceful, pain-free transition for your beloved pet in the comfort of your own home.</p>
+      </header>
+
+      <section class="service-details">
+        <h2>Why Choose At-Home Euthanasia?</h2>
+        <p>For many pets, visiting a veterinary clinic causes unnecessary anxiety and stress. Choosing at-home euthanasia allows your pet to spend their final moments exactly where they feel most safe and loved—whether that's on their own bed, in your lap, or in their favorite spot in the garden.</p>
+        
+        <p>Our dedicated veterinarians serving {cityName} are committed to making this difficult day as peaceful as possible for both you and your pet.</p>
+
+        <h2>Our Gentle Process</h2>
+        <div class="process-steps">
+          <div class="step card">
+            <h3>1. Arrival & Sedation</h3>
+            <p>Our compassionate veterinarian arrives at your {cityName} home. After answering your questions, they administer a gentle sedative. Your pet will fall into a deep, pain-free sleep within minutes.</p>
+          </div>
+          <div class="step card">
+            <h3>2. The Final Step</h3>
+            <p>Once you are ready and your pet is completely relaxed and unaware, the final medication is given. The passing is quiet and completely peaceful.</p>
+          </div>
+          <div class="step card">
+            <h3>3. Aftercare</h3>
+            <p>We provide you with private time to say goodbye. If you have chosen cremation services, we respectfully transport your pet from your home.</p>
+          </div>
+        </div>
+
+        <div class="contact-box card">
+          <p><strong>Schedule an Appointment or Consultation in {cityName}</strong></p>
+          <p class="phone"><a href={`tel:${telephone}`}>{telephone}</a></p>
+          <p class="mt-sm"><em>We are here to support you in making the best decision for your pet.</em></p>
+        </div>
+      </section>
+
+      <FAQSection items={faqItems} title="Frequently Asked Questions" />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .service-location-page {
+    padding: var(--space-xl) 0 var(--space-4xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+  }
+
+  .lead {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  .process-steps {
+    display: grid;
+    gap: var(--space-md);
+    margin: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .step h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+  }
+
+  .contact-box {
+    background: var(--color-primary-subtle);
+    border-color: var(--color-primary-light);
+    margin: var(--space-2xl) 0;
+    text-align: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .contact-box p {
+    margin-bottom: 0;
+  }
+
+  .phone {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+  }
+
+  .phone a {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+  }
+  
+  .mt-sm {
+    margin-top: var(--space-sm);
+  }
+</style>

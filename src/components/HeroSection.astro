@@ -1,0 +1,157 @@
+---
+/**
+ * HeroSection.astro
+ * Above-the-fold hero with h1, subheadline, CTA, and hero image.
+ * Image uses fetchpriority="high" for LCP optimization.
+ */
+
+interface Props {
+  headline: string;
+  subheadline: string;
+  ctaText?: string;
+  ctaHref?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+}
+
+const {
+  headline,
+  subheadline,
+  ctaText,
+  ctaHref,
+  imageUrl,
+  imageAlt = '',
+} = Astro.props as Props;
+---
+
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <h1 class="hero-headline">{headline}</h1>
+      <p class="hero-subheadline">{subheadline}</p>
+      {ctaText && ctaHref && (
+        <a href={ctaHref} class="btn btn-primary btn-lg hero-cta">
+          {ctaText}
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      )}
+    </div>
+    {imageUrl && (
+      <div class="hero-image">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          width="600"
+          height="400"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-subtle) 0%,
+      var(--color-bg) 50%,
+      hsl(264, 20%, 95%) 100%
+    );
+    padding: var(--space-4xl) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse at center,
+      hsla(173, 42%, 32%, 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-headline {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-subheadline {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-xl);
+    max-width: 36rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .hero-image {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-image img {
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-2xl) 0;
+    }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      text-align: center;
+    }
+
+    .hero-headline {
+      font-size: var(--font-size-3xl);
+    }
+
+    .hero-subheadline {
+      font-size: var(--font-size-lg);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-image {
+      order: -1;
+    }
+  }
+</style>

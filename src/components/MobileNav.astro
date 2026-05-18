@@ -1,0 +1,208 @@
+---
+/**
+ * MobileNav.astro
+ * Collapsible hamburger menu for viewports < 768px.
+ * Client-side hydrated for interactivity.
+ */
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  navLinks: NavLink[];
+}
+
+const { navLinks } = Astro.props as Props;
+---
+
+<div class="mobile-nav" id="mobile-nav">
+  <button
+    class="mobile-nav-toggle"
+    id="mobile-nav-toggle"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+    aria-controls="mobile-nav-menu"
+  >
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+  <nav class="mobile-nav-menu" id="mobile-nav-menu" aria-label="Mobile navigation">
+    <ul class="mobile-nav-list">
+      {navLinks.map((link: NavLink) => (
+        <li class="mobile-nav-item">
+          <a href={link.href} class="mobile-nav-link">{link.label}</a>
+        </li>
+      ))}
+      <li class="mobile-nav-item">
+        <a href="/contact/" class="btn btn-primary mobile-nav-cta">Call or Text</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('mobile-nav-toggle');
+    const menu = document.getElementById('mobile-nav-menu');
+    const overlay = document.getElementById('mobile-nav-overlay');
+
+    if (!toggle || !menu || !overlay) return;
+
+    function openMenu() {
+      toggle!.setAttribute('aria-expanded', 'true');
+      menu!.classList.add('is-open');
+      overlay!.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      toggle!.setAttribute('aria-expanded', 'false');
+      menu!.classList.remove('is-open');
+      overlay!.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    overlay.addEventListener('click', closeMenu);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    // Close when a nav link is clicked
+    menu.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  });
+</script>
+
+<style>
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-nav {
+      display: block;
+    }
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 110;
+    position: relative;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: all var(--transition-normal);
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: hsla(220, 15%, 18%, 0.5);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+  }
+
+  .mobile-nav-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(80vw, 320px);
+    height: 100vh;
+    background: var(--color-bg-card);
+    z-index: 105;
+    padding: calc(var(--header-height) + var(--space-lg)) var(--space-xl) var(--space-xl);
+    transform: translateX(100%);
+    transition: transform var(--transition-slow);
+    box-shadow: var(--shadow-xl);
+    overflow-y: auto;
+  }
+
+  .mobile-nav-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .mobile-nav-item {
+    margin: 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: var(--space-md) var(--space-md);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .mobile-nav-link:hover {
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+  }
+
+  .mobile-nav-cta {
+    margin-top: var(--space-md);
+    text-align: center;
+    width: 100%;
+  }
+</style>

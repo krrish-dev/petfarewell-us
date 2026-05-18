@@ -1,0 +1,180 @@
+---
+/**
+ * ResourcePageLayout.astro
+ * Layout for resource article pages.
+ * Extends BaseLayout with Article JSON-LD, Breadcrumb, dates, and related pages.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FAQSection from '../components/FAQSection.astro';
+import { generateBreadcrumbs } from '../lib/breadcrumb';
+import { buildArticleSchema, buildBreadcrumbSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  datePublished: Date;
+  dateModified: Date;
+  author?: string;
+  ogImage?: string;
+  faqs?: FAQItem[];
+  relatedPages?: string[];
+}
+
+const {
+  title,
+  description,
+  datePublished,
+  dateModified,
+  author = 'Pet Farewell Editorial Team',
+  ogImage,
+  faqs = [],
+  relatedPages = [],
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const articleJsonLd = buildArticleSchema({
+  headline: title,
+  description,
+  datePublished: datePublished.toISOString().split('T')[0],
+  dateModified: dateModified.toISOString().split('T')[0],
+  author,
+  url: canonicalUrl,
+  image: ogImage ? `${SITE_CONFIG.url}${ogImage}` : undefined,
+  publisher: {
+    name: SITE_CONFIG.organization.name,
+    url: SITE_CONFIG.organization.url,
+    logo: `${SITE_CONFIG.url}${SITE_CONFIG.organization.logo}`,
+  },
+});
+
+const publishDate = datePublished.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const modifiedDate = dateModified.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={ogImage ? `${SITE_CONFIG.url}${ogImage}` : undefined}
+  structuredData={[articleJsonLd, breadcrumbJsonLd]}
+>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <article class="resource-article content-container">
+      <header class="article-header">
+        <h1>{title}</h1>
+        <div class="article-meta">
+          <span class="article-author">By {author}</span>
+          <span class="article-separator">·</span>
+          <time datetime={datePublished.toISOString()}>Published {publishDate}</time>
+          {dateModified > datePublished && (
+            <>
+              <span class="article-separator">·</span>
+              <time datetime={dateModified.toISOString()}>Updated {modifiedDate}</time>
+            </>
+          )}
+        </div>
+      </header>
+
+      <div class="article-body">
+        <slot />
+      </div>
+
+      {faqs.length > 0 && (
+        <FAQSection items={faqs} />
+      )}
+
+      {relatedPages.length > 0 && (
+        <section class="related-pages" id="related">
+          <h2>Related Articles</h2>
+          <ul class="related-list">
+            {relatedPages.map(slug => (
+              <li>
+                <a href={`/${slug}/`}>{slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .resource-article {
+    padding: var(--space-xl) 0 var(--space-4xl);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .article-header h1 {
+    margin-bottom: var(--space-md);
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .article-separator {
+    color: var(--color-border);
+  }
+
+  .article-body {
+    line-height: var(--line-height-relaxed);
+  }
+
+  .article-body :global(h2) {
+    scroll-margin-top: calc(var(--header-height) + var(--space-lg));
+  }
+
+  .related-pages {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .related-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .related-list li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .related-list a {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    text-transform: capitalize;
+  }
+</style>

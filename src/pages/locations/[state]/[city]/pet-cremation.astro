@@ -1,0 +1,158 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import FAQSection from '../../../../components/FAQSection.astro';
+import { generateBreadcrumbs } from '../../../../lib/breadcrumb';
+import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../../../../lib/schema';
+import { SITE_CONFIG } from '../../../../config/site';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations');
+  // Only create this page for locations that offer pet-cremation
+  const eligibleLocations = locations.filter(loc => loc.data.services.includes('pet-cremation'));
+  
+  return eligibleLocations.map(loc => ({
+    params: { 
+      state: loc.data.stateSlug,
+      city: loc.data.citySlug
+    },
+    props: { location: loc }
+  }));
+}
+
+const { location } = Astro.props;
+const { cityName, stateName, businessName, address, telephone, geo, serviceArea } = location.data;
+
+const title = `Pet Cremation in ${cityName}, ${stateName} | ${businessName}`;
+const description = `Dignified and respectful pet cremation services in ${cityName}, ${stateName}. We offer private and communal options with complete transparency. Contact ${businessName} today.`;
+
+const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const localBusinessJsonLd = buildLocalBusinessSchema({
+  businessName,
+  address,
+  telephone,
+  geo,
+  url: canonicalUrl,
+  services: ['pet-cremation'],
+  serviceArea,
+});
+
+const faqItems = [
+  {
+    question: `Do you offer home pickup for pet cremation in ${cityName}?`,
+    answer: `Yes, we can arrange for the gentle and respectful transportation of your pet from your home in ${cityName} to our facility. Please call us at ${telephone} to make arrangements.`
+  },
+  {
+    question: `How do I know I am getting my pet's ashes back?`,
+    answer: "We utilize a strict tracking system throughout the entire cremation process. Your pet is assigned a unique identification tag that remains with them at all times, ensuring complete transparency and peace of mind."
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
+>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="service-location-page content-container">
+      <header class="page-header">
+        <h1>Pet Cremation Services in {cityName}, {stateName}</h1>
+        <p class="lead">Providing a dignified farewell for your beloved companion with respectful, ethical cremation care.</p>
+      </header>
+
+      <section class="service-details">
+        <h2>Compassionate Cremation Options</h2>
+        <p>At {businessName}, we understand that every family's needs are different when it comes to memorializing a pet. We offer two primary cremation options for the {cityName} community:</p>
+        
+        <div class="options-grid">
+          <div class="card option-card">
+            <h3>Private Cremation</h3>
+            <p>Your pet is cremated individually, alone in the cremation chamber. This ensures that the ashes you receive belong exclusively to your pet. Ashes are carefully returned to you in a complimentary temporary urn or a beautiful custom urn of your choosing.</p>
+          </div>
+          <div class="card option-card">
+            <h3>Communal Cremation</h3>
+            <p>Your pet is respectfully cremated alongside other pets. With this option, ashes are not returned to the family but are scattered in a designated, dignified manner. This is a cost-effective option for families who do not wish to keep their pet's remains.</p>
+          </div>
+        </div>
+
+        <h2>Contact Us in {cityName}</h2>
+        <p>If you have questions about our process, pricing, or need to arrange for transportation, our compassionate team is here to help.</p>
+        
+        <div class="contact-box card">
+          <p><strong>{businessName}</strong></p>
+          <p>{address.streetAddress}<br />{address.city}, {address.state} {address.postalCode}</p>
+          <p class="phone"><strong>Call us 24/7:</strong> <a href={`tel:${telephone}`}>{telephone}</a></p>
+        </div>
+      </section>
+
+      <FAQSection items={faqItems} title={`Frequently Asked Questions about Pet Cremation in ${cityName}`} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .service-location-page {
+    padding: var(--space-xl) 0 var(--space-4xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+  }
+
+  .lead {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .option-card h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+  }
+
+  .contact-box {
+    background: var(--color-primary-subtle);
+    border-color: var(--color-primary-light);
+    margin: var(--space-lg) 0;
+  }
+
+  .contact-box p {
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .phone {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-lg);
+  }
+
+  .phone a {
+    color: var(--color-primary-dark);
+  }
+
+  @media (max-width: 768px) {
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

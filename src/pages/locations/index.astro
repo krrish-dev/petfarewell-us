@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import { getCollection } from 'astro:content';
+import { generateBreadcrumbs } from '../../lib/breadcrumb';
+import { buildBreadcrumbSchema } from '../../lib/schema';
+import { SITE_CONFIG } from '../../config/site';
+
+const title = "Service Locations | Pet Farewell";
+const description = "Find Pet Farewell compassionate end-of-life pet care services in your state. We provide at-home pet euthanasia and pet cremation in multiple locations.";
+
+const locations = await getCollection('locations');
+
+// Get unique states
+const uniqueStates = Array.from(new Set(locations.map(loc => loc.data.stateName)))
+  .map(stateName => {
+    const loc = locations.find(l => l.data.stateName === stateName);
+    return {
+      name: stateName,
+      slug: loc?.data.stateSlug,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={breadcrumbJsonLd}
+>
+  <HeroSection
+    headline="Our Service Areas"
+    subheadline="Compassionate end-of-life care available in communities across the country."
+    ctaText="Contact Us"
+    ctaHref="/contact/"
+  />
+
+  <div class="container section">
+    <div class="content-container">
+      <h2>Select Your State</h2>
+      <p>We are continually expanding our service areas to help more families during their time of need. Please select your state below to find the nearest Pet Farewell providers and available services.</p>
+
+      <ul class="states-list">
+        {uniqueStates.map(state => (
+          <li>
+            <a href={`/locations/${state.slug}/`} class="card state-card">
+              <h3>{state.name}</h3>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .states-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-xl) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .state-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: var(--space-lg);
+  }
+
+  .state-card h3 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+  }
+
+  .arrow {
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+    transition: transform var(--transition-fast);
+  }
+
+  .state-card:hover .arrow {
+    transform: translateX(4px);
+  }
+</style>

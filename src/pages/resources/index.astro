@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import { getCollection } from 'astro:content';
+import { generateBreadcrumbs } from '../../lib/breadcrumb';
+import { buildBreadcrumbSchema } from '../../lib/schema';
+import { SITE_CONFIG } from '../../config/site';
+
+const title = "End-of-Life Pet Care Resources | Pet Farewell";
+const description = "Educational resources, guides, and support articles to help you navigate your pet's end-of-life care, cremation options, and the grieving process.";
+
+const allResources = await getCollection('resources');
+
+// Sort by date published, newest first
+const sortedResources = allResources.sort((a, b) => 
+  b.data.datePublished.valueOf() - a.data.datePublished.valueOf()
+);
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={breadcrumbJsonLd}
+>
+  <HeroSection
+    headline="Pet End-of-Life Resources"
+    subheadline="Compassionate guides and information to help you make informed decisions during a difficult time."
+    ctaText="Contact Us for Support"
+    ctaHref="/contact/"
+  />
+
+  <div class="container section">
+    <div class="resources-grid">
+      {sortedResources.map(resource => (
+        <article class="card resource-card">
+          {resource.data.ogImage && (
+            <div class="resource-image">
+              <img 
+                src={resource.data.ogImage} 
+                alt="" 
+                width="400" 
+                height="225" 
+                loading="lazy" 
+                decoding="async"
+              />
+            </div>
+          )}
+          <div class="resource-content">
+            <h2 class="resource-title">
+              <a href={`/resources/${resource.slug}/`}>{resource.data.title}</a>
+            </h2>
+            <p class="resource-desc">{resource.data.description}</p>
+            <div class="resource-meta">
+              <time datetime={resource.data.datePublished.toISOString()}>
+                {resource.data.datePublished.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-xl);
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+  }
+
+  .resource-card {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resource-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .resource-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .resource-card:hover .resource-image img {
+    transform: scale(1.05);
+  }
+
+  .resource-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .resource-title {
+    font-size: var(--font-size-xl);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    line-height: var(--line-height-tight);
+  }
+
+  .resource-title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .resource-card:hover .resource-title a {
+    color: var(--color-primary);
+  }
+
+  .resource-desc {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-lg);
+    flex: 1;
+  }
+
+  .resource-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--space-md);
+  }
+</style>

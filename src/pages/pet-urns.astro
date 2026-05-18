@@ -1,0 +1,78 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+import { buildProductSchema } from '../lib/schema';
+
+const title = "Pet Urns & Keepsakes | Beautiful Resting Places | Pet Farewell";
+const description = "Discover beautiful pet urns, memorial boxes, and keepsakes to honor and preserve the memory of your beloved dog or cat after cremation.";
+
+const headline = "Beautiful Pet Urns & Keepsakes";
+const subheadline = "Find a fitting and respectful resting place for your companion's ashes, preserving their memory for years to come.";
+
+const headings = [
+  { depth: 2, slug: "choosing-an-urn", text: "Choosing the Right Urn" },
+  { depth: 2, slug: "types-of-urns", text: "Types of Pet Urns" },
+  { depth: 2, slug: "personalization", text: "Personalization and Engraving" }
+];
+
+const faqItems = [
+  {
+    question: "What size urn do I need for my pet?",
+    answer: "A general rule is that you need 1 cubic inch of urn capacity for every 1 pound of your pet's healthy weight. For example, a 50-pound dog would need an urn with at least a 50-cubic-inch capacity."
+  },
+  {
+    question: "Can I transfer the ashes to a new urn later?",
+    answer: "Yes. Ashes are typically returned in a sealed plastic bag inside a temporary container or basic urn. You can safely transfer this bag into a new urn whenever you are ready."
+  }
+];
+
+const relatedLinks = [
+  { label: "Pet Cremation", href: "/pet-cremation/", description: "Learn about the cremation process." },
+  { label: "Pet Memorial Ideas", href: "/pet-memorial-ideas/", description: "More ways to honor your pet's memory." }
+];
+
+const productSchema = buildProductSchema({
+  name: "Custom Pet Cremation Urns",
+  description: "A selection of high-quality wood, metal, and ceramic urns for pet ashes.",
+  url: "https://petfarewell.us/pet-urns/",
+  offers: {
+    price: 49.99,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock"
+  }
+});
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/pet-urns-hero.jpg"
+  heroImageAlt="A collection of beautifully crafted wooden and ceramic pet urns"
+  structuredData={productSchema}
+>
+  <h2 id="choosing-an-urn">Choosing the Right Urn</h2>
+  <p>Selecting an urn is a deeply personal decision. The right vessel not only holds your pet's ashes securely but also serves as a beautiful tribute to their life. When choosing an urn, consider where it will be displayed, your personal aesthetic, and the size required based on your pet's weight.</p>
+
+  <h2 id="types-of-urns">Types of Pet Urns</h2>
+  <p>There are many styles of urns available to suit different preferences and memorial plans:</p>
+  <ul>
+    <li><strong>Wooden Box Urns:</strong> Classic and warm, often available in oak, cherry, or walnut. Many include a slot to display a favorite photograph of your pet.</li>
+    <li><strong>Metal Urns:</strong> Durable and elegant, typically made from brass or pewter, often featuring decorative paw prints or silhouettes.</li>
+    <li><strong>Ceramic Urns:</strong> Artistic and unique, these can be displayed as a piece of art in your home.</li>
+    <li><strong>Biodegradable Urns:</strong> Designed for families who wish to bury their pet's ashes or scatter them in water. These urns naturally break down over time.</li>
+    <li><strong>Keepsake Urns:</strong> Small vessels designed to hold just a tiny portion of the ashes, perfect for families who want to share the ashes among multiple family members.</li>
+  </ul>
+
+  <h2 id="personalization">Personalization and Engraving</h2>
+  <p>Many urns can be personalized to make them truly unique to your pet. Options often include:</p>
+  <ul>
+    <li>Engraving your pet's name, dates of birth and passing, or a short, meaningful quote.</li>
+    <li>Attaching a personalized nameplate to wooden or stone urns.</li>
+    <li>Choosing an urn that incorporates a cast of your pet's actual paw print.</li>
+  </ul>
+  <p>Take your time in making this selection. Your cremation provider can temporarily hold the ashes in a simple container until you find the perfect resting place.</p>
+</ServicePageLayout>

@@ -1,0 +1,226 @@
+---
+/**
+ * LocationPageLayout.astro
+ * Layout for location pages.
+ * Extends BaseLayout with LocalBusiness JSON-LD, NAP display, Breadcrumb.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { generateBreadcrumbs } from '../lib/breadcrumb';
+import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+interface Address {
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}
+
+interface Geo {
+  latitude: number;
+  longitude: number;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  businessName: string;
+  address: Address;
+  telephone: string;
+  geo: Geo;
+  services: string[];
+  serviceArea?: string;
+}
+
+const {
+  title,
+  description,
+  businessName,
+  address,
+  telephone,
+  geo,
+  services,
+  serviceArea,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const localBusinessJsonLd = buildLocalBusinessSchema({
+  businessName,
+  address,
+  telephone,
+  geo,
+  url: canonicalUrl,
+  services,
+  serviceArea,
+});
+
+const serviceLabels: Record<string, string> = {
+  'pet-cremation': 'Pet Cremation',
+  'at-home-pet-euthanasia': 'At-Home Pet Euthanasia',
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
+>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="location-page content-container">
+      <header class="location-header">
+        <h1>{title}</h1>
+      </header>
+
+      <!-- NAP Display Block -->
+      <section class="nap-block card" id="nap">
+        <h2 class="nap-title">Contact Information</h2>
+        <div class="nap-details">
+          <div class="nap-item">
+            <span class="nap-label">Business</span>
+            <span class="nap-value">{businessName}</span>
+          </div>
+          <div class="nap-item">
+            <span class="nap-label">Address</span>
+            <address class="nap-value nap-address">
+              {address.streetAddress}<br />
+              {address.city}, {address.state} {address.postalCode}
+            </address>
+          </div>
+          <div class="nap-item">
+            <span class="nap-label">Phone</span>
+            <a href={`tel:${telephone}`} class="nap-value nap-phone">{telephone}</a>
+          </div>
+          {serviceArea && (
+            <div class="nap-item">
+              <span class="nap-label">Service Area</span>
+              <span class="nap-value">{serviceArea}</span>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <!-- Available Services -->
+      <section class="available-services" id="services">
+        <h2>Available Services</h2>
+        <div class="services-grid">
+          {services.map(service => (
+            <a
+              href={`${Astro.url.pathname.replace(/\/$/, '')}/${service}/`}
+              class="card service-card"
+            >
+              <h3>{serviceLabels[service] || service}</h3>
+              <span class="service-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Page Content Slot -->
+      <div class="location-content">
+        <slot />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .location-page {
+    padding: var(--space-xl) 0 var(--space-4xl);
+  }
+
+  .location-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .nap-block {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .nap-title {
+    font-size: var(--font-size-xl);
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
+  }
+
+  .nap-details {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .nap-item {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .nap-label {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    min-width: 6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .nap-value {
+    color: var(--color-text);
+    font-style: normal;
+  }
+
+  .nap-phone {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .available-services {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .service-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+  }
+
+  .service-card h3 {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    margin: 0;
+  }
+
+  .service-arrow {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+  }
+
+  .service-card:hover .service-arrow {
+    transform: translateX(4px);
+  }
+
+  .location-content {
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 768px) {
+    .nap-item {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>

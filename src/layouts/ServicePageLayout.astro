@@ -1,0 +1,165 @@
+---
+/**
+ * ServicePageLayout.astro
+ * Layout for cornerstone service pages.
+ * Extends BaseLayout with HeroSection, TOC, FAQ, Breadcrumb, and internal links.
+ */
+import BaseLayout from './BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import FAQSection from '../components/FAQSection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { generateBreadcrumbs } from '../lib/breadcrumb';
+import { buildBreadcrumbSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface InternalLink {
+  label: string;
+  href: string;
+  description?: string;
+}
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  headline: string;
+  subheadline: string;
+  ctaText?: string;
+  ctaHref?: string;
+  heroImageUrl?: string;
+  heroImageAlt?: string;
+  headings: Heading[];
+  faqItems: FAQItem[];
+  relatedLinks?: InternalLink[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  headline,
+  subheadline,
+  ctaText = 'Learn More',
+  ctaHref = '/contact/',
+  heroImageUrl,
+  heroImageAlt,
+  headings,
+  faqItems,
+  relatedLinks = [],
+  structuredData,
+  ogImage,
+} = Astro.props;
+
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+// Merge breadcrumb JSON-LD with any page-specific structured data
+const allStructuredData = structuredData
+  ? Array.isArray(structuredData)
+    ? [...structuredData, breadcrumbJsonLd]
+    : [structuredData, breadcrumbJsonLd]
+  : breadcrumbJsonLd;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={allStructuredData}
+  ogImage={ogImage}
+  preloadImage={heroImageUrl}
+>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <HeroSection
+    headline={headline}
+    subheadline={subheadline}
+    ctaText={ctaText}
+    ctaHref={ctaHref}
+    imageUrl={heroImageUrl}
+    imageAlt={heroImageAlt}
+  />
+
+  <div class="container">
+    <div class="service-page-content content-container">
+      <TableOfContents headings={headings} />
+
+      <article class="service-article">
+        <slot />
+      </article>
+
+      {faqItems.length > 0 && (
+        <FAQSection items={faqItems} />
+      )}
+
+      {relatedLinks.length > 0 && (
+        <section class="related-links" id="related">
+          <h2>Related Services</h2>
+          <div class="related-links-grid">
+            {relatedLinks.map(link => (
+              <a href={link.href} class="card related-card">
+                <h3>{link.label}</h3>
+                {link.description && <p>{link.description}</p>}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .service-page-content {
+    padding: var(--space-2xl) 0 var(--space-4xl);
+  }
+
+  .service-article {
+    line-height: var(--line-height-relaxed);
+  }
+
+  .service-article :global(h2) {
+    scroll-margin-top: calc(var(--header-height) + var(--space-lg));
+  }
+
+  .related-links {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .related-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .related-card {
+    text-decoration: none;
+  }
+
+  .related-card h3 {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .related-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+</style>

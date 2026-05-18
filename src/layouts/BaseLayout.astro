@@ -1,0 +1,112 @@
+---
+/**
+ * BaseLayout.astro
+ * Root layout wrapping every page.
+ * Injects title, meta, OG tags, JSON-LD, GA4 script, GSC verification,
+ * and "Skip to main content" link.
+ */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { SITE_CONFIG } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  preloadImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href,
+  ogImage = `${SITE_CONFIG.url}/images/og-default.jpg`,
+  ogType = 'website',
+  structuredData,
+  noindex = false,
+  preloadImage,
+} = Astro.props;
+
+const fullTitle = title === SITE_CONFIG.name
+  ? title
+  : `${title} | ${SITE_CONFIG.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title & Description -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Robots -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={SITE_CONFIG.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content={SITE_CONFIG.gscVerificationToken} />
+
+    <!-- Hero image preload for LCP optimization -->
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} />
+    )}
+
+    <!-- JSON-LD Structured Data -->
+    {structuredData && <StructuredData data={structuredData} />}
+
+    <!-- GA4 (async) -->
+    {SITE_CONFIG.ga4MeasurementId && SITE_CONFIG.ga4MeasurementId !== 'G-XXXXXXXXXX' && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.ga4MeasurementId}`}></script>
+        <script define:vars={{ measurementId: SITE_CONFIG.ga4MeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', measurementId);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <!-- Skip to main content (first focusable element) -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+    <MobileCallBar />
+  </body>
+</html>

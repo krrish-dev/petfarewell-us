@@ -1,0 +1,87 @@
+---
+/**
+ * TableOfContents.astro
+ * Auto-generated TOC from page h2 headings.
+ */
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Only show h2-level headings
+const tocItems = headings.filter(h => h.depth === 2);
+---
+
+{tocItems.length > 0 && (
+  <nav aria-label="Table of contents" class="toc">
+    <h2 class="toc-title">In This Article</h2>
+    <ol class="toc-list">
+      {tocItems.map(item => (
+        <li class="toc-item">
+          <a href={`#${item.slug}`}>{item.text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .toc {
+    background: var(--color-bg-warm);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-xl);
+    margin: var(--space-xl) 0;
+  }
+
+  .toc-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc-counter;
+  }
+
+  .toc-item {
+    counter-increment: toc-counter;
+    margin-bottom: var(--space-sm);
+  }
+
+  .toc-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    padding: var(--space-xs) 0;
+    transition: color var(--transition-fast);
+  }
+
+  .toc-item a::before {
+    content: counter(toc-counter) ".";
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    min-width: 1.5rem;
+  }
+
+  .toc-item a:hover {
+    color: var(--color-primary-dark);
+  }
+</style>

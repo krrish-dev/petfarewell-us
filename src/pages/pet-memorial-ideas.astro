@@ -1,0 +1,71 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Pet Memorial Ideas | Honoring Your Pet | Pet Farewell";
+const description = "Find meaningful pet memorial ideas to honor and celebrate the life of your beloved animal companion after they have passed.";
+
+const headline = "Meaningful Pet Memorial Ideas";
+const subheadline = "Creative, beautiful, and heartfelt ways to celebrate the unique life and love of your animal companion.";
+
+const headings = [
+  { depth: 2, slug: "why-memorialize", text: "Why Memorializing Helps" },
+  { depth: 2, slug: "physical-memorials", text: "Physical Memorials and Keepsakes" },
+  { depth: 2, slug: "living-tributes", text: "Living Tributes" },
+  { depth: 2, slug: "acts-of-service", text: "Acts of Service" }
+];
+
+const faqItems = [
+  {
+    question: "Should I hold a memorial service for my pet?",
+    answer: "Many families find holding a small, private memorial service to be very healing. It provides an opportunity to share stories, express grief, and officially say goodbye. This can be especially helpful for children."
+  },
+  {
+    question: "Is it weird to keep a shrine to my pet?",
+    answer: "Not at all. Creating a dedicated space in your home with their photo, ashes, collar, or favorite toy is a very common and healthy way to honor their memory and keep them present in your life."
+  }
+];
+
+const relatedLinks = [
+  { label: "Pet Urns", href: "/pet-urns/", description: "Find a beautiful vessel for your pet's ashes." },
+  { label: "Pet Grief Support", href: "/pet-grief-support/", description: "Resources to help you cope with the loss." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/pet-memorial-hero.jpg"
+  heroImageAlt="A framed photo of a dog next to a lit candle"
+>
+  <h2 id="why-memorialize">Why Memorializing Helps</h2>
+  <p>Creating a memorial for your pet is a powerful step in the healing journey. It gives your grief a physical outlet and provides a dedicated space or action to channel the love you still have for your companion. Memorials serve as a lasting testament to the bond you shared and ensure that their memory continues to be honored.</p>
+
+  <h2 id="physical-memorials">Physical Memorials and Keepsakes</h2>
+  <p>Tangible items can provide immense comfort when you are missing your pet's physical presence:</p>
+  <ul>
+    <li><strong>Custom Jewelry:</strong> Have a piece of jewelry created using a tiny amount of your pet's ashes, a lock of their fur, or an engraving of their paw print or nose print.</li>
+    <li><strong>Shadow Boxes:</strong> Create a beautiful display containing their collar, favorite toy, tags, and a cherished photograph.</li>
+    <li><strong>Garden Stones:</strong> Place an engraved stepping stone or marker in your yard, perhaps in their favorite spot to lay in the sun.</li>
+    <li><strong>Custom Artwork:</strong> Commission a local artist to paint or draw a portrait of your pet from your favorite photograph.</li>
+  </ul>
+
+  <h2 id="living-tributes">Living Tributes</h2>
+  <p>Many people find peace in memorials that bring new life to the world:</p>
+  <ul>
+    <li><strong>Plant a Tree or Shrub:</strong> Plant a memorial tree in your yard. Some companies offer biodegradable urns that combine your pet's ashes with a seed or sapling.</li>
+    <li><strong>Create a Memorial Garden:</strong> Dedicate a small section of your garden to your pet, planting their favorite types of grass, catnip, or flowers that bloom in the month they were born.</li>
+  </ul>
+
+  <h2 id="acts-of-service">Acts of Service</h2>
+  <p>Honoring your pet by helping others can be a profoundly healing experience:</p>
+  <ul>
+    <li><strong>Make a Donation:</strong> Donate to a local animal shelter, rescue organization, or veterinary research fund in your pet's name.</li>
+    <li><strong>Volunteer:</strong> Spend time walking dogs or socializing cats at a local shelter when you feel ready.</li>
+    <li><strong>Sponsor an Adoption:</strong> Pay the adoption fee for a shelter animal so they can find a loving home, acting as a legacy for the love your pet experienced.</li>
+  </ul>
+</ServicePageLayout>

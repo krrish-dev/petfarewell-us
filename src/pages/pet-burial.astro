@@ -1,0 +1,60 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Pet Burial Services & Information | Pet Farewell";
+const description = "Learn about pet burial options, including dedicated pet cemeteries and the laws and best practices surrounding backyard pet burial.";
+
+const headline = "Pet Burial Options and Guidance";
+const subheadline = "Exploring dignified resting places for your pet, whether at a dedicated cemetery or a loving home burial.";
+
+const headings = [
+  { depth: 2, slug: "pet-cemeteries", text: "Dedicated Pet Cemeteries" },
+  { depth: 2, slug: "home-burial", text: "Home Burial Considerations" },
+  { depth: 2, slug: "environmental-concerns", text: "Environmental and Legal Concerns" }
+];
+
+const faqItems = [
+  {
+    question: "Is it legal to bury my pet in my backyard?",
+    answer: "In many municipalities, it is legal to bury a pet on private property that you own, but local laws vary wildly. You must check with your local city or county government to ensure you are complying with zoning and environmental regulations."
+  },
+  {
+    question: "How deep should a pet grave be?",
+    answer: "Generally, a pet should be buried at least 3 to 4 feet deep to prevent scavengers from disturbing the site and to comply with most local health regulations."
+  }
+];
+
+const relatedLinks = [
+  { label: "Backyard Pet Burial Laws", href: "/resources/backyard-pet-burial-laws/", description: "Detailed guide on home burial regulations." },
+  { label: "Pet Cremation", href: "/pet-cremation/", description: "Learn about cremation as an alternative." },
+  { label: "Pet Memorial Ideas", href: "/pet-memorial-ideas/", description: "Ways to mark the burial site." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/pet-burial-hero.jpg"
+  heroImageAlt="A peaceful garden setting suitable for a pet memorial"
+>
+  <h2 id="pet-cemeteries">Dedicated Pet Cemeteries</h2>
+  <p>For families who cannot or choose not to bury their pet at home, dedicated pet cemeteries offer a beautiful, permanent resting place. These facilities are deed-restricted, meaning the land will remain a cemetery in perpetuity, providing peace of mind that your pet's grave will never be disturbed.</p>
+  <p>Services often include formal caskets, headstones, and the option to hold a graveside service. While more costly than home burial or communal cremation, pet cemeteries offer a formal space for you to visit and mourn.</p>
+
+  <h2 id="home-burial">Home Burial Considerations</h2>
+  <p>Burying a pet at home is a traditional and comforting choice for many families who own their property. It allows you to keep your companion close by in a familiar environment. However, there are several important factors to consider before proceeding with a home burial.</p>
+  <ul>
+    <li><strong>Property Ownership:</strong> You should only bury a pet on property you own. If you move, you will have to leave the burial site behind, which can be emotionally difficult for some families.</li>
+    <li><strong>Preparation:</strong> The grave should be dug deep enough (typically 3-4 feet) to prevent disturbance by wildlife. Wrapping the pet in a biodegradable blanket or placing them in a wooden box is recommended.</li>
+    <li><strong>Utility Lines:</strong> Always call your local utility marking service (like 811 in the US) before digging to avoid striking buried gas, electric, or water lines.</li>
+  </ul>
+
+  <h2 id="environmental-concerns">Environmental and Legal Concerns</h2>
+  <p>If your pet was euthanized by a veterinarian, the medications used (specifically pentobarbital) can persist in the body for a long time. If a scavenger digs up the remains, they can be fatally poisoned. For this reason, some areas strictly prohibit the home burial of euthanized animals.</p>
+  <p>Always verify your local ordinances regarding pet burial. They will dictate distance requirements from water sources (wells, streams) and property lines. For a comprehensive overview, please read our guide on <a href="/resources/backyard-pet-burial-laws/">Backyard Pet Burial Laws</a>.</p>
+</ServicePageLayout>

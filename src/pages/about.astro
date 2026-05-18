@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import { SITE_CONFIG } from '../config/site';
+import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/schema';
+
+const title = `About Dr. Hany Soliman | ${SITE_CONFIG.name}`;
+const description = "Learn about Dr. Hany Soliman's background, credentials, and mission to provide compassionate in-home pet euthanasia across Southern California.";
+
+const orgSchema = buildOrganizationSchema({
+  name: SITE_CONFIG.organization.name,
+  url: SITE_CONFIG.organization.url,
+  logo: SITE_CONFIG.organization.logo,
+  telephone: SITE_CONFIG.nap.telephone,
+  email: SITE_CONFIG.nap.email,
+});
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { label: 'Home', href: SITE_CONFIG.url },
+  { label: 'About Us', href: `${SITE_CONFIG.url}/about/` },
+]);
+
+const structuredData = [orgSchema, breadcrumbSchema];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={structuredData}
+>
+  <HeroSection
+    headline="About Dr. Hany Soliman"
+    subheadline="Providing Southern California families with warm, patient, and understanding end-of-life care."
+    imageUrl="/images/about-hero.jpg"
+    imageAlt="Dr. Hany Soliman comforting a pet"
+  />
+
+  <div class="container section">
+    <div class="content-container article-body">
+      <h2>Dr. Hany Soliman's Journey</h2>
+      <p>Dr. Soliman graduated in 1994 from Cairo University Veterinary School, and practiced abroad for over ten years before moving to the US in 2005. He attended Oklahoma State University for three years to complete additional certifications for his veterinary license, choosing to practice in the great state of California once he was done.</p>
+      
+      <p>In his work as an associate veterinarian at Banfield and private clinics in the following years, he found that many pet owners contacted him for at-home euthanasia options for their beloved companions. To better offer them those peaceful final moments together, Dr. Soliman left private practice to provide options for people who'd like to compassionately put their animal to sleep in the comfort of their own home.</p>
+
+      <p>His goal has always been to give pet owners the warmth, patience, and understanding they need at such a difficult time.</p>
+
+      <h2>Our Mission & Core Values</h2>
+      <p>Pet Farewell is founded on the belief that every pet deserves a dignified and peaceful transition, and every family deserves compassionate support during their time of loss.</p>
+      
+      <div class="values-grid">
+        <div class="card value-card">
+          <h3>Compassion First</h3>
+          <p>We approach every family and every pet with deep empathy, understanding the profound weight of saying goodbye.</p>
+        </div>
+        
+        <div class="card value-card">
+          <h3>Unwavering Dignity</h3>
+          <p>From the moment Dr. Soliman arrives at your home, your pet is treated with the utmost respect, gentleness, and peace.</p>
+        </div>
+        
+        <div class="card value-card">
+          <h3>Total Transparency</h3>
+          <p>We believe in clear communication. Our cremation tracking systems and honest guidance ensure you have complete peace of mind.</p>
+        </div>
+        
+        <div class="card value-card">
+          <h3>Support Through Grief</h3>
+          <p>Our care doesn't end when the service is complete. We provide resources to help you and your family navigate the grieving process.</p>
+        </div>
+      </div>
+
+      <h2>Why Choose Pet Farewell?</h2>
+      <p>Making decisions during a time of grief is overwhelming. We strive to lift that burden from your shoulders. When you choose Dr. Soliman, you are choosing a veterinary doctor who will guide you step-by-step, whether you are assessing your pet's quality of life, arranging for a peaceful passing in their favorite spot at home, or seeking a respectful cremation service.</p>
+
+      <p>We invite you to <a href="/contact/">contact us</a> with any questions you may have. We are here to listen and to help.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .article-body {
+    line-height: var(--line-height-relaxed);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .value-card h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+</style>

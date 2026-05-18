@@ -1,0 +1,24 @@
+{
+  "name": "petfarewell-static-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/sitemap": "^3.1.6",
+    "astro": "^4.16.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "fast-check": "^3.22.0",
+    "node-html-parser": "^7.1.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

@@ -1,0 +1,64 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+
+const title = "Pet Hospice Care | Comfort for Your Pet's Final Days | Pet Farewell";
+const description = "Learn about veterinary pet hospice (palliative care). Focus on comfort, pain management, and maintaining your pet's quality of life during their final days.";
+
+const headline = "Compassionate Pet Hospice Care";
+const subheadline = "Prioritizing your pet's comfort and quality of life when a cure is no longer possible.";
+
+const headings = [
+  { depth: 2, slug: "what-is-pet-hospice", text: "What is Pet Hospice?" },
+  { depth: 2, slug: "palliative-care-focus", text: "The Focus of Palliative Care" },
+  { depth: 2, slug: "when-to-consider", text: "When to Consider Hospice Care" },
+  { depth: 2, slug: "supporting-the-family", text: "Supporting the Family" }
+];
+
+const faqItems = [
+  {
+    question: "Does hospice care mean I am giving up on my pet?",
+    answer: "No. Hospice care means you are shifting the focus from curing the illness to ensuring your pet is as comfortable and happy as possible for the time they have left."
+  },
+  {
+    question: "How long can a pet be in hospice care?",
+    answer: "Hospice care can last anywhere from a few days to several months, depending on the pet's condition, the disease progression, and the family's wishes."
+  }
+];
+
+const relatedLinks = [
+  { label: "Quality of Life Scale", href: "/resources/quality-of-life-scale-dog/", description: "A tool to help assess your pet's well-being." },
+  { label: "At-Home Euthanasia", href: "/at-home-pet-euthanasia/", description: "Information on peaceful transition when the time comes." },
+  { label: "Pet Grief Support", href: "/pet-grief-support/", description: "Emotional support resources for pet owners." }
+];
+---
+
+<ServicePageLayout
+  title={title}
+  description={description}
+  headline={headline}
+  subheadline={subheadline}
+  headings={headings}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+  heroImageUrl="/images/pet-hospice-hero.jpg"
+  heroImageAlt="An elderly dog receiving gentle affection from their owner"
+>
+  <h2 id="what-is-pet-hospice">What is Pet Hospice?</h2>
+  <p>Veterinary hospice, also known as palliative care, is a specialized approach to caring for a pet with a terminal illness or advanced age. Just like in human medicine, when a cure is no longer achievable, the focus shifts to providing comfort, relieving pain, and maintaining the highest possible quality of life for whatever time remains.</p>
+
+  <h2 id="palliative-care-focus">The Focus of Palliative Care</h2>
+  <p>Hospice care is highly individualized based on the pet's specific needs and the family's capabilities. Key components often include:</p>
+  <ul>
+    <li><strong>Pain Management:</strong> Utilizing medications and therapies to keep your pet comfortable.</li>
+    <li><strong>Nutritional Support:</strong> Adjusting diet, offering appetizing foods, or managing nausea to encourage eating.</li>
+    <li><strong>Hydration:</strong> Administering subcutaneous fluids at home if your pet isn't drinking enough.</li>
+    <li><strong>Mobility Assistance:</strong> Using harnesses, ramps, or modifying the home environment to help your pet move safely.</li>
+    <li><strong>Hygiene Care:</strong> Assisting with grooming and managing incontinence to preserve your pet's dignity.</li>
+  </ul>
+
+  <h2 id="when-to-consider">When to Consider Hospice Care</h2>
+  <p>Hospice care may be the right choice if your pet has been diagnosed with a terminal illness (like cancer or organ failure), if they are experiencing significant age-related decline, or if aggressive treatments are causing more stress than benefit. It provides a peaceful alternative to frequent, stressful clinic visits, allowing your pet to remain in the comfort of their own home.</p>
+
+  <h2 id="supporting-the-family">Supporting the Family</h2>
+  <p>Hospice isn't just about the pet; it's also about supporting the family. A hospice veterinarian will work with you to understand your goals, teach you how to administer care, help you monitor your pet's <a href="/resources/quality-of-life-scale-dog/">quality of life</a>, and provide guidance on preparing for the inevitable, including discussions about <a href="/at-home-pet-euthanasia/">euthanasia</a> when the time is right.</p>
+</ServicePageLayout>
