@@ -35,3 +35,4 @@ Pet Farewell is an Astro static site with feature-first ownership under `src/pag
 - 2026-05-18: Linked the workspace to the GitHub remote `https://github.com/krrish-dev/petfarewell-us.git` and expanded SEO tests for trailing slash canonical, sitemap, and internal page links.
 - 2026-05-18: Centered the shared breadcrumb component across generated pages.
 - 2026-05-18: Added mobile-only call actions: a header phone icon and a fixed bottom call bar using the configured phone number.
+- 2026-05-18: Added a sitewide footer backlink to `https://pethomeeuthanasiaservice.com` with the anchor text `pet home euthanasia near me`.

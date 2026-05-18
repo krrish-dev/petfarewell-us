@@ -169,7 +169,20 @@ describe('Static Site Integration Tests', () => {
     }
   });
 
-  it('14.9: dist/404.html exists and contains navigation links', () => {
+  it('14.9: every page includes the main domain footer backlink', () => {
+    expect(htmlFiles.length).toBeGreaterThan(0);
+
+    for (const file of htmlFiles) {
+      const content = fs.readFileSync(file, 'utf-8');
+      const root = parse(content);
+      const backlink = root.querySelector('footer a[href="https://pethomeeuthanasiaservice.com"]');
+
+      expect(backlink, `File ${file} missing main domain footer backlink`).toBeTruthy();
+      expect(backlink?.text.trim()).toBe('pet home euthanasia near me');
+    }
+  });
+
+  it('14.10: dist/404.html exists and contains navigation links', () => {
     const notFoundPath = path.join(distDir, '404.html');
     expect(fs.existsSync(notFoundPath)).toBe(true);
 
@@ -182,7 +195,7 @@ describe('Static Site Integration Tests', () => {
     expect(link).toBeTruthy();
   });
 
-  it('14.10: Every page has exactly one h1 element', () => {
+  it('14.11: Every page has exactly one h1 element', () => {
     expect(htmlFiles.length).toBeGreaterThan(0);
 
     for (const file of htmlFiles) {
@@ -193,7 +206,7 @@ describe('Static Site Integration Tests', () => {
     }
   });
 
-  it('14.11: Every page has required Open Graph tags', () => {
+  it('14.12: Every page has required Open Graph tags', () => {
     expect(htmlFiles.length).toBeGreaterThan(0);
 
     for (const file of htmlFiles) {
@@ -214,7 +227,7 @@ describe('Static Site Integration Tests', () => {
     }
   });
 
-  it('14.12: Validate JSON-LD blocks exist and are parsable JSON', () => {
+  it('14.13: Validate JSON-LD blocks exist and are parsable JSON', () => {
     expect(htmlFiles.length).toBeGreaterThan(0);
 
     for (const file of htmlFiles) {

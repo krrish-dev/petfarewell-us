@@ -89,6 +89,10 @@ const currentYear = new Date().getFullYear();
 
     <div class="footer-bottom">
       <p>&copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.</p>
+      <p class="footer-backlink">
+        Main service:
+        <a href="https://pethomeeuthanasiaservice.com">pet home euthanasia near me</a>
+      </p>
     </div>
   </div>
 </footer>
@@ -174,6 +178,24 @@ const currentYear = new Date().getFullYear();
     padding-top: var(--space-xl);
     text-align: center;
     font-size: var(--font-size-sm);
+  }
+
+  .footer-bottom p {
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-bottom p:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer-backlink a {
+    color: hsl(220, 10%, 82%);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer-backlink a:hover {
+    color: white;
   }
 
   @media (max-width: 768px) {
