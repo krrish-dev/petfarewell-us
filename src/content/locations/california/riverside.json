@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "riverside",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Riverside",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Riverside", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 33.9806,
-    "longitude": -117.3755
-  },
+  "geo": { "latitude": 33.9806, "longitude": -117.3755 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Riverside, CA and nearby Inland Empire communities by mobile appointment",
   "serviceRadius": "Call for Riverside route availability, travel timing, and exact pricing by distance.",
   "localIntro": "Pet Farewell supports Riverside families with in-home dog and cat euthanasia when a quiet home setting is the kindest option.",
   "nearbyAreas": ["Jurupa Valley", "Moreno Valley", "Grand Terrace", "Colton", "Loma Linda"],
-  "priorityKeywords": ["in-home pet euthanasia Riverside CA", "dog euthanasia at home Riverside", "cat euthanasia at home Riverside"]
+  "priorityKeywords": ["in-home pet euthanasia Riverside CA", "dog euthanasia at home Riverside", "cat euthanasia at home Riverside"],
+  "localSeo": {
+    "localAngle": "Riverside is a high-intent Inland Empire market for families comparing mobile euthanasia, cost, and cremation options before making a difficult decision.",
+    "serviceContext": "The appointment is designed for comfort at home, with time for questions, sedation before the final medication, and respectful aftercare planning.",
+    "routeNotes": ["Riverside availability may be coordinated with Jurupa Valley, Moreno Valley, Grand Terrace, Colton, and nearby Inland Empire routes.", "Traffic, distance, and pet size can affect the final quote.", "Call or text with your neighborhood, pet type, weight, mobility, and cremation preference."],
+    "localConcerns": ["Pets who panic in clinic settings or during car travel.", "Families seeking a private room, favorite bed, or quiet backyard setting.", "Households that want to understand price differences between euthanasia-only, communal cremation, and private cremation."],
+    "appointmentFit": "An in-home visit may be appropriate when the kindest option is to avoid moving your pet and allow them to pass in a familiar place.",
+    "aftercareNote": "Riverside families can discuss private cremation, communal cremation, and transportation after the visit before the appointment begins.",
+    "relatedCities": [{ "label": "Jurupa Valley", "href": "/locations/california/jurupa-valley/" }, { "label": "Moreno Valley", "href": "/locations/california/moreno-valley/" }, { "label": "Grand Terrace", "href": "/locations/california/grand-terrace/" }, { "label": "Colton", "href": "/locations/california/colton/" }],
+    "faqs": [
+      { "question": "Do you offer in-home pet euthanasia in Riverside?", "answer": "Yes. Pet Farewell provides in-home euthanasia for dogs and cats in Riverside by mobile appointment when route timing allows." },
+      { "question": "Can Riverside pricing vary by distance?", "answer": "Yes. The final quote can vary by distance, route timing, pet weight, and aftercare choice." },
+      { "question": "Can cremation be arranged after a Riverside appointment?", "answer": "Yes. Families can request aftercare coordination before the visit." }
+    ]
+  }
 }
