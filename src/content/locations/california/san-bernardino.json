@@ -1,0 +1,23 @@
+{
+  "cityName": "San Bernardino",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "san-bernardino",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "San Bernardino",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.1083,
+    "longitude": -117.2898
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "San Bernardino, CA and nearby Inland Empire communities by mobile appointment",
+  "serviceRadius": "Call for San Bernardino appointment availability, travel timing, and aftercare options.",
+  "localIntro": "Pet Farewell helps San Bernardino families plan a compassionate at-home goodbye for a beloved dog or cat.",
+  "nearbyAreas": ["Highland", "Rialto", "Colton", "Loma Linda", "Muscoy"],
+  "priorityKeywords": ["in-home pet euthanasia San Bernardino CA", "dog euthanasia at home San Bernardino", "cat euthanasia at home San Bernardino"]
+}
