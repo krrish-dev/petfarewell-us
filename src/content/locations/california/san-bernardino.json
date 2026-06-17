@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "san-bernardino",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "San Bernardino",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "San Bernardino", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.1083,
-    "longitude": -117.2898
-  },
+  "geo": { "latitude": 34.1083, "longitude": -117.2898 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "San Bernardino, CA and nearby Inland Empire communities by mobile appointment",
   "serviceRadius": "Call for San Bernardino appointment availability, travel timing, and aftercare options.",
   "localIntro": "Pet Farewell helps San Bernardino families plan a compassionate at-home goodbye for a beloved dog or cat.",
   "nearbyAreas": ["Highland", "Rialto", "Colton", "Loma Linda", "Muscoy"],
-  "priorityKeywords": ["in-home pet euthanasia San Bernardino CA", "dog euthanasia at home San Bernardino", "cat euthanasia at home San Bernardino"]
+  "priorityKeywords": ["in-home pet euthanasia San Bernardino CA", "dog euthanasia at home San Bernardino", "cat euthanasia at home San Bernardino"],
+  "localSeo": {
+    "localAngle": "San Bernardino is a major Inland Empire service-area page, so the content is focused on families who want mobile end-of-life care without adding a final clinic trip.",
+    "serviceContext": "Pet Farewell provides home-based support for dogs and cats, including comfort sedation, family privacy, and aftercare coordination when requested.",
+    "routeNotes": ["San Bernardino routing may connect with Highland, Rialto, Colton, Loma Linda, and Redlands appointments.", "Urban traffic and appointment distance can affect arrival windows.", "Families should ask about travel fees, private cremation, and appointment timing before confirming."],
+    "localConcerns": ["Pets who are too painful or anxious for traffic and clinic travel.", "Families who want children or other pets nearby during a private goodbye.", "Cats who are difficult to place in a carrier during end-of-life decline."],
+    "appointmentFit": "An in-home appointment may be best when your pet is fragile, breathing poorly, in uncontrolled pain, or no longer comfortable with normal movement or travel.",
+    "aftercareNote": "San Bernardino families can request communal cremation, private cremation with ashes returned, or guidance on their own aftercare arrangements.",
+    "relatedCities": [{ "label": "Highland", "href": "/locations/california/highland/" }, { "label": "Rialto", "href": "/locations/california/rialto/" }, { "label": "Colton", "href": "/locations/california/colton/" }, { "label": "Loma Linda", "href": "/locations/california/loma-linda/" }],
+    "faqs": [
+      { "question": "Do you provide pet euthanasia at home in San Bernardino?", "answer": "Yes. Pet Farewell provides mobile dog and cat euthanasia in San Bernardino when route availability allows." },
+      { "question": "Do you serve nearby Inland Empire cities from San Bernardino?", "answer": "Nearby cities such as Highland, Rialto, Colton, and Loma Linda may also be served by appointment." },
+      { "question": "Can San Bernardino families choose ashes returned?", "answer": "Yes. Private cremation can be requested when families want ashes returned." }
+    ]
+  }
 }
