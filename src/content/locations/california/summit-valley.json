@@ -1,0 +1,14 @@
+{
+  "cityName": "Summit Valley",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "summit-valley",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": { "city": "Summit Valley", "state": "CA", "country": "US" },
+  "telephone": "(760) 912-0848",
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Summit Valley, CA and nearby communities by mobile appointment",
+  "serviceRadius": "Mobile visit coverage depends on route timing and appointment availability.",
+  "localIntro": "Pet Farewell supports Summit Valley families with private in-home end-of-life care for dogs and cats.",
+  "priorityKeywords": ["in-home pet euthanasia Summit Valley CA", "dog euthanasia at home Summit Valley", "cat euthanasia at home Summit Valley"]
+}
