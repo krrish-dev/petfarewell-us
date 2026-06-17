@@ -28,7 +28,7 @@ const resourcesCollection = defineCollection({
 
 /**
  * Locations Collection
- * JSON data files describing service locations.
+ * JSON data files describing mobile service areas.
  * File path: src/content/locations/[state]/[city].json
  */
 const locationsCollection = defineCollection({
@@ -39,22 +39,30 @@ const locationsCollection = defineCollection({
     stateSlug: z.string(),
     citySlug: z.string(),
     businessName: z.string(),
-    address: z.object({
-      streetAddress: z.string(),
-      city: z.string(),
-      state: z.string(),
-      postalCode: z.string(),
-      country: z.string().default('US'),
-    }),
-    telephone: z.string(),
-    geo: z.object({
-      latitude: z.number(),
-      longitude: z.number(),
-    }),
+    address: z
+      .object({
+        streetAddress: z.string().optional(),
+        city: z.string(),
+        state: z.string(),
+        postalCode: z.string().optional(),
+        country: z.string().default('US'),
+      })
+      .optional(),
+    telephone: z.string().optional(),
+    geo: z
+      .object({
+        latitude: z.number(),
+        longitude: z.number(),
+      })
+      .optional(),
     services: z.array(
       z.enum(['pet-cremation', 'at-home-pet-euthanasia'])
     ),
     serviceArea: z.string().optional(),
+    serviceRadius: z.string().optional(),
+    localIntro: z.string().optional(),
+    nearbyAreas: z.array(z.string()).optional(),
+    priorityKeywords: z.array(z.string()).optional(),
   }),
 });
 
