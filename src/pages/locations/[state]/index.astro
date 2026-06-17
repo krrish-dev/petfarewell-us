@@ -1,14 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import HeroSection from '../../../components/HeroSection.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { generateBreadcrumbs } from '../../../lib/breadcrumb';
 import { buildBreadcrumbSchema } from '../../../lib/schema';
 import { SITE_CONFIG } from '../../../config/site';
+import { getAllLocations } from '../../../lib/locations';
 
 export async function getStaticPaths() {
-  const locations = await getCollection('locations');
+  const locations = await getAllLocations();
   const states = Array.from(new Set(locations.map(loc => loc.data.stateSlug)));
   
   return states.map(stateSlug => {
