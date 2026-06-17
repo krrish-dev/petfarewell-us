@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FAQSection from '../components/FAQSection.astro';
+import { generateBreadcrumbs } from '../lib/breadcrumb';
+import { buildBreadcrumbSchema, buildFAQSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+const title = 'In-Home Pet Euthanasia Cost in Southern California';
+const description = 'Review PetFarewell.us pricing for in-home dog euthanasia, cat euthanasia, communal cremation, private cremation, travel fees, and aftercare options in Southern California.';
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const faqItems = [
+  {
+    question: 'How much does in-home pet euthanasia cost?',
+    answer: 'Pet Farewell starting prices are $450 for euthanasia-only, $550 with communal cremation, and $750 with private cremation. Final pricing can vary by travel distance, pet weight, and aftercare choice.'
+  },
+  {
+    question: 'What is included in the euthanasia-only package?',
+    answer: 'The euthanasia-only package includes travel within the standard local area, a home exam, comfort sedation, and peaceful euthanasia. The family keeps the body for burial or separate arrangements.'
+  },
+  {
+    question: 'What is included with private cremation?',
+    answer: 'Private cremation includes respectful transport after the appointment and ashes returned in a personalized cedar box with a clay paw print. Return timing is usually about two to three weeks.'
+  },
+  {
+    question: 'Is there a travel fee?',
+    answer: 'A travel fee may apply for extended-distance appointments. Call or text Pet Farewell for a clear quote based on your city, pet size, and preferred aftercare option.'
+  }
+];
+
+const structuredData = [breadcrumbJsonLd, buildFAQSchema(faqItems)];
+
+const packages = [
+  {
+    name: 'Euthanasia-Only',
+    price: '$450',
+    items: ['Mobile in-home visit', 'Home exam', 'Comfort sedation', 'Peaceful euthanasia', 'Family keeps the body for burial or separate arrangements']
+  },
+  {
+    name: 'Euthanasia + Communal Cremation',
+    price: '$550',
+    items: ['Mobile in-home visit', 'Home exam and sedation', 'Peaceful euthanasia', 'Respectful transport', 'Communal cremation without ashes returned']
+  },
+  {
+    name: 'Euthanasia + Private Cremation',
+    price: '$750',
+    items: ['Mobile in-home visit', 'Home exam and sedation', 'Peaceful euthanasia', 'Individual cremation', 'Ashes returned with cedar box and clay paw print']
+  }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+    <article class="content-container cost-page">
+      <header class="page-header">
+        <h1>In-Home Pet Euthanasia Cost in Southern California</h1>
+        <p class="lead">Transparent starting prices for dog euthanasia at home, cat euthanasia at home, and cremation aftercare coordination by PetFarewell.us.</p>
+      </header>
+
+      <section class="pricing-grid" aria-label="Pricing packages">
+        {packages.map((item) => (
+          <div class="card pricing-card">
+            <h2>{item.name}</h2>
+            <p class="price">{item.price}</p>
+            <p class="note">Starting price</p>
+            <ul>
+              {item.items.map((detail) => <li>{detail}</li>)}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2>What Can Affect Final Cost?</h2>
+        <p>Final pricing can depend on appointment distance, route availability, pet weight, aftercare selection, and whether private cremation or communal cremation is requested. Pet Farewell provides the quote before the visit so your family can make decisions without pressure.</p>
+      </section>
+
+      <section>
+        <h2>Related Planning Pages</h2>
+        <ul>
+          <li><a href="/at-home-pet-euthanasia/">Dog and cat euthanasia at home</a></li>
+          <li><a href="/pet-cremation/">Pet cremation and aftercare options</a></li>
+          <li><a href="/pet-hospice/">Pet hospice and end-of-life care</a></li>
+          <li><a href="/faq/">Frequently asked questions</a></li>
+          <li><a href="/locations/">Southern California service areas</a></li>
+        </ul>
+      </section>
+
+      <div class="contact-cta card">
+        <h2>Ask for an Exact Quote</h2>
+        <p>Call or text <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`}>{SITE_CONFIG.nap.telephone}</a> with your city, pet type, pet size, and preferred aftercare option.</p>
+      </div>
+
+      <FAQSection items={faqItems} title="Pet Euthanasia Cost FAQs" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .cost-page { padding: var(--space-xl) 0 var(--space-4xl); }
+  .page-header { text-align: center; margin-bottom: var(--space-2xl); }
+  .lead { color: var(--color-text-secondary); font-size: var(--font-size-xl); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl); }
+  .pricing-card h2 { color: var(--color-primary); margin-top: 0; }
+  .price { font-size: var(--font-size-3xl); font-weight: 800; margin: var(--space-sm) 0 0; }
+  .note { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+  .contact-cta { background: var(--color-primary-subtle); border-color: var(--color-primary-light); margin: var(--space-2xl) 0; }
+</style>
