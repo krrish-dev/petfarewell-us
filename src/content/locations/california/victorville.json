@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "victorville",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Victorville",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Victorville", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.5361,
-    "longitude": -117.2912
-  },
+  "geo": { "latitude": 34.5361, "longitude": -117.2912 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Victorville, CA and nearby Victor Valley communities by mobile appointment",
   "serviceRadius": "Core High Desert service area; call for same-day or next-available route timing.",
   "localIntro": "Pet Farewell helps Victorville families arrange in-home dog and cat euthanasia with a calm, compassionate process.",
   "nearbyAreas": ["Apple Valley", "Hesperia", "Adelanto", "Spring Valley Lake", "Oak Hills"],
-  "priorityKeywords": ["in-home pet euthanasia Victorville CA", "dog euthanasia at home Victorville", "cat euthanasia at home Victorville"]
+  "priorityKeywords": ["in-home pet euthanasia Victorville CA", "dog euthanasia at home Victorville", "cat euthanasia at home Victorville"],
+  "localSeo": {
+    "localAngle": "Victorville is one of Pet Farewell's core High Desert service areas, so this page is written for families who want a quiet in-home option instead of a final drive to a clinic.",
+    "serviceContext": "Appointments are planned around home comfort, family privacy, and route availability across Victorville and nearby Victor Valley communities. The visit can include comfort sedation, peaceful euthanasia, and aftercare coordination.",
+    "routeNotes": ["Best suited for families in Victorville, Spring Valley Lake, Mountain View Acres, and nearby Victor Valley neighborhoods.", "High Desert routing can often be coordinated with Apple Valley, Hesperia, Adelanto, and Oak Hills requests.", "Travel timing is confirmed before scheduling so the family understands availability and any distance-based fee."],
+    "localConcerns": ["Large or painful dogs who cannot comfortably get into a car.", "Cats who become fearful during travel or in clinic waiting rooms.", "Families who need time at home before choosing private or communal cremation."],
+    "appointmentFit": "An in-home visit may be appropriate when your pet is weak, painful, anxious during travel, breathing with effort, or having more difficult days than comfortable days.",
+    "aftercareNote": "Victorville families can ask about communal cremation, private cremation with ashes returned, or keeping the body for their own arrangements when local rules allow.",
+    "relatedCities": [{ "label": "Apple Valley", "href": "/locations/california/apple-valley/" }, { "label": "Hesperia", "href": "/locations/california/hesperia/" }, { "label": "Adelanto", "href": "/locations/california/adelanto/" }, { "label": "Oak Hills", "href": "/locations/california/oak-hills/" }],
+    "faqs": [
+      { "question": "Do you offer in-home pet euthanasia in Victorville?", "answer": "Yes. Pet Farewell provides mobile in-home euthanasia visits for dogs and cats in Victorville when scheduling and route availability allow." },
+      { "question": "Can Victorville families choose private cremation?", "answer": "Yes. Families can request private cremation with ashes returned, or communal cremation when ashes do not need to be returned." },
+      { "question": "Is Victorville a core service area?", "answer": "Victorville is treated as a core High Desert service area, but final appointment timing still depends on route scheduling and your pet's needs." }
+    ]
+  }
 }
