@@ -9,7 +9,6 @@ import { SITE_CONFIG } from '../../../../config/site';
 
 export async function getStaticPaths() {
   const locations = await getCollection('locations');
-  // Only create this page for locations that offer pet-cremation
   const eligibleLocations = locations.filter(loc => loc.data.services.includes('pet-cremation'));
   
   return eligibleLocations.map(loc => ({
@@ -22,12 +21,21 @@ export async function getStaticPaths() {
 }
 
 const { location } = Astro.props;
-const { cityName, stateName, businessName, address, telephone, geo, serviceArea } = location.data;
+const {
+  cityName,
+  stateName,
+  businessName,
+  address,
+  telephone = SITE_CONFIG.nap.telephone,
+  geo,
+  serviceArea,
+  nearbyAreas = [],
+} = location.data;
 
-const title = `Pet Cremation in ${cityName}, ${stateName} | ${businessName}`;
-const description = `Dignified and respectful pet cremation services in ${cityName}, ${stateName}. We offer private and communal options with complete transparency. Contact ${businessName} today.`;
+const title = `Pet Cremation & Aftercare in ${cityName}, ${stateName}`;
+const description = `Pet cremation aftercare coordination in ${cityName}, ${stateName}. Private cremation and communal cremation options after an in-home euthanasia visit.`;
 
-const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+const canonicalUrl = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, SITE_CONFIG.url).href;
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
@@ -40,16 +48,21 @@ const localBusinessJsonLd = buildLocalBusinessSchema({
   url: canonicalUrl,
   services: ['pet-cremation'],
   serviceArea,
+  nearbyAreas,
 });
 
 const faqItems = [
   {
-    question: `Do you offer home pickup for pet cremation in ${cityName}?`,
-    answer: `Yes, we can arrange for the gentle and respectful transportation of your pet from your home in ${cityName} to our facility. Please call us at ${telephone} to make arrangements.`
+    question: `Do you help with pet cremation after euthanasia in ${cityName}?`,
+    answer: `Yes. Pet Farewell can coordinate respectful aftercare after an in-home euthanasia visit in ${cityName}, including communal cremation or private cremation when ashes should be returned.`
   },
   {
-    question: `How do I know I am getting my pet's ashes back?`,
-    answer: "We utilize a strict tracking system throughout the entire cremation process. Your pet is assigned a unique identification tag that remains with them at all times, ensuring complete transparency and peace of mind."
+    question: 'What is the difference between private and communal cremation?',
+    answer: 'Private cremation means your pet is cremated individually and ashes are returned. Communal cremation means ashes are not returned, and the option is usually more affordable.'
+  },
+  {
+    question: 'Can I decide after the appointment?',
+    answer: 'Families are encouraged to discuss aftercare before the visit when possible. This helps avoid pressure during an emotional moment and allows the appointment to be handled calmly.'
   }
 ];
 ---
@@ -57,6 +70,7 @@ const faqItems = [
 <BaseLayout
   title={title}
   description={description}
+  canonicalUrl={canonicalUrl}
   structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
 >
   <div class="container">
@@ -64,36 +78,36 @@ const faqItems = [
 
     <div class="service-location-page content-container">
       <header class="page-header">
-        <h1>Pet Cremation Services in {cityName}, {stateName}</h1>
-        <p class="lead">Providing a dignified farewell for your beloved companion with respectful, ethical cremation care.</p>
+        <h1>Pet Cremation & Aftercare in {cityName}, {stateName}</h1>
+        <p class="lead">Respectful aftercare options after a peaceful goodbye at home.</p>
       </header>
 
       <section class="service-details">
         <h2>Compassionate Cremation Options</h2>
-        <p>At {businessName}, we understand that every family's needs are different when it comes to memorializing a pet. We offer two primary cremation options for the {cityName} community:</p>
+        <p>After saying goodbye, many families want help choosing the most respectful aftercare path. {businessName} can coordinate cremation options for {cityName} families after an in-home euthanasia visit.</p>
         
         <div class="options-grid">
           <div class="card option-card">
             <h3>Private Cremation</h3>
-            <p>Your pet is cremated individually, alone in the cremation chamber. This ensures that the ashes you receive belong exclusively to your pet. Ashes are carefully returned to you in a complimentary temporary urn or a beautiful custom urn of your choosing.</p>
+            <p>Your pet is cremated individually, and ashes are returned to your family. This option is best when you want a keepsake, urn, or memorial placement at home.</p>
           </div>
           <div class="card option-card">
             <h3>Communal Cremation</h3>
-            <p>Your pet is respectfully cremated alongside other pets. With this option, ashes are not returned to the family but are scattered in a designated, dignified manner. This is a cost-effective option for families who do not wish to keep their pet's remains.</p>
+            <p>Your pet is respectfully cremated with other pets, and ashes are not returned. This is often chosen by families who want dignified aftercare without keeping remains.</p>
           </div>
         </div>
 
-        <h2>Contact Us in {cityName}</h2>
-        <p>If you have questions about our process, pricing, or need to arrange for transportation, our compassionate team is here to help.</p>
-        
+        <h2>Aftercare Guidance for {cityName} Families</h2>
+        <p>Pet Farewell explains the available options before the appointment so you can choose without feeling rushed. If cremation is selected, transportation is handled with care after your family has had private time to say goodbye.</p>
+
         <div class="contact-box card">
           <p><strong>{businessName}</strong></p>
-          <p>{address.streetAddress}<br />{address.city}, {address.state} {address.postalCode}</p>
-          <p class="phone"><strong>Call us 24/7:</strong> <a href={`tel:${telephone}`}>{telephone}</a></p>
+          <p>Mobile in-home service for {cityName} and nearby communities.</p>
+          <p class="phone"><strong>Call or text:</strong> <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`}>{telephone}</a></p>
         </div>
       </section>
 
-      <FAQSection items={faqItems} title={`Frequently Asked Questions about Pet Cremation in ${cityName}`} />
+      <FAQSection items={faqItems} title={`Pet Cremation FAQs for ${cityName}`} />
     </div>
   </div>
 </BaseLayout>
