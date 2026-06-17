@@ -1,0 +1,23 @@
+{
+  "cityName": "Palm Springs",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "palm-springs",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Palm Springs",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 33.8303,
+    "longitude": -116.5453
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Palm Springs, CA and nearby Coachella Valley communities by mobile appointment",
+  "serviceRadius": "Call to confirm Coachella Valley appointment availability and travel timing.",
+  "localIntro": "Pet Farewell supports Palm Springs families with gentle in-home euthanasia for dogs and cats in a quiet, familiar setting.",
+  "nearbyAreas": ["Cathedral City", "Rancho Mirage", "Palm Desert", "Desert Hot Springs", "Thousand Palms"],
+  "priorityKeywords": ["in-home pet euthanasia Palm Springs CA", "dog euthanasia at home Palm Springs", "cat euthanasia at home Palm Springs"]
+}
