@@ -26,8 +26,8 @@ export async function getStaticPaths() {
 const { state } = Astro.params;
 const { stateName, cities } = Astro.props;
 
-const title = `Pet Farewell Services in ${stateName}`;
-const description = `Find compassionate pet cremation and at-home euthanasia services in ${stateName}. View our locations and available care options.`;
+const title = `In-Home Pet Euthanasia Service Areas in ${stateName}`;
+const description = `Find ${stateName} city pages for Pet Farewell in-home dog euthanasia, cat euthanasia, pet hospice guidance, and cremation aftercare coordination.`;
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
@@ -45,16 +45,16 @@ const sortedCities = cities.sort((a, b) => a.data.cityName.localeCompare(b.data.
   </div>
 
   <HeroSection
-    headline={`Pet End-of-Life Care in ${stateName}`}
-    subheadline={`Providing dignified, compassionate services for families throughout ${stateName}.`}
+    headline={`In-Home Pet Euthanasia in ${stateName}`}
+    subheadline="Mobile dog and cat euthanasia, quality-of-life guidance, and cremation aftercare coordination."
     ctaText="Find Your City"
     ctaHref="#cities"
   />
 
   <div class="container section" id="cities">
     <div class="content-container">
-      <h2>Available Locations in {stateName}</h2>
-      <p>Select your city to view contact information, service areas, and available options for your pet's care.</p>
+      <h2>Available {stateName} Service Areas</h2>
+      <p>Select the closest city page for local details, nearby communities, service-area notes, and appointment guidance. Pet Farewell uses mobile service-area pages instead of fake clinic locations.</p>
 
       <ul class="cities-list">
         {sortedCities.map(city => (
@@ -62,7 +62,7 @@ const sortedCities = cities.sort((a, b) => a.data.cityName.localeCompare(b.data.
             <a href={`/locations/${state}/${city.data.citySlug}/`} class="card city-card">
               <div class="city-info">
                 <h3>{city.data.cityName}</h3>
-                <span class="city-services">{city.data.services.length} services available</span>
+                <span class="city-services">In-home euthanasia + aftercare coordination</span>
               </div>
               <span class="arrow">→</span>
             </a>
