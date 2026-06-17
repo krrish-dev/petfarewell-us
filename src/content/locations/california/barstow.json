@@ -1,0 +1,23 @@
+{
+  "cityName": "Barstow",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "barstow",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Barstow",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.8958,
+    "longitude": -117.0173
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Barstow, CA and nearby High Desert communities by mobile appointment",
+  "serviceRadius": "Mobile visit coverage depends on route availability from the High Desert service area.",
+  "localIntro": "Pet Farewell helps Barstow families arrange a calm in-home goodbye for dogs and cats without a stressful final drive to a clinic.",
+  "nearbyAreas": ["Lenwood", "Daggett", "Yermo", "Newberry Springs", "Hinkley"],
+  "priorityKeywords": ["in-home pet euthanasia Barstow CA", "dog euthanasia at home Barstow", "cat euthanasia at home Barstow"]
+}
