@@ -13,6 +13,9 @@ export interface OrgData {
   logo: string;
   telephone?: string;
   email?: string;
+  legalName?: string;
+  founder?: string;
+  serviceArea?: string;
 }
 
 export interface BreadcrumbItem {
@@ -22,21 +25,22 @@ export interface BreadcrumbItem {
 
 export interface LocationData {
   businessName: string;
-  address: {
-    streetAddress: string;
+  address?: {
+    streetAddress?: string;
     city: string;
     state: string;
-    postalCode: string;
+    postalCode?: string;
     country: string;
   };
-  telephone: string;
-  geo: {
+  telephone?: string;
+  geo?: {
     latitude: number;
     longitude: number;
   };
   url: string;
   services?: string[];
   serviceArea?: string;
+  nearbyAreas?: string[];
 }
 
 export interface ArticleData {
@@ -77,16 +81,30 @@ export function buildOrganizationSchema(org: OrgData): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${org.url}/#organization`,
     name: org.name,
     url: org.url,
-    logo: org.logo,
+    logo: new URL(org.logo, org.url).href,
   };
 
+  if (org.legalName) {
+    schema.legalName = org.legalName;
+  }
   if (org.telephone) {
     schema.telephone = org.telephone;
   }
   if (org.email) {
     schema.email = org.email;
+  }
+  if (org.founder) {
+    schema.founder = {
+      '@type': 'Person',
+      name: org.founder,
+      jobTitle: 'Veterinarian',
+    };
+  }
+  if (org.serviceArea) {
+    schema.areaServed = org.serviceArea;
   }
 
   return schema;
@@ -112,34 +130,68 @@ export function buildBreadcrumbSchema(
 }
 
 /**
- * Builds LocalBusiness JSON-LD for location pages.
+ * Builds LocalBusiness/VeterinaryCare JSON-LD for mobile location pages.
  */
 export function buildLocalBusinessSchema(
   location: LocationData
 ): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'VeterinaryCare',
+    '@id': `${location.url}#veterinary-care`,
     name: location.businessName,
-    telephone: location.telephone,
     url: location.url,
-    address: {
+    priceRange: '$$',
+  };
+
+  if (location.telephone) {
+    schema.telephone = location.telephone;
+  }
+
+  if (location.address) {
+    const postalAddress: Record<string, unknown> = {
       '@type': 'PostalAddress',
-      streetAddress: location.address.streetAddress,
       addressLocality: location.address.city,
       addressRegion: location.address.state,
-      postalCode: location.address.postalCode,
       addressCountry: location.address.country,
-    },
-    geo: {
+    };
+
+    if (location.address.streetAddress) {
+      postalAddress.streetAddress = location.address.streetAddress;
+    }
+    if (location.address.postalCode) {
+      postalAddress.postalCode = location.address.postalCode;
+    }
+
+    schema.address = postalAddress;
+  }
+
+  if (location.geo) {
+    schema.geo = {
       '@type': 'GeoCoordinates',
       latitude: location.geo.latitude,
       longitude: location.geo.longitude,
-    },
-  };
+    };
+  }
 
-  if (location.serviceArea) {
-    schema.areaServed = location.serviceArea;
+  if (location.serviceArea || location.nearbyAreas?.length) {
+    schema.areaServed = [
+      location.serviceArea,
+      ...(location.nearbyAreas || []),
+    ].filter(Boolean);
+  }
+
+  if (location.services?.length) {
+    schema.makesOffer = location.services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name:
+          service === 'at-home-pet-euthanasia'
+            ? 'In-home pet euthanasia'
+            : 'Pet cremation and aftercare coordination',
+      },
+    }));
   }
 
   return schema;
