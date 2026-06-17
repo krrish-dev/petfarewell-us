@@ -1,15 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
-import { getCollection } from 'astro:content';
 import { generateBreadcrumbs } from '../../lib/breadcrumb';
 import { buildBreadcrumbSchema } from '../../lib/schema';
 import { SITE_CONFIG } from '../../config/site';
+import { getAllLocations } from '../../lib/locations';
 
 const title = 'Service Areas for In-Home Pet Euthanasia';
 const description = 'Pet Farewell service areas for in-home dog euthanasia, cat euthanasia, pet hospice guidance, and cremation aftercare coordination in Southern California.';
 
-const locations = await getCollection('locations');
+const locations = await getAllLocations();
 
 const uniqueStates = Array.from(new Set(locations.map(loc => loc.data.stateName)))
   .map(stateName => {
@@ -24,7 +24,7 @@ const uniqueStates = Array.from(new Set(locations.map(loc => loc.data.stateName)
 
 const priorityCities = locations
   .sort((a, b) => a.data.cityName.localeCompare(b.data.cityName))
-  .slice(0, 24);
+  .slice(0, 120);
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
