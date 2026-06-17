@@ -1,0 +1,23 @@
+{
+  "cityName": "Palmdale",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "palmdale",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Palmdale",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.5794,
+    "longitude": -118.1165
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Palmdale, CA and nearby Antelope Valley communities by mobile appointment",
+  "serviceRadius": "Call to confirm Palmdale route timing and availability before scheduling.",
+  "localIntro": "Pet Farewell helps Palmdale families arrange a calm, private in-home euthanasia visit for a beloved dog or cat.",
+  "nearbyAreas": ["Lancaster", "Quartz Hill", "Acton", "Rosamond", "Lake Los Angeles"],
+  "priorityKeywords": ["in-home pet euthanasia Palmdale CA", "dog euthanasia at home Palmdale", "cat euthanasia at home Palmdale"]
+}
