@@ -4,21 +4,27 @@
   "stateSlug": "california",
   "citySlug": "phelan",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Phelan",
-    "state": "CA",
-    "postalCode": "92371",
-    "country": "US"
-  },
+  "address": { "city": "Phelan", "state": "CA", "postalCode": "92371", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.4261,
-    "longitude": -117.5723
-  },
+  "geo": { "latitude": 34.4261, "longitude": -117.5723 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Phelan, CA 92371 and nearby High Desert communities by mobile appointment",
   "serviceRadius": "Call for Phelan route availability, travel timing, and exact aftercare pricing.",
   "localIntro": "Pet Farewell helps Phelan families arrange a gentle in-home goodbye for dogs and cats without a stressful clinic trip.",
   "nearbyAreas": ["Pinon Hills", "Wrightwood", "Oak Hills", "Hesperia", "El Mirage"],
-  "priorityKeywords": ["in-home pet euthanasia Phelan CA", "dog euthanasia at home Phelan", "cat euthanasia at home Phelan"]
+  "priorityKeywords": ["in-home pet euthanasia Phelan CA", "dog euthanasia at home Phelan", "cat euthanasia at home Phelan"],
+  "localSeo": {
+    "localAngle": "Phelan is a high-value local page because families in more rural High Desert areas often need clear mobile-service expectations before scheduling.",
+    "serviceContext": "Pet Farewell can help Phelan families plan a home visit that respects distance, route timing, pet mobility, and aftercare needs.",
+    "routeNotes": ["Phelan appointments may be planned with Pinon Hills, Wrightwood, Oak Hills, and Hesperia routes.", "Rural mileage and road access can affect timing and travel fees.", "Share your pet's weight and mobility limitations before the appointment so the visit can be planned respectfully."],
+    "localConcerns": ["Pets who cannot tolerate a longer drive to a clinic.", "Families who need clear aftercare planning because of distance from cremation partners.", "Dogs who are most comfortable on a bed, porch, or quiet outdoor area at home."],
+    "appointmentFit": "An in-home visit may be a strong fit when your pet is declining and the added drive from Phelan would create pain, panic, or exhaustion.",
+    "aftercareNote": "Phelan families can discuss private cremation, communal cremation, or keeping the body for their own arrangements before the visit.",
+    "relatedCities": [{ "label": "Oak Hills", "href": "/locations/california/oak-hills/" }, { "label": "Wrightwood", "href": "/locations/california/wrightwood/" }, { "label": "Hesperia", "href": "/locations/california/hesperia/" }, { "label": "Pinon Hills", "href": "/locations/california/pinon-hills/" }],
+    "faqs": [
+      { "question": "Do you serve Phelan for mobile pet euthanasia?", "answer": "Yes. Phelan can be served by mobile appointment depending on route timing and availability." },
+      { "question": "Can distance affect the final quote in Phelan?", "answer": "Yes. Extended travel may affect the final quote, so Pet Farewell confirms pricing before the visit." },
+      { "question": "Can aftercare be arranged from Phelan?", "answer": "Yes. Cremation aftercare can be coordinated when requested." }
+    ]
+  }
 }
