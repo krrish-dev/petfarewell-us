@@ -1,0 +1,23 @@
+{
+  "cityName": "Fontana",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "fontana",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Fontana",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.0922,
+    "longitude": -117.4350
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Fontana, CA and nearby Inland Empire communities by mobile appointment",
+  "serviceRadius": "Call for appointment availability, travel timing, and aftercare options for Fontana homes.",
+  "localIntro": "Pet Farewell supports Fontana families who want end-of-life care for a dog or cat to happen privately at home.",
+  "nearbyAreas": ["Rialto", "Rancho Cucamonga", "Bloomington", "Muscoy", "San Bernardino"],
+  "priorityKeywords": ["in-home pet euthanasia Fontana CA", "dog euthanasia at home Fontana", "cat euthanasia at home Fontana"]
+}
