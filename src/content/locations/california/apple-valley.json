@@ -1,0 +1,23 @@
+{
+  "cityName": "Apple Valley",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "apple-valley",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Apple Valley",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.5008,
+    "longitude": -117.1859
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Apple Valley, CA and nearby High Desert communities by mobile appointment",
+  "serviceRadius": "Core High Desert service area; call for appointment timing and aftercare availability.",
+  "localIntro": "Pet Farewell helps Apple Valley families choose a peaceful at-home goodbye for a beloved dog or cat.",
+  "nearbyAreas": ["Victorville", "Lucerne Valley", "Spring Valley Lake", "Hesperia", "Oro Grande"],
+  "priorityKeywords": ["in-home pet euthanasia Apple Valley CA", "dog euthanasia at home Apple Valley", "cat euthanasia at home Apple Valley"]
+}
