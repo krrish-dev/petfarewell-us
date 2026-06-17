@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "apple-valley",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Apple Valley",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Apple Valley", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.5008,
-    "longitude": -117.1859
-  },
+  "geo": { "latitude": 34.5008, "longitude": -117.1859 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Apple Valley, CA and nearby High Desert communities by mobile appointment",
   "serviceRadius": "Core High Desert service area; call for appointment timing and aftercare availability.",
   "localIntro": "Pet Farewell helps Apple Valley families choose a peaceful at-home goodbye for a beloved dog or cat.",
   "nearbyAreas": ["Victorville", "Lucerne Valley", "Spring Valley Lake", "Hesperia", "Oro Grande"],
-  "priorityKeywords": ["in-home pet euthanasia Apple Valley CA", "dog euthanasia at home Apple Valley", "cat euthanasia at home Apple Valley"]
+  "priorityKeywords": ["in-home pet euthanasia Apple Valley CA", "dog euthanasia at home Apple Valley", "cat euthanasia at home Apple Valley"],
+  "localSeo": {
+    "localAngle": "Apple Valley families often choose in-home care because many pets are more comfortable resting at home than traveling during a painful or fragile stage of life.",
+    "serviceContext": "Pet Farewell supports Apple Valley homes with a calm visit structure: questions first, sedation for comfort, family privacy, and a peaceful final medication only when your pet is deeply relaxed.",
+    "routeNotes": ["Apple Valley routing is often planned with nearby High Desert communities such as Victorville, Spring Valley Lake, and Lucerne Valley.", "Longer drives around the Apple Valley area may affect route timing, so availability is confirmed before the appointment.", "Families can discuss pet size, mobility, and preferred aftercare during the scheduling call."],
+    "localConcerns": ["Senior dogs with arthritis or mobility loss who cannot safely load into a vehicle.", "Cats with stress, hiding behavior, or breathing difficulty that makes travel harder.", "Families who want a private setting for children or other pets to say goodbye."],
+    "appointmentFit": "An in-home visit may be a good fit when travel would add stress, pain, or panic and the family wants the goodbye to happen in a familiar room or quiet outdoor space.",
+    "aftercareNote": "Apple Valley aftercare can include private cremation, communal cremation, or home arrangements. Pet Farewell explains options before the visit so the decision is not rushed.",
+    "relatedCities": [{ "label": "Victorville", "href": "/locations/california/victorville/" }, { "label": "Hesperia", "href": "/locations/california/hesperia/" }, { "label": "Lucerne Valley", "href": "/locations/california/lucerne-valley/" }, { "label": "Spring Valley Lake", "href": "/locations/california/spring-valley-lake/" }],
+    "faqs": [
+      { "question": "Do you provide dog euthanasia at home in Apple Valley?", "answer": "Yes. Pet Farewell provides in-home dog euthanasia in Apple Valley by mobile appointment when route availability allows." },
+      { "question": "Do you provide cat euthanasia at home in Apple Valley?", "answer": "Yes. Cats can often benefit from an in-home visit because it avoids the stress of carrier travel and a clinic environment." },
+      { "question": "Can Apple Valley appointments include cremation aftercare?", "answer": "Yes. Private and communal cremation options can be discussed before scheduling." }
+    ]
+  }
 }
