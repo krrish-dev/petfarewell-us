@@ -41,13 +41,13 @@
 
 [[redirects]]
   from = "/cost.html"
-  to = "/at-home-pet-euthanasia/#pricing"
+  to = "/cost/"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/cost/"
-  to = "/at-home-pet-euthanasia/#pricing"
+  from = "/pricing/"
+  to = "/cost/"
   status = 301
   force = true
 
