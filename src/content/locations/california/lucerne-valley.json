@@ -1,0 +1,24 @@
+{
+  "cityName": "Lucerne Valley",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "lucerne-valley",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Lucerne Valley",
+    "state": "CA",
+    "postalCode": "92356",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.4439,
+    "longitude": -116.9675
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Lucerne Valley, CA 92356 and nearby High Desert communities by mobile appointment",
+  "serviceRadius": "Call for Lucerne Valley route availability, travel timing, and aftercare coordination.",
+  "localIntro": "Pet Farewell supports Lucerne Valley families with a private at-home goodbye for a beloved dog or cat.",
+  "nearbyAreas": ["Apple Valley", "Johnson Valley", "Big Bear City", "Hesperia", "Victorville"],
+  "priorityKeywords": ["in-home pet euthanasia Lucerne Valley CA", "dog euthanasia at home Lucerne Valley", "cat euthanasia at home Lucerne Valley"]
+}
