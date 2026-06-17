@@ -19,6 +19,13 @@
   status = 301
   force = true
 
+# Removed non-core service page cleanup.
+[[redirects]]
+  from = "/pet-grief-support/"
+  to = "/at-home-pet-euthanasia/"
+  status = 301
+  force = true
+
 # Legacy/alternate SEO path cleanup.
 [[redirects]]
   from = "/cities/:city.html"
