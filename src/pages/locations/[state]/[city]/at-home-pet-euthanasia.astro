@@ -9,7 +9,6 @@ import { SITE_CONFIG } from '../../../../config/site';
 
 export async function getStaticPaths() {
   const locations = await getCollection('locations');
-  // Only create this page for locations that offer at-home-pet-euthanasia
   const eligibleLocations = locations.filter(loc => loc.data.services.includes('at-home-pet-euthanasia'));
   
   return eligibleLocations.map(loc => ({
@@ -22,12 +21,21 @@ export async function getStaticPaths() {
 }
 
 const { location } = Astro.props;
-const { cityName, stateName, businessName, address, telephone, geo, serviceArea } = location.data;
+const {
+  cityName,
+  stateName,
+  businessName,
+  address,
+  telephone = SITE_CONFIG.nap.telephone,
+  geo,
+  serviceArea,
+  nearbyAreas = [],
+} = location.data;
 
-const title = `At-Home Pet Euthanasia in ${cityName}, ${stateName} | ${businessName}`;
-const description = `Peaceful, compassionate at-home pet euthanasia in ${cityName}. Allow your pet to pass gently in the comfort of their own home. Call ${businessName} for guidance.`;
+const title = `At-Home Pet Euthanasia in ${cityName}, ${stateName}`;
+const description = `Peaceful at-home dog and cat euthanasia in ${cityName}, ${stateName}. Mobile veterinary end-of-life care with sedation, family privacy, and aftercare options.`;
 
-const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+const canonicalUrl = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, SITE_CONFIG.url).href;
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
@@ -40,16 +48,21 @@ const localBusinessJsonLd = buildLocalBusinessSchema({
   url: canonicalUrl,
   services: ['at-home-pet-euthanasia'],
   serviceArea,
+  nearbyAreas,
 });
 
 const faqItems = [
   {
-    question: `Do you offer at-home euthanasia appointments on weekends in ${cityName}?`,
-    answer: `We understand that the need for end-of-life care can arise at any time. Please call us at ${telephone} to discuss our current availability for weekend or evening appointments in the ${cityName} area.`
+    question: `Do you offer at-home euthanasia appointments in ${cityName}?`,
+    answer: `Yes. Pet Farewell provides mobile in-home euthanasia visits for dogs and cats in ${cityName} when scheduling and route availability allow. Call or text ${telephone} to discuss timing, distance, and your pet's condition.`
   },
   {
-    question: "What happens after the at-home euthanasia?",
-    answer: "We offer respectful transportation for your pet to our facility if you choose private or communal cremation. If you prefer to handle burial yourself (in accordance with local laws), the veterinarian will ensure your pet is respectfully placed before leaving your home."
+    question: `What happens during an in-home euthanasia visit in ${cityName}?`,
+    answer: 'The visit starts with time for questions and a comfort-focused assessment. A sedative is given first so your pet can relax into deep sleep. The final medication is given only after your pet is fully comfortable and your family is ready.'
+  },
+  {
+    question: 'Can Pet Farewell help with cremation after the visit?',
+    answer: 'Yes. Families can request aftercare coordination, including communal cremation or private cremation when ashes should be returned.'
   }
 ];
 ---
@@ -57,6 +70,7 @@ const faqItems = [
 <BaseLayout
   title={title}
   description={description}
+  canonicalUrl={canonicalUrl}
   structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
 >
   <div class="container">
@@ -65,39 +79,46 @@ const faqItems = [
     <div class="service-location-page content-container">
       <header class="page-header">
         <h1>At-Home Pet Euthanasia in {cityName}, {stateName}</h1>
-        <p class="lead">A peaceful, pain-free transition for your beloved pet in the comfort of your own home.</p>
+        <p class="lead">A peaceful, pain-free transition for your dog or cat in the comfort of home.</p>
       </header>
 
       <section class="service-details">
         <h2>Why Choose At-Home Euthanasia?</h2>
-        <p>For many pets, visiting a veterinary clinic causes unnecessary anxiety and stress. Choosing at-home euthanasia allows your pet to spend their final moments exactly where they feel most safe and loved—whether that's on their own bed, in your lap, or in their favorite spot in the garden.</p>
+        <p>For many pets, a veterinary clinic can add fear and confusion to an already difficult day. An in-home visit allows your pet to rest in a familiar room, on their own bed, near their family, without a final car ride or waiting room.</p>
         
-        <p>Our dedicated veterinarians serving {cityName} are committed to making this difficult day as peaceful as possible for both you and your pet.</p>
+        <p>{businessName} helps {cityName} families plan a calm goodbye with clear communication, gentle sedation, and time for privacy before and after the passing.</p>
 
         <h2>Our Gentle Process</h2>
         <div class="process-steps">
           <div class="step card">
-            <h3>1. Arrival & Sedation</h3>
-            <p>Our compassionate veterinarian arrives at your {cityName} home. After answering your questions, they administer a gentle sedative. Your pet will fall into a deep, pain-free sleep within minutes.</p>
+            <h3>1. Arrival & Questions</h3>
+            <p>Dr. Hany Soliman arrives for the mobile visit, confirms your pet's comfort needs, answers final questions, and explains each step before anything begins.</p>
           </div>
           <div class="step card">
-            <h3>2. The Final Step</h3>
-            <p>Once you are ready and your pet is completely relaxed and unaware, the final medication is given. The passing is quiet and completely peaceful.</p>
+            <h3>2. Comfort Sedation</h3>
+            <p>A gentle sedative helps your dog or cat fall into a deep, pain-free sleep while family can remain close.</p>
           </div>
           <div class="step card">
-            <h3>3. Aftercare</h3>
-            <p>We provide you with private time to say goodbye. If you have chosen cremation services, we respectfully transport your pet from your home.</p>
+            <h3>3. Peaceful Passing & Aftercare</h3>
+            <p>The final medication is given after your pet is fully relaxed. If cremation is selected, respectful transportation and aftercare coordination can be arranged.</p>
           </div>
         </div>
+
+        {nearbyAreas.length > 0 && (
+          <div class="nearby-note card">
+            <h2>Nearby Areas Often Served from {cityName}</h2>
+            <p>{nearbyAreas.join(', ')}</p>
+          </div>
+        )}
 
         <div class="contact-box card">
           <p><strong>Schedule an Appointment or Consultation in {cityName}</strong></p>
-          <p class="phone"><a href={`tel:${telephone}`}>{telephone}</a></p>
-          <p class="mt-sm"><em>We are here to support you in making the best decision for your pet.</em></p>
+          <p class="phone"><a href={`tel:${SITE_CONFIG.nap.telephoneHref}`}>{telephone}</a></p>
+          <p class="mt-sm"><em>We are here to support you in making the kindest decision for your pet.</em></p>
         </div>
       </section>
 
-      <FAQSection items={faqItems} title="Frequently Asked Questions" />
+      <FAQSection items={faqItems} title={`At-Home Pet Euthanasia FAQs for ${cityName}`} />
     </div>
   </div>
 </BaseLayout>
@@ -125,9 +146,15 @@ const faqItems = [
     margin: var(--space-xl) 0 var(--space-2xl);
   }
 
-  .step h3 {
+  .step h3,
+  .nearby-note h2 {
     color: var(--color-primary);
     margin-top: 0;
+  }
+
+  .nearby-note {
+    margin: var(--space-2xl) 0;
+    background: var(--color-bg-warm);
   }
 
   .contact-box {
