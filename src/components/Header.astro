@@ -7,11 +7,12 @@
 import { SITE_CONFIG } from '../config/site';
 import MobileNav from './MobileNav.astro';
 
-const phoneHref = 'tel:+17609120848';
+const phoneHref = `tel:${SITE_CONFIG.nap.telephoneHref}`;
 
 const navLinks = [
-  { label: 'Dog & Cat Euthanasia', href: '/at-home-pet-euthanasia/' },
+  { label: 'In-Home Euthanasia', href: '/at-home-pet-euthanasia/' },
   { label: 'Pricing', href: '/at-home-pet-euthanasia/#pricing' },
+  { label: 'Service Areas', href: '/locations/' },
   { label: 'About Dr. Hany', href: '/about/' },
 ];
 ---
@@ -36,7 +37,7 @@ const navLinks = [
       </ul>
     </nav>
 
-    <a href="/contact/" class="btn btn-primary header-cta" id="header-cta">
+    <a href={phoneHref} class="btn btn-primary header-cta" id="header-cta">
       Call or Text
     </a>
 
