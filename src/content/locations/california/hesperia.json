@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "hesperia",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Hesperia",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Hesperia", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.4264,
-    "longitude": -117.3009
-  },
+  "geo": { "latitude": 34.4264, "longitude": -117.3009 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Hesperia, CA and nearby Victor Valley communities by mobile appointment",
   "serviceRadius": "High Desert route availability can vary by day; call for exact scheduling.",
   "localIntro": "Pet Farewell helps Hesperia families keep a dog or cat comfortable at home during a difficult end-of-life decision.",
   "nearbyAreas": ["Victorville", "Oak Hills", "Spring Valley Lake", "Apple Valley", "Phelan"],
-  "priorityKeywords": ["in-home pet euthanasia Hesperia CA", "dog euthanasia at home Hesperia", "cat euthanasia at home Hesperia"]
+  "priorityKeywords": ["in-home pet euthanasia Hesperia CA", "dog euthanasia at home Hesperia", "cat euthanasia at home Hesperia"],
+  "localSeo": {
+    "localAngle": "Hesperia sits between several High Desert communities, making it a strong local page for families comparing in-home euthanasia availability around Victor Valley and Oak Hills.",
+    "serviceContext": "The service is built around a gentle home visit for dogs and cats who may be too weak, anxious, or painful for a final car ride.",
+    "routeNotes": ["Hesperia appointments may be coordinated with Oak Hills, Victorville, Spring Valley Lake, and Phelan routes.", "Some homes are closer to rural or hillside roads, so exact travel timing is confirmed in advance.", "Tell Pet Farewell if your pet cannot stand, needs help moving, or may need extra time before aftercare."],
+    "localConcerns": ["Pets with back-end weakness, collapse episodes, or severe arthritis.", "Families who want a calmer alternative to clinic euthanasia.", "Pets who become anxious around strangers and need a slower, quieter visit."],
+    "appointmentFit": "At-home euthanasia may be appropriate when your dog or cat is uncomfortable moving, no longer enjoying normal routines, or becoming distressed by transportation.",
+    "aftercareNote": "Hesperia families can choose aftercare coordination during scheduling, including communal cremation or private cremation when ashes should be returned.",
+    "relatedCities": [{ "label": "Victorville", "href": "/locations/california/victorville/" }, { "label": "Oak Hills", "href": "/locations/california/oak-hills/" }, { "label": "Phelan", "href": "/locations/california/phelan/" }, { "label": "Apple Valley", "href": "/locations/california/apple-valley/" }],
+    "faqs": [
+      { "question": "Do you serve Hesperia homes for pet euthanasia?", "answer": "Yes. Pet Farewell provides in-home dog and cat euthanasia in Hesperia when schedule and route timing allow." },
+      { "question": "Can I schedule if my dog cannot walk?", "answer": "Yes. Many Hesperia families call because a pet can no longer stand or travel comfortably." },
+      { "question": "Can cremation be arranged from Hesperia?", "answer": "Yes. Aftercare coordination can be discussed before the visit." }
+    ]
+  }
 }
