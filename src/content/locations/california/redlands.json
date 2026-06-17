@@ -1,0 +1,23 @@
+{
+  "cityName": "Redlands",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "redlands",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Redlands",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.0556,
+    "longitude": -117.1825
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Redlands, CA and nearby Inland Empire communities by mobile appointment",
+  "serviceRadius": "Call for Redlands appointment availability, travel timing, and cremation aftercare options.",
+  "localIntro": "Pet Farewell gives Redlands families a private home option when a dog or cat needs gentle end-of-life care.",
+  "nearbyAreas": ["Loma Linda", "Mentone", "Highland", "Yucaipa", "San Bernardino"],
+  "priorityKeywords": ["in-home pet euthanasia Redlands CA", "dog euthanasia at home Redlands", "cat euthanasia at home Redlands"]
+}
