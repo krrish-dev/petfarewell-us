@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "fontana",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Fontana",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Fontana", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.0922,
-    "longitude": -117.4350
-  },
+  "geo": { "latitude": 34.0922, "longitude": -117.435 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Fontana, CA and nearby Inland Empire communities by mobile appointment",
   "serviceRadius": "Call for appointment availability, travel timing, and aftercare options for Fontana homes.",
   "localIntro": "Pet Farewell supports Fontana families who want end-of-life care for a dog or cat to happen privately at home.",
   "nearbyAreas": ["Rialto", "Rancho Cucamonga", "Bloomington", "Muscoy", "San Bernardino"],
-  "priorityKeywords": ["in-home pet euthanasia Fontana CA", "dog euthanasia at home Fontana", "cat euthanasia at home Fontana"]
+  "priorityKeywords": ["in-home pet euthanasia Fontana CA", "dog euthanasia at home Fontana", "cat euthanasia at home Fontana"],
+  "localSeo": {
+    "localAngle": "Fontana is important for Inland Empire searches because families often compare nearby mobile euthanasia availability across Fontana, Rialto, Rancho Cucamonga, and San Bernardino.",
+    "serviceContext": "Pet Farewell helps families plan a gentle home appointment that avoids a stressful final clinic visit and includes aftercare options when requested.",
+    "routeNotes": ["Fontana appointments may be coordinated with Rialto, Bloomington, Rancho Cucamonga, and San Bernardino routes.", "Traffic and distance can affect appointment windows, so availability is confirmed by phone or text.", "Families should ask about cost, travel fee, and cremation package before confirming."],
+    "localConcerns": ["Dogs with painful mobility who cannot safely get into a car.", "Cats that hide, panic, or breathe harder during travel.", "Families who want a quiet goodbye at home before private or communal cremation."],
+    "appointmentFit": "At-home euthanasia may be right when your pet is uncomfortable traveling, your family needs privacy, or you want aftercare decisions explained before the visit.",
+    "aftercareNote": "Fontana families can request private cremation with ashes returned, communal cremation, or guidance on keeping the body for their own arrangements.",
+    "relatedCities": [{ "label": "Rialto", "href": "/locations/california/rialto/" }, { "label": "Rancho Cucamonga", "href": "/locations/california/rancho-cucamonga/" }, { "label": "San Bernardino", "href": "/locations/california/san-bernardino/" }, { "label": "Bloomington", "href": "/locations/california/bloomington/" }],
+    "faqs": [
+      { "question": "Do you provide pet euthanasia at home in Fontana?", "answer": "Yes. Fontana homes may be served by Pet Farewell based on schedule and route availability." },
+      { "question": "Can Fontana families compare cremation options before the visit?", "answer": "Yes. Private and communal cremation choices can be discussed before scheduling." },
+      { "question": "Is travel time included in the quote?", "answer": "Standard service-area pricing may vary by distance, so the exact quote is confirmed before the appointment." }
+    ]
+  }
 }
