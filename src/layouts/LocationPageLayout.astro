@@ -72,6 +72,14 @@ const serviceLabels: Record<string, string> = {
   'at-home-pet-euthanasia': 'At-Home Pet Euthanasia',
 };
 
+const corePlanningLinks = [
+  { label: 'Home', href: '/', description: 'Pet Farewell homepage' },
+  { label: 'Cost & Pricing', href: '/cost/', description: 'Euthanasia and cremation package pricing' },
+  { label: 'In-Home Pet Euthanasia', href: '/at-home-pet-euthanasia/', description: 'Dog and cat euthanasia at home process' },
+  { label: 'FAQ', href: '/faq/', description: 'Common questions about scheduling and aftercare' },
+  { label: 'Pet Cremation', href: '/pet-cremation/', description: 'Private and communal cremation options' },
+];
+
 const hasPublicAddress = Boolean(address?.streetAddress);
 ---
 
@@ -154,6 +162,19 @@ const hasPublicAddress = Boolean(address?.streetAddress);
         </div>
       </section>
 
+      <section class="planning-links card" id="planning-links">
+        <h2>Plan an In-Home Visit</h2>
+        <p>Use these core pages to compare cost, understand the process, and choose aftercare before scheduling.</p>
+        <ul class="planning-list">
+          {corePlanningLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+              <span>{link.description}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <!-- Page Content Slot -->
       <div class="location-content">
         <slot />
@@ -179,12 +200,14 @@ const hasPublicAddress = Boolean(address?.streetAddress);
   }
 
   .nap-block,
-  .nearby-areas {
+  .nearby-areas,
+  .planning-links {
     margin-bottom: var(--space-2xl);
   }
 
   .nap-title,
-  .nearby-areas h2 {
+  .nearby-areas h2,
+  .planning-links h2 {
     font-size: var(--font-size-xl);
     margin-top: 0;
     margin-bottom: var(--space-lg);
@@ -269,6 +292,35 @@ const hasPublicAddress = Boolean(address?.streetAddress);
 
   .service-card:hover .service-arrow {
     transform: translateX(4px);
+  }
+
+  .planning-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    list-style: none;
+    margin: var(--space-lg) 0 0;
+    padding: 0;
+  }
+
+  .planning-list li {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+  }
+
+  .planning-list a {
+    color: var(--color-primary);
+    display: block;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .planning-list span {
+    color: var(--color-text-secondary);
+    display: block;
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
   }
 
   .location-content {
