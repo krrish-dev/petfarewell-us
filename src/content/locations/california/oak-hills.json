@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "oak-hills",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Oak Hills",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Oak Hills", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.3839,
-    "longitude": -117.3812
-  },
+  "geo": { "latitude": 34.3839, "longitude": -117.3812 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Oak Hills, CA and nearby Victor Valley communities by mobile appointment",
   "serviceRadius": "Call for Oak Hills route availability, travel timing, and aftercare options.",
   "localIntro": "Pet Farewell helps Oak Hills families choose a peaceful in-home goodbye for a beloved dog or cat without a stressful final car ride.",
   "nearbyAreas": ["Hesperia", "Phelan", "Victorville", "Summit Valley", "Wrightwood"],
-  "priorityKeywords": ["in-home pet euthanasia Oak Hills CA", "dog euthanasia at home Oak Hills", "cat euthanasia at home Oak Hills"]
+  "priorityKeywords": ["in-home pet euthanasia Oak Hills CA", "dog euthanasia at home Oak Hills", "cat euthanasia at home Oak Hills"],
+  "localSeo": {
+    "localAngle": "Oak Hills families often want a home-based option because rural drives, larger properties, and mountain-edge routes can make a clinic visit especially difficult for an elderly or painful pet.",
+    "serviceContext": "The appointment can take place in the room or outdoor space where your pet feels safest, with sedation first and time for family privacy.",
+    "routeNotes": ["Oak Hills routing is commonly considered alongside Hesperia, Phelan, Victorville, and Summit Valley.", "Mountain or rural access can affect arrival windows, so travel notes are confirmed during scheduling.", "Families should mention gate access, long driveways, or special mobility concerns before the visit."],
+    "localConcerns": ["Large dogs who cannot safely be lifted into a vehicle.", "Pets who are comfortable outside or in a familiar yard and become fearful at clinics.", "Families who need a quiet, private appointment without a waiting room."],
+    "appointmentFit": "An in-home visit may be best when your pet is too uncomfortable for a car ride, needs a calm setting, or is declining quickly and the family wants less stress.",
+    "aftercareNote": "Aftercare can be planned before the Oak Hills visit, including respectful transportation for cremation when requested.",
+    "relatedCities": [{ "label": "Hesperia", "href": "/locations/california/hesperia/" }, { "label": "Phelan", "href": "/locations/california/phelan/" }, { "label": "Victorville", "href": "/locations/california/victorville/" }, { "label": "Wrightwood", "href": "/locations/california/wrightwood/" }],
+    "faqs": [
+      { "question": "Do you provide in-home pet euthanasia in Oak Hills?", "answer": "Yes. Pet Farewell serves Oak Hills by mobile appointment when route and schedule availability allow." },
+      { "question": "Should I mention rural access or gates before the visit?", "answer": "Yes. Gate codes, long driveways, and road details can help with scheduling and arrival timing." },
+      { "question": "Can my pet be outside for the visit?", "answer": "Often yes, if the location is safe, quiet, and comfortable for your pet and family." }
+    ]
+  }
 }
