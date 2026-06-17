@@ -4,20 +4,27 @@
   "stateSlug": "california",
   "citySlug": "adelanto",
   "businessName": "Pet Farewell by Dr. Hany Soliman",
-  "address": {
-    "city": "Adelanto",
-    "state": "CA",
-    "country": "US"
-  },
+  "address": { "city": "Adelanto", "state": "CA", "country": "US" },
   "telephone": "(760) 912-0848",
-  "geo": {
-    "latitude": 34.5828,
-    "longitude": -117.4092
-  },
+  "geo": { "latitude": 34.5828, "longitude": -117.4092 },
   "services": ["at-home-pet-euthanasia", "pet-cremation"],
   "serviceArea": "Adelanto, CA and nearby High Desert communities by mobile appointment",
   "serviceRadius": "Mobile coverage is scheduled around High Desert route availability.",
   "localIntro": "Pet Farewell provides Adelanto families with compassionate in-home euthanasia for dogs and cats when a clinic visit would be too stressful.",
   "nearbyAreas": ["Victorville", "Oro Grande", "El Mirage", "Helendale", "Apple Valley"],
-  "priorityKeywords": ["in-home pet euthanasia Adelanto CA", "dog euthanasia at home Adelanto", "cat euthanasia at home Adelanto"]
+  "priorityKeywords": ["in-home pet euthanasia Adelanto CA", "dog euthanasia at home Adelanto", "cat euthanasia at home Adelanto"],
+  "localSeo": {
+    "localAngle": "Adelanto families searching for pet euthanasia near me often need a mobile option that can coordinate with High Desert route availability.",
+    "serviceContext": "The visit focuses on reducing stress for pets who are weak, painful, anxious, or unable to travel comfortably to a clinic.",
+    "routeNotes": ["Adelanto appointments are commonly planned near Victorville, Helendale, Oro Grande, and Apple Valley routes.", "Scheduling depends on route timing, distance, and whether aftercare transportation is requested.", "Families can call or text with pet type, size, condition, and preferred aftercare option."],
+    "localConcerns": ["Pets with sudden decline where same-day or next-available guidance may be needed.", "Families comparing euthanasia-only versus cremation packages.", "Dogs or cats who become distressed during car rides or clinic visits."],
+    "appointmentFit": "A home visit may be appropriate when travel would make your pet's final day harder or when your family wants a private setting for goodbye.",
+    "aftercareNote": "Adelanto aftercare options can include private cremation with ashes returned or communal cremation when ashes are not returned.",
+    "relatedCities": [{ "label": "Victorville", "href": "/locations/california/victorville/" }, { "label": "Helendale", "href": "/locations/california/helendale/" }, { "label": "Oro Grande", "href": "/locations/california/oro-grande/" }, { "label": "Apple Valley", "href": "/locations/california/apple-valley/" }],
+    "faqs": [
+      { "question": "Do you offer in-home euthanasia in Adelanto?", "answer": "Yes. Pet Farewell can serve Adelanto by mobile appointment based on route availability." },
+      { "question": "Can I ask about same-day availability in Adelanto?", "answer": "Yes. Call or text to check the current schedule and explain your pet's condition." },
+      { "question": "Can you help with cremation after an Adelanto visit?", "answer": "Yes. Aftercare coordination can be requested before the appointment." }
+    ]
+  }
 }
