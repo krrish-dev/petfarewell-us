@@ -7,20 +7,27 @@ import { SITE_CONFIG } from '../config/site';
 
 const organizationSchema = buildOrganizationSchema({
   name: SITE_CONFIG.organization.name,
+  legalName: SITE_CONFIG.organization.legalName,
   url: SITE_CONFIG.organization.url,
   logo: SITE_CONFIG.organization.logo,
   telephone: SITE_CONFIG.nap.telephone,
   email: SITE_CONFIG.nap.email,
+  founder: SITE_CONFIG.organization.founder,
+  serviceArea: SITE_CONFIG.organization.serviceArea,
 });
 
 const faqItems = [
+  {
+    question: 'Who is Pet Farewell by Dr. Hany Soliman?',
+    answer: 'Pet Farewell is a mobile veterinary end-of-life care service led by Dr. Hany Soliman. The service focuses on in-home euthanasia for dogs and cats, with guidance before the visit and aftercare coordination when requested.'
+  },
   {
     question: 'How do I know when it is time for dog euthanasia or cat euthanasia?',
     answer: 'The decision usually depends on quality of life: mobility, appetite, pain, breathing comfort, anxiety, and whether bad days now outnumber good days. Dr. Soliman can help you talk through your dog or cat\'s condition before the visit.'
   },
   {
     question: 'What does in-home euthanasia include?',
-    answer: 'The visit includes travel to your home, a gentle home exam, time for questions, sedation for comfort, and a peaceful final medication once your dog or cat is deeply asleep.'
+    answer: 'The visit includes travel to your home, a comfort-focused assessment, time for questions, sedation for comfort, and a peaceful final medication once your dog or cat is deeply asleep.'
   },
   {
     question: 'How much does at-home euthanasia cost?',
@@ -33,33 +40,41 @@ const faqItems = [
 ];
 
 const cornerstonePages = [
-  { title: 'Dog & Cat Euthanasia', href: '/at-home-pet-euthanasia/', desc: 'In-home dog euthanasia and cat euthanasia with sedation, comfort, and time to say goodbye.' },
+  { title: 'In-Home Pet Euthanasia', href: '/at-home-pet-euthanasia/', desc: 'Mobile dog euthanasia and cat euthanasia with sedation, comfort, and time to say goodbye.' },
   { title: 'Pricing & Aftercare', href: '/at-home-pet-euthanasia/#pricing', desc: 'Transparent packages for euthanasia-only, communal cremation, and private cremation.' },
   { title: 'About Dr. Hany', href: '/about/', desc: 'Learn about Dr. Hany Soliman\'s compassionate approach and veterinary background.' },
-  { title: 'Service Areas', href: '/locations/', desc: 'Serving families within 50 miles of Victorville and surrounding Southern California cities.' }
+  { title: 'Service Areas', href: '/locations/', desc: 'City pages for Southern California families searching for in-home pet euthanasia near them.' }
 ];
 
+const localLinks = [
+  { label: 'Victorville', href: '/locations/california/victorville/' },
+  { label: 'Apple Valley', href: '/locations/california/apple-valley/' },
+  { label: 'Hesperia', href: '/locations/california/hesperia/' },
+  { label: 'Barstow', href: '/locations/california/barstow/' },
+  { label: 'Riverside', href: '/locations/california/riverside/' },
+  { label: 'San Bernardino', href: '/locations/california/san-bernardino/' },
+];
 ---
 
 <BaseLayout
-  title="In-Home Dog Euthanasia & Cat Euthanasia"
-  description="In-home dog euthanasia and cat euthanasia by Dr. Hany Soliman, with transparent pricing, private cremation, communal cremation, and Southern California service areas."
+  title="Pet Farewell by Dr. Hany Soliman"
+  description="Pet Farewell provides in-home dog euthanasia, cat euthanasia, pet hospice guidance, and cremation aftercare coordination for Southern California families."
   structuredData={organizationSchema}
 >
   <HeroSection
-    headline="In-Home Dog Euthanasia & Cat Euthanasia"
-    subheadline="A peaceful goodbye at home with Dr. Hany Soliman, serving Southern California families by appointment 7 days a week."
+    headline="Pet Farewell by Dr. Hany Soliman"
+    subheadline="In-home dog and cat euthanasia, calm end-of-life guidance, and respectful aftercare coordination across Southern California."
     ctaText="View Pricing & Process"
     ctaHref="/at-home-pet-euthanasia/"
     imageUrl="/images/hero-home.jpg"
-    imageAlt="A peaceful dog resting comfortably"
+    imageAlt="A peaceful dog resting comfortably at home"
   />
 
   <div class="container">
     <section class="section">
       <div class="content-container text-center">
-        <h2>Dog and Cat End-of-Life Care at Home</h2>
-        <p>Pet Farewell focuses on dogs and cats only. We help families arrange in-home euthanasia, private cremation, communal cremation, and aftercare with clear pricing and calm guidance.</p>
+        <h2>Mobile Dog and Cat End-of-Life Care at Home</h2>
+        <p>Pet Farewell is intentionally focused: dogs and cats, in-home euthanasia, honest pricing, quality-of-life conversations, and cremation aftercare when families need help after the goodbye.</p>
       </div>
 
       <div class="services-grid mt-xl">
@@ -76,12 +91,20 @@ const cornerstonePages = [
     <section class="section bg-warm split-section">
       <div class="split-content">
         <h2>About Pet Farewell</h2>
-        <p>Pet Farewell provides in-home euthanasia for dogs and cats so they can remain in a familiar, quiet place instead of a stressful clinic.</p>
+        <p>Pet Farewell helps families avoid the stress of a final clinic visit. The appointment is designed to be quiet, private, and centered on your pet's comfort.</p>
         <p>Led by Dr. Hany Soliman, the service includes gentle sedation, a peaceful final medication, and respectful aftercare options for families who choose cremation.</p>
-        <a href="/about/" class="btn btn-secondary mt-md">Learn More About Us</a>
+        <a href="/about/" class="btn btn-secondary mt-md">Learn More About Dr. Hany</a>
       </div>
       <div class="split-image">
-        <img src="/images/about-home.jpg" alt="A veterinarian comforting a pet" width="600" height="400" loading="lazy" />
+        <img src="/images/about-home.jpg" alt="A veterinarian comforting a pet at home" width="600" height="400" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="section text-center">
+      <h2>Popular Service Areas</h2>
+      <p>Start with the closest city page for local appointment notes and nearby communities served.</p>
+      <div class="local-links">
+        {localLinks.map(link => <a href={link.href}>{link.label}</a>)}
       </div>
     </section>
 
@@ -177,6 +200,24 @@ const cornerstonePages = [
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+
+  .local-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .local-links a {
+    background: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-light);
+    border-radius: var(--radius-full);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    padding: 0.5rem 0.9rem;
+    text-decoration: none;
   }
 
   .trust-signals {
