@@ -1,14 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import FAQSection from '../../../../components/FAQSection.astro';
 import { generateBreadcrumbs } from '../../../../lib/breadcrumb';
 import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../../../../lib/schema';
 import { SITE_CONFIG } from '../../../../config/site';
+import { getAllLocations } from '../../../../lib/locations';
 
 export async function getStaticPaths() {
-  const locations = await getCollection('locations');
+  const locations = await getAllLocations();
   const eligibleLocations = locations.filter(loc => loc.data.services.includes('at-home-pet-euthanasia'));
   
   return eligibleLocations.map(loc => ({
