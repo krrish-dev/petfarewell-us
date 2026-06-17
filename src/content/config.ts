@@ -26,6 +26,31 @@ const resourcesCollection = defineCollection({
   }),
 });
 
+const localSeoSchema = z.object({
+  localAngle: z.string(),
+  serviceContext: z.string(),
+  routeNotes: z.array(z.string()).default([]),
+  localConcerns: z.array(z.string()).default([]),
+  appointmentFit: z.string(),
+  aftercareNote: z.string(),
+  relatedCities: z
+    .array(
+      z.object({
+        label: z.string(),
+        href: z.string(),
+      })
+    )
+    .default([]),
+  faqs: z
+    .array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    )
+    .default([]),
+});
+
 /**
  * Locations Collection
  * JSON data files describing mobile service areas.
@@ -63,6 +88,7 @@ const locationsCollection = defineCollection({
     localIntro: z.string().optional(),
     nearbyAreas: z.array(z.string()).optional(),
     priorityKeywords: z.array(z.string()).optional(),
+    localSeo: localSeoSchema.optional(),
   }),
 });
 
