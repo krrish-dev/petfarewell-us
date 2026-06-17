@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import LocationPageLayout from '../../../../layouts/LocationPageLayout.astro';
+import { SITE_CONFIG } from '../../../../config/site';
 
 export async function getStaticPaths() {
   const locations = await getCollection('locations');
@@ -14,13 +15,25 @@ export async function getStaticPaths() {
 }
 
 const { location } = Astro.props;
-const { cityName, stateName, businessName, address, telephone, geo, services, serviceArea } = location.data;
+const {
+  cityName,
+  stateName,
+  businessName,
+  address,
+  telephone = SITE_CONFIG.nap.telephone,
+  geo,
+  services,
+  serviceArea,
+  serviceRadius,
+  localIntro,
+  nearbyAreas = [],
+} = location.data;
 
-const description = `Compassionate in-home dog and cat euthanasia in ${cityName}, ${stateName}. Contact ${businessName} for peaceful, gentle end-of-life care in the comfort of home.`;
+const description = `In-home pet euthanasia in ${cityName}, ${stateName} by ${SITE_CONFIG.brandName}. Mobile dog and cat euthanasia, compassionate guidance, and cremation aftercare coordination.`;
 ---
 
 <LocationPageLayout
-  title={`Pet Farewell in ${cityName}, ${stateName}`}
+  title={`In-Home Pet Euthanasia in ${cityName}, ${stateName}`}
   description={description}
   businessName={businessName}
   address={address}
@@ -28,23 +41,30 @@ const description = `Compassionate in-home dog and cat euthanasia in ${cityName}
   geo={geo}
   services={services}
   serviceArea={serviceArea}
+  serviceRadius={serviceRadius}
+  localIntro={localIntro}
+  nearbyAreas={nearbyAreas}
 >
   <div class="location-about">
-    <h2>Compassionate At-Home Euthanasia for {cityName} Families</h2>
-    <p>At {businessName}, we understand that your dog or cat is a beloved member of your family. Saying goodbye is an incredibly difficult experience. Our dedicated team led by Dr. Hany Soliman is here in {cityName} to support you with empathy, respect, and professional veterinary care in the comfort of your own home.</p>
+    <h2>Mobile Dog and Cat Euthanasia for {cityName} Families</h2>
+    <p>Pet Farewell provides calm, respectful in-home end-of-life care for dogs and cats in {cityName}. The goal is to avoid a stressful clinic visit and allow your pet to remain in a familiar place, surrounded by the people who know them best.</p>
     
-    <p>By choosing in-home euthanasia, you provide your beloved companion with a peaceful, stress-free transition, surrounded by familiar sights, smells, and the people they love most.</p>
+    <p>Dr. Hany Soliman helps families understand the process, answer quality-of-life questions, and plan aftercare before the appointment. Visits are handled with sedation first, private family time, and a peaceful final medication only when your pet is deeply relaxed.</p>
 
-    <h3>Why Choose Our In-Home Euthanasia in {cityName}?</h3>
+    <h3>What This {cityName} Service Page Covers</h3>
     <ul>
-      <li><strong>Compassionate Veterinary Doctor:</strong> Dr. Hany Soliman provides gentle, pain-free passing with the utmost care and respect.</li>
-      <li><strong>Peaceful Home Environment:</strong> Avoid the anxiety and distress of a clinical veterinary office for your pet's final moments.</li>
-      <li><strong>Local Understanding:</strong> Serving the {cityName} and surrounding Southern California communities with dedication and love.</li>
+      <li><strong>At-home pet euthanasia:</strong> mobile veterinary visit for dogs and cats in a familiar home setting.</li>
+      <li><strong>Pet hospice guidance:</strong> practical support when you are unsure whether it is the right time.</li>
+      <li><strong>Aftercare coordination:</strong> communal or private cremation options when requested.</li>
+      <li><strong>Local scheduling:</strong> appointment availability depends on route timing, distance, and your pet's needs.</li>
     </ul>
 
+    <h3>When Families Usually Call</h3>
+    <p>Families in {cityName} usually reach out when a pet is no longer eating well, cannot stand comfortably, is struggling to breathe, is in uncontrolled pain, or has more difficult days than good days. A phone conversation can help clarify the next step without pressure.</p>
+
     <div class="contact-cta">
-      <h3>Ready to Discuss Your Options?</h3>
-      <p>We are available to answer any questions you may have. Please call us at <a href={`tel:${telephone}`}>{telephone}</a> for immediate assistance, or explore our specific services above to learn more about how we can help.</p>
+      <h3>Talk With Pet Farewell About {cityName} Availability</h3>
+      <p>Call or text <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`}>{telephone}</a> to ask about appointment timing, pricing, cremation choices, and whether an in-home visit is appropriate for your dog or cat.</p>
     </div>
   </div>
 </LocationPageLayout>
