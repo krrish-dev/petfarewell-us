@@ -1,0 +1,14 @@
+{
+  "cityName": "Pinon Hills",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "pinon-hills",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": { "city": "Pinon Hills", "state": "CA", "country": "US" },
+  "telephone": "(760) 912-0848",
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Pinon Hills, CA and nearby communities by mobile appointment",
+  "serviceRadius": "Mobile visit coverage depends on route timing and appointment availability.",
+  "localIntro": "Pet Farewell supports Pinon Hills families with private in-home end-of-life care for dogs and cats.",
+  "priorityKeywords": ["in-home pet euthanasia Pinon Hills CA", "dog euthanasia at home Pinon Hills", "cat euthanasia at home Pinon Hills"]
+}
