@@ -1,0 +1,24 @@
+{
+  "cityName": "Phelan",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "phelan",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Phelan",
+    "state": "CA",
+    "postalCode": "92371",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.4261,
+    "longitude": -117.5723
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Phelan, CA 92371 and nearby High Desert communities by mobile appointment",
+  "serviceRadius": "Call for Phelan route availability, travel timing, and exact aftercare pricing.",
+  "localIntro": "Pet Farewell helps Phelan families arrange a gentle in-home goodbye for dogs and cats without a stressful clinic trip.",
+  "nearbyAreas": ["Pinon Hills", "Wrightwood", "Oak Hills", "Hesperia", "El Mirage"],
+  "priorityKeywords": ["in-home pet euthanasia Phelan CA", "dog euthanasia at home Phelan", "cat euthanasia at home Phelan"]
+}
