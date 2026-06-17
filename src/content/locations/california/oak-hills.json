@@ -1,0 +1,23 @@
+{
+  "cityName": "Oak Hills",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "oak-hills",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Oak Hills",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.3839,
+    "longitude": -117.3812
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Oak Hills, CA and nearby Victor Valley communities by mobile appointment",
+  "serviceRadius": "Call for Oak Hills route availability, travel timing, and aftercare options.",
+  "localIntro": "Pet Farewell helps Oak Hills families choose a peaceful in-home goodbye for a beloved dog or cat without a stressful final car ride.",
+  "nearbyAreas": ["Hesperia", "Phelan", "Victorville", "Summit Valley", "Wrightwood"],
+  "priorityKeywords": ["in-home pet euthanasia Oak Hills CA", "dog euthanasia at home Oak Hills", "cat euthanasia at home Oak Hills"]
+}
