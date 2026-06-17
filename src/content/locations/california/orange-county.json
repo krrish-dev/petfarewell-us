@@ -1,0 +1,23 @@
+{
+  "cityName": "Orange County",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "orange-county",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Orange County",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 33.7175,
+    "longitude": -117.8311
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Orange County, CA communities by mobile appointment when routing allows",
+  "serviceRadius": "Orange County availability depends on distance, route timing, and appointment scheduling.",
+  "localIntro": "Pet Farewell supports Orange County families who want a private, compassionate in-home euthanasia option for a dog or cat.",
+  "nearbyAreas": ["Anaheim", "Irvine", "Orange", "Santa Ana", "Tustin", "Garden Grove"],
+  "priorityKeywords": ["in-home pet euthanasia Orange County CA", "dog euthanasia at home Orange County", "cat euthanasia at home Orange County"]
+}
