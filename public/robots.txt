@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petfarewell.us/sitemap-index.xml
+Sitemap: https://petfarewell.us/sitemap.xml
