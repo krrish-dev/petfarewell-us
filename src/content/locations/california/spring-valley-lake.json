@@ -1,0 +1,23 @@
+{
+  "cityName": "Spring Valley Lake",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "spring-valley-lake",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Spring Valley Lake",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.5008,
+    "longitude": -117.2681
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Spring Valley Lake, CA and nearby Victor Valley communities by mobile appointment",
+  "serviceRadius": "Call for Spring Valley Lake appointment timing and aftercare availability.",
+  "localIntro": "Pet Farewell helps Spring Valley Lake families arrange a quiet in-home goodbye for a beloved dog or cat.",
+  "nearbyAreas": ["Victorville", "Apple Valley", "Hesperia", "Jess Ranch", "Mountain View Acres"],
+  "priorityKeywords": ["in-home pet euthanasia Spring Valley Lake CA", "dog euthanasia at home Spring Valley Lake", "cat euthanasia at home Spring Valley Lake"]
+}
