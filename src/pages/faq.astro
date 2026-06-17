@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FAQSection from '../components/FAQSection.astro';
+import { generateBreadcrumbs } from '../lib/breadcrumb';
+import { buildBreadcrumbSchema, buildFAQSchema } from '../lib/schema';
+import { SITE_CONFIG } from '../config/site';
+
+const title = 'In-Home Pet Euthanasia FAQ';
+const description = 'Frequently asked questions about in-home dog euthanasia, cat euthanasia, pet hospice care, cost, scheduling, cremation, and aftercare by PetFarewell.us.';
+const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
+const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
+
+const faqItems = [
+  {
+    question: 'What is in-home pet euthanasia?',
+    answer: 'In-home pet euthanasia is a mobile veterinary visit that allows a dog or cat to pass peacefully at home. The appointment usually includes a comfort-focused assessment, sedation, and a final medication after the pet is deeply relaxed.'
+  },
+  {
+    question: 'Do you help both dogs and cats?',
+    answer: 'Yes. Pet Farewell provides in-home dog euthanasia and cat euthanasia for Southern California families by appointment.'
+  },
+  {
+    question: 'How do I know when it is time?',
+    answer: 'Families usually consider euthanasia when pain, breathing difficulty, loss of appetite, severe weakness, anxiety, or more bad days than good days affect quality of life. A quality-of-life conversation can help clarify the next step.'
+  },
+  {
+    question: 'Will my pet feel pain?',
+    answer: 'The process is designed to be peaceful. A sedative is given first so your pet can relax into deep sleep before the final medication is administered.'
+  },
+  {
+    question: 'How much does in-home pet euthanasia cost?',
+    answer: 'Starting prices are $450 for euthanasia-only, $550 with communal cremation, and $750 with private cremation. Exact pricing can vary by distance, pet weight, and aftercare choice.'
+  },
+  {
+    question: 'Can children or other pets be present?',
+    answer: 'Yes. This is a family decision. Many families choose to have children or other pets nearby, while others prefer a smaller private setting.'
+  },
+  {
+    question: 'What cremation options are available?',
+    answer: 'Families may choose communal cremation, private cremation with ashes returned, or make their own burial or aftercare arrangements when local rules allow.'
+  },
+  {
+    question: 'Do you offer pet hospice care?',
+    answer: 'Pet Farewell provides end-of-life guidance and pet hospice support focused on comfort, quality of life, and deciding when an in-home euthanasia appointment may be appropriate.'
+  },
+  {
+    question: 'Which areas do you serve?',
+    answer: 'Pet Farewell serves Southern California communities by mobile appointment. Availability depends on city, route timing, and scheduling.'
+  }
+];
+
+const structuredData = [breadcrumbJsonLd, buildFAQSchema(faqItems)];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <div class="container">
+    <Breadcrumb items={breadcrumbItems} />
+    <article class="content-container faq-page">
+      <header class="page-header">
+        <h1>In-Home Pet Euthanasia FAQ</h1>
+        <p class="lead">Answers for families planning dog euthanasia at home, cat euthanasia at home, pet hospice guidance, cost, and aftercare.</p>
+      </header>
+
+      <section class="quick-links card">
+        <h2>Helpful Next Steps</h2>
+        <ul>
+          <li><a href="/at-home-pet-euthanasia/">Review the in-home euthanasia process</a></li>
+          <li><a href="/cost/">View pricing and cremation packages</a></li>
+          <li><a href="/pet-hospice/">Learn about pet hospice and end-of-life care</a></li>
+          <li><a href="/pet-cremation/">Compare cremation and aftercare options</a></li>
+          <li><a href="/locations/">Find your Southern California service area</a></li>
+        </ul>
+      </section>
+
+      <FAQSection items={faqItems} title="Frequently Asked Questions" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .faq-page { padding: var(--space-xl) 0 var(--space-4xl); }
+  .page-header { text-align: center; margin-bottom: var(--space-2xl); }
+  .lead { color: var(--color-text-secondary); font-size: var(--font-size-xl); }
+  .quick-links { margin-bottom: var(--space-2xl); background: var(--color-bg-warm); }
+  .quick-links h2 { margin-top: 0; }
+</style>
