@@ -1,0 +1,23 @@
+{
+  "cityName": "Adelanto",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "adelanto",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Adelanto",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.5828,
+    "longitude": -117.4092
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Adelanto, CA and nearby High Desert communities by mobile appointment",
+  "serviceRadius": "Mobile coverage is scheduled around High Desert route availability.",
+  "localIntro": "Pet Farewell provides Adelanto families with compassionate in-home euthanasia for dogs and cats when a clinic visit would be too stressful.",
+  "nearbyAreas": ["Victorville", "Oro Grande", "El Mirage", "Helendale", "Apple Valley"],
+  "priorityKeywords": ["in-home pet euthanasia Adelanto CA", "dog euthanasia at home Adelanto", "cat euthanasia at home Adelanto"]
+}
