@@ -6,21 +6,25 @@ import { generateBreadcrumbs } from '../../lib/breadcrumb';
 import { buildBreadcrumbSchema } from '../../lib/schema';
 import { SITE_CONFIG } from '../../config/site';
 
-const title = "Service Locations | Pet Farewell";
-const description = "Find Pet Farewell compassionate end-of-life pet care services in your state. We provide at-home pet euthanasia and pet cremation in multiple locations.";
+const title = 'Service Areas for In-Home Pet Euthanasia';
+const description = 'Pet Farewell service areas for in-home dog euthanasia, cat euthanasia, pet hospice guidance, and cremation aftercare coordination in Southern California.';
 
 const locations = await getCollection('locations');
 
-// Get unique states
 const uniqueStates = Array.from(new Set(locations.map(loc => loc.data.stateName)))
   .map(stateName => {
     const loc = locations.find(l => l.data.stateName === stateName);
     return {
       name: stateName,
       slug: loc?.data.stateSlug,
+      count: locations.filter(l => l.data.stateName === stateName).length,
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+
+const priorityCities = locations
+  .sort((a, b) => a.data.cityName.localeCompare(b.data.cityName))
+  .slice(0, 24);
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
@@ -32,22 +36,42 @@ const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
   structuredData={breadcrumbJsonLd}
 >
   <HeroSection
-    headline="Our Service Areas"
-    subheadline="Compassionate end-of-life care available in communities across the country."
-    ctaText="Contact Us"
-    ctaHref="/contact/"
+    headline="Southern California In-Home Pet Euthanasia Service Areas"
+    subheadline="Mobile dog and cat euthanasia, hospice guidance, and aftercare coordination by appointment."
+    ctaText="Find Your City"
+    ctaHref="#cities"
   />
 
   <div class="container section">
     <div class="content-container">
       <h2>Select Your State</h2>
-      <p>We are continually expanding our service areas to help more families during their time of need. Please select your state below to find the nearest Pet Farewell providers and available services.</p>
+      <p>Pet Farewell is built around real mobile service areas, not fake clinic addresses. Choose your state, then select the nearest city page for localized appointment and aftercare information.</p>
 
       <ul class="states-list">
         {uniqueStates.map(state => (
           <li>
             <a href={`/locations/${state.slug}/`} class="card state-card">
-              <h3>{state.name}</h3>
+              <span>
+                <strong>{state.name}</strong>
+                <small>{state.count} service areas</small>
+              </span>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container section" id="cities">
+    <div class="content-container">
+      <h2>Priority City Pages</h2>
+      <p>These pages target high-intent local searches such as “in-home pet euthanasia near me”, “dog euthanasia at home”, and “cat euthanasia at home” with city-specific content.</p>
+      <ul class="cities-list">
+        {priorityCities.map(city => (
+          <li>
+            <a href={`/locations/${city.data.stateSlug}/${city.data.citySlug}/`} class="card city-card">
+              <span>{city.data.cityName}, {city.data.address?.state || 'CA'}</span>
               <span class="arrow">→</span>
             </a>
           </li>
@@ -58,7 +82,8 @@ const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
 </BaseLayout>
 
 <style>
-  .states-list {
+  .states-list,
+  .cities-list {
     list-style: none;
     padding: 0;
     margin: var(--space-xl) 0 0;
@@ -67,7 +92,8 @@ const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
     gap: var(--space-lg);
   }
 
-  .state-card {
+  .state-card,
+  .city-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,10 +101,17 @@ const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
     padding: var(--space-lg);
   }
 
-  .state-card h3 {
-    margin: 0;
+  .state-card strong,
+  .city-card span:first-child {
     color: var(--color-primary);
     font-size: var(--font-size-lg);
+  }
+
+  .state-card small {
+    display: block;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
   }
 
   .arrow {
@@ -87,7 +120,8 @@ const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
     transition: transform var(--transition-fast);
   }
 
-  .state-card:hover .arrow {
+  .state-card:hover .arrow,
+  .city-card:hover .arrow {
     transform: translateX(4px);
   }
 </style>
