@@ -1,0 +1,23 @@
+{
+  "cityName": "Wrightwood",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "wrightwood",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Wrightwood",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.3608,
+    "longitude": -117.6334
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Wrightwood, CA and nearby mountain and High Desert communities by mobile appointment",
+  "serviceRadius": "Mountain route availability can vary by weather, distance, and appointment timing.",
+  "localIntro": "Pet Farewell helps Wrightwood families plan a peaceful in-home goodbye for dogs and cats when comfort at home matters most.",
+  "nearbyAreas": ["Phelan", "Pinon Hills", "Oak Hills", "Lone Pine Canyon", "Cajon Junction"],
+  "priorityKeywords": ["in-home pet euthanasia Wrightwood CA", "dog euthanasia at home Wrightwood", "cat euthanasia at home Wrightwood"]
+}
