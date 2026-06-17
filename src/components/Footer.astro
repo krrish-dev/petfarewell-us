@@ -6,15 +6,23 @@
 import { SITE_CONFIG } from '../config/site';
 
 const serviceLinks = [
-  { label: 'Dog & Cat Euthanasia', href: '/at-home-pet-euthanasia/' },
+  { label: 'In-Home Pet Euthanasia', href: '/at-home-pet-euthanasia/' },
   { label: 'Pricing', href: '/at-home-pet-euthanasia/#pricing' },
   { label: 'Cremation & Aftercare', href: '/pet-cremation/' },
 ];
 
 const companyLinks = [
-  { label: 'About Us', href: '/about/' },
+  { label: 'About Dr. Hany', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
-  { label: 'Locations', href: '/locations/' },
+  { label: 'Service Areas', href: '/locations/' },
+];
+
+const cityLinks = [
+  { label: 'Victorville', href: '/locations/california/victorville/' },
+  { label: 'Apple Valley', href: '/locations/california/apple-valley/' },
+  { label: 'Hesperia', href: '/locations/california/hesperia/' },
+  { label: 'Barstow', href: '/locations/california/barstow/' },
+  { label: 'Riverside', href: '/locations/california/riverside/' },
 ];
 
 const legalLinks = [
@@ -38,11 +46,11 @@ const currentYear = new Date().getFullYear();
           <span>{SITE_CONFIG.name}</span>
         </a>
         <p class="footer-description">
-          In-home dog euthanasia and cat euthanasia with respectful cremation and aftercare options for Southern California families.
+          In-home dog euthanasia and cat euthanasia with respectful cremation and aftercare coordination for Southern California families.
         </p>
         {SITE_CONFIG.nap.telephone && (
           <div class="footer-nap">
-            <a href={`tel:${SITE_CONFIG.nap.telephone}`} class="footer-phone">
+            <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`} class="footer-phone">
               {SITE_CONFIG.nap.telephone}
             </a>
           </div>
@@ -76,6 +84,16 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
+      <!-- City Column -->
+      <div class="footer-column">
+        <h3 class="footer-heading">Popular Areas</h3>
+        <ul class="footer-links">
+          {cityLinks.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
       <!-- Legal Column -->
       <div class="footer-column">
         <h3 class="footer-heading">Legal</h3>
@@ -88,11 +106,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.</p>
-      <p class="footer-backlink">
-        Main service:
-        <a href="https://pethomeeuthanasiaservice.com">pet home euthanasia near me</a>
-      </p>
+      <p>&copy; {currentYear} {SITE_CONFIG.brandName}. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -107,7 +121,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr repeat(4, 1fr);
     gap: var(--space-2xl);
     padding-bottom: var(--space-2xl);
     border-bottom: 1px solid hsla(220, 10%, 75%, 0.15);
@@ -188,14 +202,10 @@ const currentYear = new Date().getFullYear();
     margin-bottom: 0;
   }
 
-  .footer-backlink a {
-    color: hsl(220, 10%, 82%);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .footer-backlink a:hover {
-    color: white;
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
   }
 
   @media (max-width: 768px) {
