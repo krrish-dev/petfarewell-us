@@ -2,7 +2,7 @@
 /**
  * BaseLayout.astro
  * Root layout wrapping every page.
- * Injects title, meta, canonical, OG tags, JSON-LD, GA4 script,
+ * Injects canonical SEO tags, social previews, JSON-LD, GA4,
  * GSC verification, and the skip-to-main-content link.
  */
 import '../styles/global.css';
@@ -13,10 +13,11 @@ import StructuredData from '../components/StructuredData.astro';
 import { SITE_CONFIG } from '../config/site';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article';
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
@@ -24,10 +25,11 @@ interface Props {
 }
 
 const {
-  title,
-  description,
+  title = SITE_CONFIG.seo.defaultTitle,
+  description = SITE_CONFIG.seo.defaultDescription,
   canonicalUrl,
-  ogImage = `${SITE_CONFIG.url}/images/og-default.jpg`,
+  ogImage = SITE_CONFIG.seo.defaultOgImage,
+  ogImageAlt = SITE_CONFIG.seo.ogImageAlt,
   ogType = 'website',
   structuredData,
   noindex = false,
@@ -40,9 +42,54 @@ const normalizedPath = Astro.url.pathname.endsWith('/')
 const fallbackCanonicalUrl = new URL(normalizedPath, SITE_CONFIG.url).href;
 const pageCanonicalUrl = canonicalUrl || fallbackCanonicalUrl;
 
-const fullTitle = title.includes(SITE_CONFIG.name)
-  ? title
-  : `${title} | ${SITE_CONFIG.name}`;
+const titleSuffixesToStrip = [
+  SITE_CONFIG.seo.titleSuffix,
+  SITE_CONFIG.seo.siteName,
+  SITE_CONFIG.name,
+  SITE_CONFIG.brandName,
+].filter(Boolean);
+const escapedSuffixes = titleSuffixesToStrip.map((value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+const titleSuffixPattern = new RegExp(`\\s*\\|\\s*(${escapedSuffixes.join('|')})\\s*$`, 'i');
+const normalizedTitle = title.replace(titleSuffixPattern, '').trim();
+const fullTitle = normalizedTitle.includes(SITE_CONFIG.seo.titleSuffix)
+  ? normalizedTitle
+  : `${normalizedTitle} | ${SITE_CONFIG.seo.titleSuffix}`;
+
+const normalizedDescription = description || SITE_CONFIG.seo.defaultDescription;
+const normalizedOgImage = new URL(ogImage, SITE_CONFIG.url).href;
+const normalizedPreloadImage = preloadImage ? new URL(preloadImage, SITE_CONFIG.url).href : undefined;
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_CONFIG.url}/#website`,
+  name: SITE_CONFIG.seo.siteName,
+  alternateName: [SITE_CONFIG.name, SITE_CONFIG.brandName],
+  url: SITE_CONFIG.url,
+  inLanguage: 'en-US',
+  publisher: {
+    '@id': `${SITE_CONFIG.url}/#organization`,
+  },
+};
+
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${pageCanonicalUrl}#webpage`,
+  url: pageCanonicalUrl,
+  name: fullTitle,
+  description: normalizedDescription,
+  isPartOf: {
+    '@id': `${SITE_CONFIG.url}/#website`,
+  },
+  inLanguage: 'en-US',
+};
+
+const allStructuredData = structuredData
+  ? Array.isArray(structuredData)
+    ? [websiteJsonLd, pageJsonLd, ...structuredData]
+    : [websiteJsonLd, pageJsonLd, structuredData]
+  : [websiteJsonLd, pageJsonLd];
 ---
 
 <!doctype html>
@@ -51,34 +98,51 @@ const fullTitle = title.includes(SITE_CONFIG.name)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Title & Description -->
+    <!-- Core SEO -->
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={normalizedDescription} />
     <meta name="author" content={SITE_CONFIG.brandName} />
+    <meta name="application-name" content={SITE_CONFIG.seo.siteName} />
+    <meta name="generator" content="Astro" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="theme-color" content={SITE_CONFIG.seo.themeColor} />
+    <meta name="geo.region" content={SITE_CONFIG.seo.geoRegion} />
+    <meta name="geo.placename" content={SITE_CONFIG.seo.geoPlacename} />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={pageCanonicalUrl} />
 
     <!-- Robots -->
-    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <meta name="googlebot" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={normalizedDescription} />
     <meta property="og:url" content={pageCanonicalUrl} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content={SITE_CONFIG.name} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={normalizedOgImage} />
+    <meta property="og:image:secure_url" content={normalizedOgImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:site_name" content={SITE_CONFIG.seo.siteName} />
+    <meta property="og:locale" content={SITE_CONFIG.seo.locale} />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content={SITE_CONFIG.seo.twitterCard} />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:description" content={normalizedDescription} />
+    <meta name="twitter:image" content={normalizedOgImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+    <meta name="twitter:domain" content={SITE_CONFIG.seo.twitterDomain} />
+    <meta name="twitter:url" content={pageCanonicalUrl} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Google Search Console Verification -->
     {SITE_CONFIG.gscVerificationToken !== 'XXXXXXXXXX' && (
@@ -86,12 +150,12 @@ const fullTitle = title.includes(SITE_CONFIG.name)
     )}
 
     <!-- Hero image preload for LCP optimization -->
-    {preloadImage && (
-      <link rel="preload" as="image" href={preloadImage} />
+    {normalizedPreloadImage && (
+      <link rel="preload" as="image" href={normalizedPreloadImage} />
     )}
 
     <!-- JSON-LD Structured Data -->
-    {structuredData && <StructuredData data={structuredData} />}
+    <StructuredData data={allStructuredData} />
 
     <!-- GA4 (async) -->
     {SITE_CONFIG.ga4MeasurementId && SITE_CONFIG.ga4MeasurementId !== 'G-XXXXXXXXXX' && (
@@ -107,7 +171,6 @@ const fullTitle = title.includes(SITE_CONFIG.name)
     )}
   </head>
   <body>
-    <!-- Skip to main content (first focusable element) -->
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
     <Header />
