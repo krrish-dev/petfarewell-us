@@ -2,8 +2,8 @@
 /**
  * BaseLayout.astro
  * Root layout wrapping every page.
- * Injects title, meta, OG tags, JSON-LD, GA4 script, GSC verification,
- * and "Skip to main content" link.
+ * Injects title, meta, canonical, OG tags, JSON-LD, GA4 script,
+ * GSC verification, and the skip-to-main-content link.
  */
 import '../styles/global.css';
 import Header from '../components/Header.astro';
@@ -26,7 +26,7 @@ interface Props {
 const {
   title,
   description,
-  canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href,
+  canonicalUrl,
   ogImage = `${SITE_CONFIG.url}/images/og-default.jpg`,
   ogType = 'website',
   structuredData,
@@ -34,13 +34,19 @@ const {
   preloadImage,
 } = Astro.props;
 
-const fullTitle = title === SITE_CONFIG.name
+const normalizedPath = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const fallbackCanonicalUrl = new URL(normalizedPath, SITE_CONFIG.url).href;
+const pageCanonicalUrl = canonicalUrl || fallbackCanonicalUrl;
+
+const fullTitle = title.includes(SITE_CONFIG.name)
   ? title
   : `${title} | ${SITE_CONFIG.name}`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,20 +54,22 @@ const fullTitle = title === SITE_CONFIG.name
     <!-- Title & Description -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE_CONFIG.brandName} />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href={canonicalUrl} />
+    <link rel="canonical" href={pageCanonicalUrl} />
 
     <!-- Robots -->
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:url" content={pageCanonicalUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content={SITE_CONFIG.name} />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -73,7 +81,9 @@ const fullTitle = title === SITE_CONFIG.name
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content={SITE_CONFIG.gscVerificationToken} />
+    {SITE_CONFIG.gscVerificationToken !== 'XXXXXXXXXX' && (
+      <meta name="google-site-verification" content={SITE_CONFIG.gscVerificationToken} />
+    )}
 
     <!-- Hero image preload for LCP optimization -->
     {preloadImage && (
