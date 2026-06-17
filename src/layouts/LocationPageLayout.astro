@@ -2,12 +2,13 @@
 /**
  * LocationPageLayout.astro
  * Layout for city service area pages.
- * Extends BaseLayout with VeterinaryCare JSON-LD, NAP display, and breadcrumbs.
+ * Extends BaseLayout with VeterinaryCare JSON-LD, NAP display, local SEO blocks, and breadcrumbs.
  */
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import FAQSection from '../components/FAQSection.astro';
 import { generateBreadcrumbs } from '../lib/breadcrumb';
-import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../lib/schema';
+import { buildLocalBusinessSchema, buildBreadcrumbSchema, buildFAQSchema } from '../lib/schema';
 import { SITE_CONFIG } from '../config/site';
 
 interface Address {
@@ -23,6 +24,27 @@ interface Geo {
   longitude: number;
 }
 
+interface RelatedCity {
+  label: string;
+  href: string;
+}
+
+interface LocalSeoFaq {
+  question: string;
+  answer: string;
+}
+
+interface LocalSeo {
+  localAngle: string;
+  serviceContext: string;
+  routeNotes?: string[];
+  localConcerns?: string[];
+  appointmentFit: string;
+  aftercareNote: string;
+  relatedCities?: RelatedCity[];
+  faqs?: LocalSeoFaq[];
+}
+
 interface Props {
   title: string;
   description: string;
@@ -35,6 +57,7 @@ interface Props {
   serviceRadius?: string;
   nearbyAreas?: string[];
   localIntro?: string;
+  localSeo?: LocalSeo;
 }
 
 const {
@@ -49,6 +72,7 @@ const {
   serviceRadius,
   nearbyAreas = [],
   localIntro,
+  localSeo,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, SITE_CONFIG.url).href;
@@ -66,6 +90,9 @@ const localBusinessJsonLd = buildLocalBusinessSchema({
   serviceArea,
   nearbyAreas,
 });
+
+const faqJsonLd = localSeo?.faqs?.length ? buildFAQSchema(localSeo.faqs) : null;
+const structuredData = [localBusinessJsonLd, breadcrumbJsonLd, faqJsonLd].filter(Boolean);
 
 const serviceLabels: Record<string, string> = {
   'pet-cremation': 'Pet Cremation & Aftercare',
@@ -87,7 +114,7 @@ const hasPublicAddress = Boolean(address?.streetAddress);
   title={title}
   description={description}
   canonicalUrl={canonicalUrl}
-  structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
+  structuredData={structuredData}
 >
   <div class="container">
     <Breadcrumb items={breadcrumbItems} />
@@ -98,7 +125,6 @@ const hasPublicAddress = Boolean(address?.streetAddress);
         {localIntro && <p class="location-lead">{localIntro}</p>}
       </header>
 
-      <!-- Mobile service NAP Display Block -->
       <section class="nap-block card" id="nap">
         <h2 class="nap-title">Contact Information</h2>
         <div class="nap-details">
@@ -136,6 +162,36 @@ const hasPublicAddress = Boolean(address?.streetAddress);
         </div>
       </section>
 
+      {localSeo && (
+        <section class="local-seo-block card" id="local-service-notes">
+          <h2>Local In-Home Euthanasia Planning</h2>
+          <p>{localSeo.localAngle}</p>
+          <p>{localSeo.serviceContext}</p>
+          <div class="local-grid">
+            {localSeo.routeNotes?.length > 0 && (
+              <div>
+                <h3>Route and Scheduling Notes</h3>
+                <ul>
+                  {localSeo.routeNotes.map((note) => <li>{note}</li>)}
+                </ul>
+              </div>
+            )}
+            {localSeo.localConcerns?.length > 0 && (
+              <div>
+                <h3>Common Situations Families Ask About</h3>
+                <ul>
+                  {localSeo.localConcerns.map((concern) => <li>{concern}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+          <h3>When an In-Home Visit May Be a Good Fit</h3>
+          <p>{localSeo.appointmentFit}</p>
+          <h3>Aftercare for This Area</h3>
+          <p>{localSeo.aftercareNote}</p>
+        </section>
+      )}
+
       {nearbyAreas.length > 0 && (
         <section class="nearby-areas card" id="nearby-areas">
           <h2>Nearby Communities Served</h2>
@@ -146,7 +202,6 @@ const hasPublicAddress = Boolean(address?.streetAddress);
         </section>
       )}
 
-      <!-- Available Services -->
       <section class="available-services" id="services">
         <h2>Available Services</h2>
         <div class="services-grid">
@@ -175,10 +230,25 @@ const hasPublicAddress = Boolean(address?.streetAddress);
         </ul>
       </section>
 
-      <!-- Page Content Slot -->
+      {localSeo?.relatedCities?.length > 0 && (
+        <section class="related-cities card" id="related-cities">
+          <h2>Related Service Areas</h2>
+          <p>These nearby pages help families compare route availability and find the most relevant local page.</p>
+          <ul class="related-city-list">
+            {localSeo.relatedCities.map((city) => (
+              <li><a href={city.href}>{city.label}</a></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <div class="location-content">
         <slot />
       </div>
+
+      {localSeo?.faqs?.length > 0 && (
+        <FAQSection items={localSeo.faqs} title="Local Service Area FAQs" />
+      )}
     </div>
   </div>
 </BaseLayout>
@@ -201,13 +271,17 @@ const hasPublicAddress = Boolean(address?.streetAddress);
 
   .nap-block,
   .nearby-areas,
-  .planning-links {
+  .planning-links,
+  .local-seo-block,
+  .related-cities {
     margin-bottom: var(--space-2xl);
   }
 
   .nap-title,
   .nearby-areas h2,
-  .planning-links h2 {
+  .planning-links h2,
+  .local-seo-block h2,
+  .related-cities h2 {
     font-size: var(--font-size-xl);
     margin-top: 0;
     margin-bottom: var(--space-lg);
@@ -242,7 +316,8 @@ const hasPublicAddress = Boolean(address?.streetAddress);
     font-weight: 600;
   }
 
-  .nearby-list {
+  .nearby-list,
+  .related-city-list {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
@@ -251,13 +326,32 @@ const hasPublicAddress = Boolean(address?.streetAddress);
     padding: 0;
   }
 
-  .nearby-list li {
+  .nearby-list li,
+  .related-city-list li {
     background: var(--color-primary-subtle);
     border: 1px solid var(--color-primary-light);
     border-radius: var(--radius-full);
     color: var(--color-primary-dark);
     font-size: var(--font-size-sm);
     padding: 0.35rem 0.75rem;
+  }
+
+  .related-city-list a {
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .local-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin: var(--space-lg) 0;
+  }
+
+  .local-seo-block h3 {
+    color: var(--color-primary);
+    margin-top: var(--space-lg);
   }
 
   .available-services {
@@ -331,6 +425,10 @@ const hasPublicAddress = Boolean(address?.streetAddress);
     .nap-item {
       flex-direction: column;
       gap: var(--space-xs);
+    }
+
+    .local-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
