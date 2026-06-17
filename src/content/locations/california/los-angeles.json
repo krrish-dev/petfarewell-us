@@ -3,19 +3,21 @@
   "stateName": "California",
   "stateSlug": "california",
   "citySlug": "los-angeles",
-  "businessName": "Pet Farewell Los Angeles",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
   "address": {
-    "streetAddress": "1234 Sunset Blvd",
     "city": "Los Angeles",
     "state": "CA",
-    "postalCode": "90028",
     "country": "US"
   },
-  "telephone": "+1-310-555-0199",
+  "telephone": "(760) 912-0848",
   "geo": {
     "latitude": 34.0522,
     "longitude": -118.2437
   },
-  "services": ["pet-cremation", "at-home-pet-euthanasia"],
-  "serviceArea": "Greater Los Angeles Area including Hollywood, Beverly Hills, Santa Monica, and surrounding communities"
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Los Angeles, CA and surrounding communities by mobile appointment",
+  "serviceRadius": "Mobile visit coverage depends on routing, distance, and appointment availability.",
+  "localIntro": "Pet Farewell supports Los Angeles families who want a calmer alternative to a final clinic visit for a beloved dog or cat.",
+  "nearbyAreas": ["Hollywood", "Beverly Hills", "Santa Monica", "Glendale", "Pasadena", "Burbank"],
+  "priorityKeywords": ["in-home pet euthanasia Los Angeles", "dog euthanasia at home Los Angeles", "cat euthanasia at home Los Angeles"]
 }
