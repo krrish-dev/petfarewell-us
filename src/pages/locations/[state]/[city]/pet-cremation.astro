@@ -1,172 +1,70 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import FAQSection from '../../../../components/FAQSection.astro';
 import { generateBreadcrumbs } from '../../../../lib/breadcrumb';
 import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../../../../lib/schema';
 import { SITE_CONFIG } from '../../../../config/site';
+import { getAllLocations } from '../../../../lib/locations';
 
 export async function getStaticPaths() {
-  const locations = await getCollection('locations');
+  const locations = await getAllLocations();
   const eligibleLocations = locations.filter(loc => loc.data.services.includes('pet-cremation'));
-  
   return eligibleLocations.map(loc => ({
-    params: { 
-      state: loc.data.stateSlug,
-      city: loc.data.citySlug
-    },
+    params: { state: loc.data.stateSlug, city: loc.data.citySlug },
     props: { location: loc }
   }));
 }
 
 const { location } = Astro.props;
-const {
-  cityName,
-  stateName,
-  businessName,
-  address,
-  telephone = SITE_CONFIG.nap.telephone,
-  geo,
-  serviceArea,
-  nearbyAreas = [],
-} = location.data;
-
+const { cityName, stateName, businessName, address, telephone = SITE_CONFIG.nap.telephone, geo, serviceArea, nearbyAreas = [] } = location.data;
 const title = `Pet Cremation & Aftercare in ${cityName}, ${stateName}`;
-const description = `Pet cremation aftercare coordination in ${cityName}, ${stateName}. Private cremation and communal cremation options after an in-home euthanasia visit.`;
-
+const description = `Private and communal pet cremation aftercare coordination in ${cityName}, ${stateName}.`;
 const canonicalUrl = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, SITE_CONFIG.url).href;
-
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
-
-const localBusinessJsonLd = buildLocalBusinessSchema({
-  businessName,
-  address,
-  telephone,
-  geo,
-  url: canonicalUrl,
-  services: ['pet-cremation'],
-  serviceArea,
-  nearbyAreas,
-});
-
+const localBusinessJsonLd = buildLocalBusinessSchema({ businessName, address, telephone, geo, url: canonicalUrl, services: ['pet-cremation'], serviceArea, nearbyAreas });
 const faqItems = [
-  {
-    question: `Do you help with pet cremation after euthanasia in ${cityName}?`,
-    answer: `Yes. Pet Farewell can coordinate respectful aftercare after an in-home euthanasia visit in ${cityName}, including communal cremation or private cremation when ashes should be returned.`
-  },
-  {
-    question: 'What is the difference between private and communal cremation?',
-    answer: 'Private cremation means your pet is cremated individually and ashes are returned. Communal cremation means ashes are not returned, and the option is usually more affordable.'
-  },
-  {
-    question: 'Can I decide after the appointment?',
-    answer: 'Families are encouraged to discuss aftercare before the visit when possible. This helps avoid pressure during an emotional moment and allows the appointment to be handled calmly.'
-  }
+  { question: `Do you help with pet cremation in ${cityName}?`, answer: `Yes. Pet Farewell can coordinate aftercare options for families in ${cityName}.` },
+  { question: 'What is private cremation?', answer: 'Private cremation means ashes are returned to the family.' },
+  { question: 'What is communal cremation?', answer: 'Communal cremation is a respectful option where ashes are not returned.' }
 ];
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonicalUrl={canonicalUrl}
-  structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
->
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl} structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}>
   <div class="container">
     <Breadcrumb items={breadcrumbItems} />
-
     <div class="service-location-page content-container">
       <header class="page-header">
         <h1>Pet Cremation & Aftercare in {cityName}, {stateName}</h1>
-        <p class="lead">Respectful aftercare options after a peaceful goodbye at home.</p>
+        <p class="lead">Respectful aftercare options for families in {cityName}.</p>
       </header>
-
       <section class="service-details">
-        <h2>Compassionate Cremation Options</h2>
-        <p>After saying goodbye, many families want help choosing the most respectful aftercare path. {businessName} can coordinate cremation options for {cityName} families after an in-home euthanasia visit.</p>
-        
+        <h2>Cremation Options</h2>
         <div class="options-grid">
-          <div class="card option-card">
-            <h3>Private Cremation</h3>
-            <p>Your pet is cremated individually, and ashes are returned to your family. This option is best when you want a keepsake, urn, or memorial placement at home.</p>
-          </div>
-          <div class="card option-card">
-            <h3>Communal Cremation</h3>
-            <p>Your pet is respectfully cremated with other pets, and ashes are not returned. This is often chosen by families who want dignified aftercare without keeping remains.</p>
-          </div>
+          <div class="card option-card"><h3>Private Cremation</h3><p>Ashes are returned to your family.</p></div>
+          <div class="card option-card"><h3>Communal Cremation</h3><p>A respectful option when ashes do not need to be returned.</p></div>
         </div>
-
-        <h2>Aftercare Guidance for {cityName} Families</h2>
-        <p>Pet Farewell explains the available options before the appointment so you can choose without feeling rushed. If cremation is selected, transportation is handled with care after your family has had private time to say goodbye.</p>
-
         <div class="contact-box card">
           <p><strong>{businessName}</strong></p>
-          <p>Mobile in-home service for {cityName} and nearby communities.</p>
+          <p>Mobile service for {cityName} and nearby communities.</p>
           <p class="phone"><strong>Call or text:</strong> <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`}>{telephone}</a></p>
         </div>
       </section>
-
       <FAQSection items={faqItems} title={`Pet Cremation FAQs for ${cityName}`} />
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .service-location-page {
-    padding: var(--space-xl) 0 var(--space-4xl);
-  }
-
-  .page-header {
-    margin-bottom: var(--space-2xl);
-    text-align: center;
-  }
-
-  .lead {
-    font-size: var(--font-size-xl);
-    color: var(--color-text-secondary);
-    max-width: 36rem;
-    margin: 0 auto;
-  }
-
-  .options-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    margin: var(--space-xl) 0 var(--space-2xl);
-  }
-
-  .option-card h3 {
-    color: var(--color-primary);
-    margin-top: 0;
-  }
-
-  .contact-box {
-    background: var(--color-primary-subtle);
-    border-color: var(--color-primary-light);
-    margin: var(--space-lg) 0;
-  }
-
-  .contact-box p {
-    margin-bottom: var(--space-xs);
-  }
-
-  .contact-box p:last-child {
-    margin-bottom: 0;
-  }
-
-  .phone {
-    margin-top: var(--space-md);
-    font-size: var(--font-size-lg);
-  }
-
-  .phone a {
-    color: var(--color-primary-dark);
-  }
-
-  @media (max-width: 768px) {
-    .options-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+  .service-location-page { padding: var(--space-xl) 0 var(--space-4xl); }
+  .page-header { margin-bottom: var(--space-2xl); text-align: center; }
+  .lead { font-size: var(--font-size-xl); color: var(--color-text-secondary); max-width: 36rem; margin: 0 auto; }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-xl) 0 var(--space-2xl); }
+  .option-card h3 { color: var(--color-primary); margin-top: 0; }
+  .contact-box { background: var(--color-primary-subtle); border-color: var(--color-primary-light); margin: var(--space-lg) 0; }
+  .contact-box p { margin-bottom: var(--space-xs); }
+  .phone { margin-top: var(--space-md); font-size: var(--font-size-lg); }
+  .phone a { color: var(--color-primary-dark); }
+  @media (max-width: 768px) { .options-grid { grid-template-columns: 1fr; } }
 </style>
