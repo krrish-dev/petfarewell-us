@@ -1,0 +1,23 @@
+{
+  "cityName": "Hesperia",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "hesperia",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Hesperia",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.4264,
+    "longitude": -117.3009
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Hesperia, CA and nearby Victor Valley communities by mobile appointment",
+  "serviceRadius": "High Desert route availability can vary by day; call for exact scheduling.",
+  "localIntro": "Pet Farewell helps Hesperia families keep a dog or cat comfortable at home during a difficult end-of-life decision.",
+  "nearbyAreas": ["Victorville", "Oak Hills", "Spring Valley Lake", "Apple Valley", "Phelan"],
+  "priorityKeywords": ["in-home pet euthanasia Hesperia CA", "dog euthanasia at home Hesperia", "cat euthanasia at home Hesperia"]
+}
