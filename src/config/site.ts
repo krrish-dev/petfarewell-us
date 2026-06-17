@@ -13,6 +13,21 @@ export interface Organization {
   serviceArea: string;
 }
 
+export interface SEOConfig {
+  siteName: string;
+  titleSuffix: string;
+  defaultTitle: string;
+  defaultDescription: string;
+  defaultOgImage: string;
+  ogImageAlt: string;
+  themeColor: string;
+  locale: string;
+  twitterCard: 'summary_large_image' | 'summary';
+  twitterDomain: string;
+  geoRegion: string;
+  geoPlacename: string;
+}
+
 export interface SiteConfig {
   name: string;
   brandName: string;
@@ -20,6 +35,7 @@ export interface SiteConfig {
   description: string;
   logo: string;
   nap: NAP;
+  seo: SEOConfig;
   ga4MeasurementId: string;
   gscVerificationToken: string;
   organization: Organization;
@@ -36,6 +52,21 @@ export const SITE_CONFIG: SiteConfig = {
     telephone: '(760) 912-0848',
     telephoneHref: '+17609120848',
     email: 'pethomeeuthanasiaservice@gmail.com',
+  },
+  seo: {
+    siteName: 'PetFarewell.us',
+    titleSuffix: 'PetFarewell.us',
+    defaultTitle: 'In-Home Pet Euthanasia in Southern California | PetFarewell.us',
+    defaultDescription:
+      'PetFarewell.us provides in-home dog euthanasia, cat euthanasia, pet hospice guidance, and cremation aftercare coordination by Dr. Hany Soliman in Southern California.',
+    defaultOgImage: '/images/og-default.jpg',
+    ogImageAlt: 'PetFarewell.us in-home pet euthanasia and aftercare coordination in Southern California',
+    themeColor: '#286f6c',
+    locale: 'en_US',
+    twitterCard: 'summary_large_image',
+    twitterDomain: 'petfarewell.us',
+    geoRegion: 'US-CA',
+    geoPlacename: 'Southern California',
   },
   ga4MeasurementId: 'G-XXXXXXXXXX',
   gscVerificationToken: 'XXXXXXXXXX',
