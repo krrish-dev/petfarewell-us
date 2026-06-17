@@ -1,8 +1,8 @@
 ---
 /**
  * LocationPageLayout.astro
- * Layout for location pages.
- * Extends BaseLayout with LocalBusiness JSON-LD, NAP display, Breadcrumb.
+ * Layout for city service area pages.
+ * Extends BaseLayout with VeterinaryCare JSON-LD, NAP display, and breadcrumbs.
  */
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
@@ -11,10 +11,10 @@ import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '../lib/schema';
 import { SITE_CONFIG } from '../config/site';
 
 interface Address {
-  streetAddress: string;
+  streetAddress?: string;
   city: string;
   state: string;
-  postalCode: string;
+  postalCode?: string;
   country: string;
 }
 
@@ -27,11 +27,14 @@ interface Props {
   title: string;
   description: string;
   businessName: string;
-  address: Address;
-  telephone: string;
-  geo: Geo;
+  address?: Address;
+  telephone?: string;
+  geo?: Geo;
   services: string[];
   serviceArea?: string;
+  serviceRadius?: string;
+  nearbyAreas?: string[];
+  localIntro?: string;
 }
 
 const {
@@ -39,13 +42,16 @@ const {
   description,
   businessName,
   address,
-  telephone,
+  telephone = SITE_CONFIG.nap.telephone,
   geo,
   services,
   serviceArea,
+  serviceRadius,
+  nearbyAreas = [],
+  localIntro,
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
+const canonicalUrl = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, SITE_CONFIG.url).href;
 
 const breadcrumbItems = generateBreadcrumbs(Astro.url.pathname, SITE_CONFIG.url);
 const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
@@ -58,17 +64,21 @@ const localBusinessJsonLd = buildLocalBusinessSchema({
   url: canonicalUrl,
   services,
   serviceArea,
+  nearbyAreas,
 });
 
 const serviceLabels: Record<string, string> = {
-  'pet-cremation': 'Pet Cremation',
+  'pet-cremation': 'Pet Cremation & Aftercare',
   'at-home-pet-euthanasia': 'At-Home Pet Euthanasia',
 };
+
+const hasPublicAddress = Boolean(address?.streetAddress);
 ---
 
 <BaseLayout
   title={title}
   description={description}
+  canonicalUrl={canonicalUrl}
   structuredData={[localBusinessJsonLd, breadcrumbJsonLd]}
 >
   <div class="container">
@@ -77,9 +87,10 @@ const serviceLabels: Record<string, string> = {
     <div class="location-page content-container">
       <header class="location-header">
         <h1>{title}</h1>
+        {localIntro && <p class="location-lead">{localIntro}</p>}
       </header>
 
-      <!-- NAP Display Block -->
+      <!-- Mobile service NAP Display Block -->
       <section class="nap-block card" id="nap">
         <h2 class="nap-title">Contact Information</h2>
         <div class="nap-details">
@@ -89,14 +100,18 @@ const serviceLabels: Record<string, string> = {
           </div>
           <div class="nap-item">
             <span class="nap-label">Address</span>
-            <address class="nap-value nap-address">
-              {address.streetAddress}<br />
-              {address.city}, {address.state} {address.postalCode}
-            </address>
+            {hasPublicAddress ? (
+              <address class="nap-value nap-address">
+                {address?.streetAddress}<br />
+                {address?.city}, {address?.state} {address?.postalCode}
+              </address>
+            ) : (
+              <span class="nap-value">Mobile in-home veterinary visit. No public clinic address is used for appointments.</span>
+            )}
           </div>
           <div class="nap-item">
             <span class="nap-label">Phone</span>
-            <a href={`tel:${telephone}`} class="nap-value nap-phone">{telephone}</a>
+            <a href={`tel:${SITE_CONFIG.nap.telephoneHref}`} class="nap-value nap-phone">{telephone}</a>
           </div>
           {serviceArea && (
             <div class="nap-item">
@@ -104,8 +119,24 @@ const serviceLabels: Record<string, string> = {
               <span class="nap-value">{serviceArea}</span>
             </div>
           )}
+          {serviceRadius && (
+            <div class="nap-item">
+              <span class="nap-label">Coverage</span>
+              <span class="nap-value">{serviceRadius}</span>
+            </div>
+          )}
         </div>
       </section>
+
+      {nearbyAreas.length > 0 && (
+        <section class="nearby-areas card" id="nearby-areas">
+          <h2>Nearby Communities Served</h2>
+          <p>Families often contact Pet Farewell from surrounding neighborhoods and nearby communities, including:</p>
+          <ul class="nearby-list">
+            {nearbyAreas.map((area) => <li>{area}</li>)}
+          </ul>
+        </section>
+      )}
 
       <!-- Available Services -->
       <section class="available-services" id="services">
@@ -140,11 +171,20 @@ const serviceLabels: Record<string, string> = {
     margin-bottom: var(--space-xl);
   }
 
-  .nap-block {
+  .location-lead {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    margin-top: var(--space-md);
+  }
+
+  .nap-block,
+  .nearby-areas {
     margin-bottom: var(--space-2xl);
   }
 
-  .nap-title {
+  .nap-title,
+  .nearby-areas h2 {
     font-size: var(--font-size-xl);
     margin-top: 0;
     margin-bottom: var(--space-lg);
@@ -177,6 +217,24 @@ const serviceLabels: Record<string, string> = {
   .nap-phone {
     color: var(--color-primary);
     font-weight: 600;
+  }
+
+  .nearby-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: var(--space-md) 0 0;
+    padding: 0;
+  }
+
+  .nearby-list li {
+    background: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-light);
+    border-radius: var(--radius-full);
+    color: var(--color-primary-dark);
+    font-size: var(--font-size-sm);
+    padding: 0.35rem 0.75rem;
   }
 
   .available-services {
