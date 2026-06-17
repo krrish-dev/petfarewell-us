@@ -1,0 +1,23 @@
+{
+  "cityName": "Victorville",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "victorville",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Victorville",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.5361,
+    "longitude": -117.2912
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Victorville, CA and nearby Victor Valley communities by mobile appointment",
+  "serviceRadius": "Core High Desert service area; call for same-day or next-available route timing.",
+  "localIntro": "Pet Farewell helps Victorville families arrange in-home dog and cat euthanasia with a calm, compassionate process.",
+  "nearbyAreas": ["Apple Valley", "Hesperia", "Adelanto", "Spring Valley Lake", "Oak Hills"],
+  "priorityKeywords": ["in-home pet euthanasia Victorville CA", "dog euthanasia at home Victorville", "cat euthanasia at home Victorville"]
+}
