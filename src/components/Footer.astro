@@ -1,7 +1,8 @@
 ---
 /**
  * Footer.astro
- * Site footer with NAP, service links, resources, locations, and legal links.
+ * Site footer with NAP, service links, resources, locations, legal links,
+ * and a contextual link to the primary service website.
  */
 import { SITE_CONFIG } from '../config/site';
 
@@ -106,6 +107,10 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="footer-bottom">
+      <p class="footer-primary-service">
+        Primary service website:
+        <a href="https://pethomeeuthanasiaservice.com/">Pet Home Euthanasia Service</a>
+      </p>
       <p>&copy; {currentYear} {SITE_CONFIG.brandName}. All rights reserved.</p>
     </div>
   </div>
@@ -200,6 +205,17 @@ const currentYear = new Date().getFullYear();
 
   .footer-bottom p:last-child {
     margin-bottom: 0;
+  }
+
+  .footer-primary-service a {
+    color: hsl(220, 10%, 86%);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer-primary-service a:hover {
+    color: white;
   }
 
   @media (max-width: 1024px) {
