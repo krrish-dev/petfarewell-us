@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import LocationPageLayout from '../../../../layouts/LocationPageLayout.astro';
 import { SITE_CONFIG } from '../../../../config/site';
+import { getAllLocations } from '../../../../lib/locations';
 
 export async function getStaticPaths() {
-  const locations = await getCollection('locations');
+  const locations = await getAllLocations();
   return locations.map(loc => ({
     params: { 
       state: loc.data.stateSlug,
