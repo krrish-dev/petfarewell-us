@@ -1,0 +1,23 @@
+{
+  "cityName": "Yucaipa",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "yucaipa",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": {
+    "city": "Yucaipa",
+    "state": "CA",
+    "country": "US"
+  },
+  "telephone": "(760) 912-0848",
+  "geo": {
+    "latitude": 34.0336,
+    "longitude": -117.0431
+  },
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Yucaipa, CA and nearby San Bernardino County communities by mobile appointment",
+  "serviceRadius": "Call for Yucaipa route availability, travel timing, and aftercare coordination.",
+  "localIntro": "Pet Farewell helps Yucaipa families plan a peaceful in-home goodbye for a beloved dog or cat.",
+  "nearbyAreas": ["Calimesa", "Mentone", "Redlands", "Cherry Valley", "Oak Glen"],
+  "priorityKeywords": ["in-home pet euthanasia Yucaipa CA", "dog euthanasia at home Yucaipa", "cat euthanasia at home Yucaipa"]
+}
