@@ -63,9 +63,14 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Robots and sitemap should be revalidated quickly after SEO updates.
+# Robots and sitemaps should be revalidated quickly after SEO updates.
 [[headers]]
   for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/sitemap.xml"
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
