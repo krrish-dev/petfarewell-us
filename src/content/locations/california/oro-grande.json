@@ -1,0 +1,14 @@
+{
+  "cityName": "Oro Grande",
+  "stateName": "California",
+  "stateSlug": "california",
+  "citySlug": "oro-grande",
+  "businessName": "Pet Farewell by Dr. Hany Soliman",
+  "address": { "city": "Oro Grande", "state": "CA", "country": "US" },
+  "telephone": "(760) 912-0848",
+  "services": ["at-home-pet-euthanasia", "pet-cremation"],
+  "serviceArea": "Oro Grande, CA and nearby communities by mobile appointment",
+  "serviceRadius": "Mobile visit coverage depends on route timing and appointment availability.",
+  "localIntro": "Pet Farewell supports Oro Grande families with private in-home end-of-life care for dogs and cats.",
+  "priorityKeywords": ["in-home pet euthanasia Oro Grande CA", "dog euthanasia at home Oro Grande", "cat euthanasia at home Oro Grande"]
+}
